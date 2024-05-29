@@ -1,10 +1,9 @@
 {
-  "extends":"@alexandria/typesconfig",
+  "extends":"@alexandria/typesconfig/base.json",
   "include": ["src"],
-  "compilerOptions": {
-    "baseUrl": "./",
+    "compilerOptions": {
     "paths": {
-        "@/*": ["src"],
-    },
+        "@/*": ["./src/*"]
+    }
   }
 }
