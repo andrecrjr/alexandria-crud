@@ -10,6 +10,6 @@ Stack:
 
 [ x ] - Monorepo creation
 [ x ] - Vite creation
-[ ] - Nest creation
-[ ] - Nest Book crud
-[ ] - User crud
+[ x ] - Nest creation
+[ ] - Nest Book crud API
+[ ] - Nest Auth User crud API
