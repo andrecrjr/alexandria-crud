@@ -1,0 +1,4 @@
+{
+  "extends":"@alexandria/typesconfig",
+  "include": ["src"]
+}
