@@ -5,7 +5,7 @@ import Button from "@alexandria/ui/src/button";
 export default function App() {
   return (
     <Layout>
-      <Button label="banana" />
+      <Button label="caralho" />
       <AppRouter />
     </Layout>
   )

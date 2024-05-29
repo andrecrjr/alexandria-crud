@@ -1,10 +1,12 @@
 {
   "extends":"@alexandria/typesconfig/",
-  "include": ["src"],
+  "include": ["**/*.ts", "**/*.tsx", "tailwind.config.ts"],
+  "exclude": ["node_modules"],
   "compilerOptions": {
-    "baseUrl": "./",
+      "baseUrl": "./",
       "paths": {
         "@/*": ["src/*"] // o alias '@' aponta para a pasta 'src'
       },
+    "types": ["node"]
   }
 }

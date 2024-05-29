@@ -6,7 +6,7 @@ type Props = {
 
 const Layout = ({children}: Props) => {
   return (
-    <main className="flex justify-center items-center">
+    <main className="flex justify-center items-center h-screen">
         <header></header>
         {children}
     </main>

@@ -1,10 +1,10 @@
 
-import { CardTitle, CardDescription, CardHeader, CardContent, CardFooter, Card } from "@/components/ui/card"
-import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
-import { SelectValue, SelectTrigger, SelectItem, SelectContent, Select } from "@/components/ui/select"
-import { Button } from "@/components/ui/button"
-import { Input } from "@alexandria/ui/src/input"
+import { CardTitle, CardDescription, CardHeader, CardContent, CardFooter, Card } from "@alexandria/ui/src/components/ui/card"
+import { Label } from "@alexandria/ui/src/components/ui/label"
+import { Textarea } from "@alexandria/ui/src/components/ui/textarea"
+import { SelectValue, SelectTrigger, SelectItem, SelectContent, Select } from "@alexandria/ui/src/components/ui/select"
+import { Button } from "@alexandria/ui/src/components/ui/button"
+import { Input } from "@alexandria/ui/src/components/ui/input"
 
 const FormInput = () => {
   return (<Card className="w-full max-w-2xl">
