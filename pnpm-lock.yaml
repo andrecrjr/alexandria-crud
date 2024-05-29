@@ -96,7 +96,7 @@ importers:
         specifier: ^5.2.0
         version: 5.2.12(@types/node@20.12.12)
 
-  backend/alexander-api:
+  backend/alexandria-api:
     dependencies:
       '@nestjs/common':
         specifier: ^10.0.0
