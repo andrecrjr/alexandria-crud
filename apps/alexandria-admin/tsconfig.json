@@ -1,10 +1,11 @@
 {
-  "include": ["**/*.ts", "**/*.tsx", "src/**/*.tsx", "tailwind.config.ts", "src"],
+  "include": ["**/*.ts", "**/*.tsx", "src/**/*.tsx", "tailwind.config.ts"],
   "exclude": ["node_modules"],
   "extends":"@alexandria/typesconfig/base.json",
-  "compilerOptions": {
+  "compilerOptions": {    
+    "baseUrl": "./",
     "paths": {
-        "@/*": ["./src/*"]
+      "@/*": ["src/*"]
     }
-  }
+  },
 }

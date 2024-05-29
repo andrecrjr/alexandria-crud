@@ -1,12 +1,10 @@
-import Layout from "@/components/Layout";
 import AppRouter from "@/Routes";
-import { Button } from "@alexandria/ui/src/components/ui/button";
+import Layout from "@/components/Layout";
 
 
 export default function App() {
   return (
     <Layout>
-      <Button>aaaaaaaaaaa</Button>
       <AppRouter />
     </Layout>
   )
