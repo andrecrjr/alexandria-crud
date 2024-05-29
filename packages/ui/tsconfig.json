@@ -1,5 +1,5 @@
 {
-  "extends":"@alexandria/typesconfig/base.json",
+  "extends":"@alexandria/typesconfig/base.front.json",
   "include": ["src"],
   "compilerOptions": {
     "baseUrl": "./",
