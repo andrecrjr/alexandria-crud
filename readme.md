@@ -9,7 +9,11 @@ Stack:
 * Next (front-end)
 
 [ x ] - Monorepo creation
+
 [ x ] - Vite creation
+
 [ x ] - Nest creation
+
 [ ] - Nest Book crud API
+
 [ ] - Nest Auth User crud API
