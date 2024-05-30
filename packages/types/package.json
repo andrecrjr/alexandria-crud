@@ -2,7 +2,7 @@
   "name": "@alexandria/typesconfig",
   "version": "1.0.0",
   "files": ["./base.front.json", 
-    "./base.nest.json"],
+    "./tsconfig.nest.json"],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
