@@ -21,11 +21,11 @@ model Book {
   content       String
   isbn          String?  @unique
   price         Float
-  authors       Author[] @relation(references: [id])
+  authors       Author[] @relation("AuthorEditorialContents")
 }
 
 model Author {
   id        Int     @id @default(autoincrement())
   name      String
-  books     Book[]  @relation(references: [id])
+  books     Book[]  @relation("AuthorEditorialContents")
 }
