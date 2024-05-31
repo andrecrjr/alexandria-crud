@@ -15,6 +15,15 @@ import { LocalStrategy } from './auth/local.strategy';
 @Module({
   imports: [],
   controllers: [AppController, BookController, UsersController, AuthController],
-  providers: [AppService, BookService, PrismaService, AuthorService, AuthService, UsersService, JwtService, LocalStrategy],
+  providers: [
+    AppService,
+    BookService,
+    PrismaService,
+    AuthorService,
+    AuthService,
+    UsersService,
+    JwtService,
+    LocalStrategy,
+  ],
 })
 export class AppModule {}
