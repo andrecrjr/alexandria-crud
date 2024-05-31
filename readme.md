@@ -16,6 +16,8 @@ Stack:
 
 [ x ] - Nest Book crud API
 
+[ x ] - Nest Auth User crud API
+
 [  ] - Nest Book Author crud API
 
-[ ] - Nest Auth User crud API
+[ ] - Nest 

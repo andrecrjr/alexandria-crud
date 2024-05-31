@@ -1,6 +1,9 @@
-import { Controller, Delete, Get, Post, Request } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Post } from '@nestjs/common';
 import { BookService } from './book.service';
+import { BookUpdate, CreateBookDto } from './book.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Books')
 @Controller('books')
 export class BookController {
   constructor(private readonly bookService: BookService) {}
@@ -10,17 +13,17 @@ export class BookController {
   }
 
   @Post()
-  create(@Request() req) {
-    return this.bookService.create(req.body);
+  create(@Body() body: CreateBookDto) {
+    return this.bookService.create(body);
   }
 
   @Post('bulk')
-  createMany(@Request() req) {
-    return this.bookService.createBulk(req.body);
+  createMany(@Body() body: CreateBookDto[]) {
+    return this.bookService.createBulk(body);
   }
 
   @Delete('bulk')
-  removeMany(@Request() req) {
-    return this.bookService.removeBulk(req.body);
+  removeMany(@Body() body: BookUpdate) {
+    return this.bookService.removeBulk(body);
   }
 }
