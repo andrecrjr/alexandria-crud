@@ -81,6 +81,7 @@ export class UpdateBookDto {
 }
 
 export class BookDto {
+  @ApiProperty()
   id: number;
   @ApiProperty()
   title: string;

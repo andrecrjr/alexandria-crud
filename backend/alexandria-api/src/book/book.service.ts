@@ -2,10 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'prisma/prisma.service';
 import { BookDto, CreateBookDto } from './book.dto';
 import { Prisma } from '@prisma/client';
-import { ApiTags } from '@nestjs/swagger';
 
 @Injectable()
-@ApiTags('Books')
 export class BookService {
   constructor(private prisma: PrismaService) {}
 
@@ -22,7 +20,11 @@ export class BookService {
   }
 
   async findAll() {
-    return this.prisma.book.findMany();
+    return this.prisma.book.findMany({
+      include: {
+        authors: true,
+      },
+    });
   }
 
   async findOne(id: string) {

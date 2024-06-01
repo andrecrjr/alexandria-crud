@@ -11,10 +11,11 @@ import { UsersService } from './users/users.service';
 import { JwtService } from '@nestjs/jwt';
 import { AuthController } from './auth/auth.controller';
 import { LocalStrategy } from './auth/local.strategy';
+import { AuthorController } from './author/author.controller';
 
 @Module({
   imports: [],
-  controllers: [AppController, BookController, UsersController, AuthController],
+  controllers: [AppController, BookController, UsersController, AuthController, AuthorController],
   providers: [
     AppService,
     BookService,
