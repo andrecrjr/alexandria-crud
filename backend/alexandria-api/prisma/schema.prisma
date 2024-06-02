@@ -22,8 +22,8 @@ model User {
   profileId  Int?         @unique
   createdAt  DateTime     @default(now())
   updatedAt  DateTime     @updatedAt
-  Collection Collection[]
-  Content    Content[]
+  userCollection Collection[]
+  userCreatedContent    Content[]
 }
 
 model Profile {
@@ -36,7 +36,7 @@ model Profile {
   collections Collection[]
   createdAt   DateTime     @default(now())
   updatedAt   DateTime     @updatedAt
-  User        User?
+  user        User?
 }
 
 model Collection {

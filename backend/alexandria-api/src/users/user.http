@@ -1,10 +1,21 @@
+
+### AUTH GET All user Profile
+GET http://localhost:3000/users/profile/all
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFuZHJlLWNhcmxvc0Bhcm9zLmNvbSIsInN1YiI6MSwiaWF0IjoxNzE3MzY1Mzc2LCJleHAiOjE3MTk5NTczNzZ9.502tgH36CUrUZzbflpnHIEBta1aHkP5boYTAbsXcTLc
+
+
 ### create user
 POST http://localhost:3000/users
 Content-Type: application/json
 
 {
-  "email": "aros@aros.com",
-  "password": "123456"
+  "email": "andrezin@aros.com",
+  "username":"eroshi",
+  "password": "123456",
+  "profile":{
+    "location":"rio de janeiro",
+    "bio": "the man who sold the world"
+  }
 }
 
 ### AUTH Login
@@ -12,10 +23,25 @@ POST http://localhost:3000/auth/login
 Content-Type: application/json
 
 {
-  "email": "aros@aros.com",
+  "email": "andre-carlos@aros.com",
   "password": "123456"
 }
 
 ### AUTH GET User Profile
 GET http://localhost:3000/users/profile
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFyb3NAYXJvcy5jb20iLCJpYXQiOjE3MTczNDk5NTIsImV4cCI6MTcxNzM0OTk3Mn0.7_0NzEZfRq-1USLR_owBQ0IVI1QCVqcsKKObUSKYRFU
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFuZHJlLWNhcmxvc0Bhcm9zLmNvbSIsInN1YiI6MSwiaWF0IjoxNzE3MzY1Mzc2LCJleHAiOjE3MTk5NTczNzZ9.502tgH36CUrUZzbflpnHIEBta1aHkP5boYTAbsXcTLc
+
+### UPDATE profile
+PATCH  http://localhost:3000/users/profile
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFuZHJlLWNhcmxvc0Bhcm9zLmNvbSIsInN1YiI6MSwiaWF0IjoxNzE3MzY1Mzc2LCJleHAiOjE3MTk5NTczNzZ9.502tgH36CUrUZzbflpnHIEBta1aHkP5boYTAbsXcTLc
+Content-Type: application/json
+
+{
+    "age":27,
+    "gender":"male",
+    "bio": "dev fullstack reader geek boy",
+    "location":"Rio de Janeiro",
+    "user":{
+      "username":"baby nescau"
+    }
+}

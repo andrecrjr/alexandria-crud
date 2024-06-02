@@ -13,6 +13,9 @@ export class CreateUserDTO {
   @ApiProperty()
   @IsOptional()
   username: string;
+
+  @IsOptional()
+  profile: object;
 }
 
 export class AuthLoginDTO {
