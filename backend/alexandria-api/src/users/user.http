@@ -1,3 +1,4 @@
+
 POST http://localhost:3000/users
 Content-Type: application/json
 
@@ -27,4 +28,4 @@ Content-Type: application/json
 
 ### AUTH GET User Profile
 GET http://localhost:3000/users/profile
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFyb3MiLCJpYXQiOjE3MTcyMTMyNTcsImV4cCI6MTcxNzgxODA1N30.NrTTMeqmyx4_L79VwlXxBqswhvELccslcEgZHwbuni4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImVyb3NoaW4iLCJpYXQiOjE3MTcyOTk1NzgsImV4cCI6MTcxNzI5OTU4OH0.YpF2carV_D-JmEByf6hVHwXPcpAp6k2T0qeTBGml0Oc
