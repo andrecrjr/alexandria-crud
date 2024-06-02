@@ -4,7 +4,6 @@ import { AuthController } from './auth.controller';
 import { PassportModule } from '@nestjs/passport';
 import { UsersModule } from 'src/users/users.module';
 import { JwtModule } from '@nestjs/jwt';
-import { LocalStrategy } from './local.strategy';
 import { jwtConstants } from 'src/constants';
 
 @Module({
@@ -12,11 +11,20 @@ import { jwtConstants } from 'src/constants';
     UsersModule,
     PassportModule,
     JwtModule.register({
+      global: true,
       secret: jwtConstants.secret,
+      secretOrPrivateKey: jwtConstants.secret,
       signOptions: { expiresIn: process.env.LOCAL_EXPIRE_ACCESS_TOKEN! },
     }),
   ],
-  providers: [AuthService, LocalStrategy],
+  providers: [
+    AuthService,
+    // define authentication globally in all routes
+    // {
+    //   provide: APP_GUARD,
+    //   useClass: AuthGuard,
+    // },
+  ],
   controllers: [AuthController],
 })
 export class AuthModule {}

@@ -27,4 +27,4 @@ Content-Type: application/json
 
 ### AUTH GET User Profile
 GET http://localhost:3000/users/profile
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFyb3MiLCJpYXQiOjE3MTcyMTI4ODgsImV4cCI6MTcxNzIxMjkwM30.lGwRXEms89s0H7VQUDOoyKyuJ5jtleBDf9757PmP4KU
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFyb3MiLCJpYXQiOjE3MTcyMTMyNTcsImV4cCI6MTcxNzgxODA1N30.NrTTMeqmyx4_L79VwlXxBqswhvELccslcEgZHwbuni4
