@@ -2,11 +2,12 @@
 
 PNPM Monorepo to develop a social network literature API
 Stack:
-* Nest (back-end)
-* Prisma
-* PostgreSQL
-* ViteJS (dashboard)
-* Next (front-end)
+
+- Nest (back-end)
+- Prisma
+- PostgreSQL
+- ViteJS (dashboard)
+- Next (front-end)
 
 [ x ] - Monorepo creation
 
@@ -14,10 +15,8 @@ Stack:
 
 [ x ] - Nest creation
 
-[ x ] - Nest Book crud API
-
 [ x ] - Nest Auth User crud API
 
-[  ] - Nest Book Author crud API
+[ ] - Nest Content crud API
 
-[ ] - Nest 
+[ ] - Nest User Collection CRUD API

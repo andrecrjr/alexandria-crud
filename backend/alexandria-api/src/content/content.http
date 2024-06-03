@@ -1,0 +1,24 @@
+### create content
+
+POST http://localhost:3000/content
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFuZHJlLWNhcmxvc0Bhcm9zLmNvbSIsInN1YiI6MSwiaWF0IjoxNzE3MzY1Mzc2LCJleHAiOjE3MTk5NTczNzZ9.502tgH36CUrUZzbflpnHIEBta1aHkP5boYTAbsXcTLc
+Content-Type: application/json
+
+{
+    "title":"Naruto Manga vol. 2",
+    "numberPages": 100,
+    "isbn": "11245454",
+    "description":"new manga"
+}
+
+### get all content
+GET http://localhost:3000/content/all
+
+### update one content
+
+PATCH http://localhost:3000/content/3
+Content-Type: application/json
+
+{
+    "title":"One Piece vol 1: Romance Dawn"
+}

@@ -14,7 +14,6 @@ import { LocalStrategy } from './local.strategy';
     JwtModule.register({
       global: true,
       secret: jwtConstants.secret,
-      secretOrPrivateKey: jwtConstants.secret,
       signOptions: { expiresIn: process.env.LOCAL_EXPIRE_ACCESS_TOKEN! },
     }),
   ],
