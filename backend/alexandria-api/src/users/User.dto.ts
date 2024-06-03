@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsEmail, IsOptional, MinLength } from 'class-validator';
+import { Prisma } from '@prisma/client';
 
 export class CreateUserDTO {
   @ApiProperty()
@@ -15,7 +16,10 @@ export class CreateUserDTO {
   username: string;
 
   @IsOptional()
-  profile: object;
+  profile: Prisma.ProfileCreateWithoutUserInput;
+
+  // @IsOptional()
+  // profileId: number;
 }
 
 export class AuthLoginDTO {

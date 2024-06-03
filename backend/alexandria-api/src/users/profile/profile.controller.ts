@@ -9,6 +9,7 @@ import {
 import { ApiBearerAuth } from '@nestjs/swagger';
 import { AuthGuard } from 'src/auth/auth.guard';
 import { ProfileService } from './profile.service';
+import { ProfileDTO } from './profile.dto';
 
 @Controller('users/profile')
 export class ProfileController {
@@ -22,7 +23,7 @@ export class ProfileController {
 
   @UseGuards(AuthGuard)
   @Patch()
-  editProfile(@Request() req, @Body() data) {
+  editProfile(@Request() req, @Body() data: ProfileDTO) {
     return this.profileService.updateProfile(data, req.user);
   }
   @UseGuards(AuthGuard)
