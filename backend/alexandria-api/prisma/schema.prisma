@@ -74,5 +74,6 @@ model Content {
   createdById Int?
   createdAt   DateTime     @default(now())
   updatedAt   DateTime     @updatedAt
-  Collection  Collection[]
+  collection  Collection[] 
+  numberPages Int
 }
