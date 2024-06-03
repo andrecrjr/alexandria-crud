@@ -33,12 +33,12 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFuZHJlL
 
 ### UPDATE profile
 PATCH  http://localhost:3000/users/profile
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InhhYmxhdUBhcm9zLmNvbSIsInN1YiI6NiwiaWF0IjoxNzE3Mzc2MjM1LCJleHAiOjE3MTk5NjgyMzV9.LnQH4GhnkQTeAjYT9e7S874SsmtWn2HycYkTxH4E4qI
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFuZHJlLWNhcmxvc0Bhcm9zLmNvbSIsInN1YiI6MSwiaWF0IjoxNzE3MzY1Mzc2LCJleHAiOjE3MTk5NTczNzZ9.502tgH36CUrUZzbflpnHIEBta1aHkP5boYTAbsXcTLc
 Content-Type: application/json
 
 {
-    "age":27,
-    "gender":"male",
+    "age":35,
+    "gender":"muito macho",
     "bio": "dev fullstack reader geek boy",
     "location":"Rio de Janeiro",
     "user":{
