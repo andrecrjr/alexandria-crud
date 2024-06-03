@@ -39,7 +39,7 @@ Content-Type: application/json
 {
     "age":35,
     "gender":"muito macho",
-    "bio": "dev fullstack reader geek boy",
+    "bio": "dev fullstack manga reader geek boy",
     "location":"Rio de Janeiro",
     "user":{
       "username":"baby nescau"

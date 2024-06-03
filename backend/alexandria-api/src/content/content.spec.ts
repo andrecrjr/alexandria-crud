@@ -1,4 +1,4 @@
-import { Content } from './content';
+import { Content } from './content.dto';
 
 describe('Content', () => {
   it('should be defined', () => {

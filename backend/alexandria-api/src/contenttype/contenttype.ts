@@ -1,7 +1,7 @@
 // ContentTypeDTO.ts
 import { IsInt, IsString, ValidateNested } from 'class-validator';
 import { Type } from 'class-transformer';
-import { ContentDTO } from 'src/content/content';
+import { ContentDTO } from 'src/content/content.dto';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class ContentTypeDTO {
