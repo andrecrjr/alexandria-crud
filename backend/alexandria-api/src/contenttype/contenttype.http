@@ -3,5 +3,5 @@ POST http://localhost:3000/contenttype
 Content-Type: application/json
 
 {
-    "name":"manga"
+    "name":"book"
 }

@@ -8,10 +8,7 @@ import {
 } from 'class-validator';
 import { Type } from 'class-transformer';
 import { CollectionDTO } from 'src/collection/collection';
-import {
-  ContentTypeDTO,
-  PartialContentTypeDTO,
-} from 'src/contenttype/contenttype';
+import { PartialContentTypeDTO } from 'src/contenttype/contenttype';
 
 export class ContentDTO {
   @IsInt()
@@ -33,8 +30,8 @@ export class ContentDTO {
 
   @IsOptional()
   @ValidateNested({ each: true })
-  @Type(() => ContentTypeDTO)
-  type: ContentTypeDTO;
+  @Type(() => PartialContentTypeDTO)
+  type: PartialContentTypeDTO;
 
   @IsOptional()
   @IsString()

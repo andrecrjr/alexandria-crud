@@ -22,7 +22,6 @@ export class ContentTypeDTO {
 export class PartialContentTypeDTO {
   @IsInt()
   @IsOptional()
-  @IsOptional()
   id: number;
 
   @ApiProperty()

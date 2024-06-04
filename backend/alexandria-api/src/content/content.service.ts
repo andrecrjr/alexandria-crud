@@ -1,13 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'prisma/prisma.service';
-import { ContentDTO, UpdateContentDTO } from './content.dto';
+import { UpdateContentDTO } from './content.dto';
 import { Prisma } from '@prisma/client';
 
 @Injectable()
 export class ContentService {
   constructor(private readonly prismaService: PrismaService) {}
 
-  convertCreatePrisma(data: ContentDTO): Prisma.ContentCreateInput {
+  convertCreatePrisma(data: UpdateContentDTO): Prisma.ContentCreateInput {
     const { collections, type, ...rest } = data;
     return {
       ...rest,
@@ -25,7 +25,7 @@ export class ContentService {
         : undefined,
     };
   }
-  async createContent(contentData: ContentDTO) {
+  async createContent(contentData: UpdateContentDTO) {
     const prismaData = this.convertCreatePrisma(contentData);
     const data = await this.prismaService.content.create({
       data: prismaData,
