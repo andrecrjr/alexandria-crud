@@ -4,13 +4,9 @@ POST http://localhost:3000/users
 Content-Type: application/json
 
 {
-  "email": "tagakash@aros.com",
-  "username":"taga",
-  "password": "123456",
-  "profile":{
-    "location":"rio de janeiro",
-    "bio": "the man who sold the world"
-  }
+  "email": "ak@aros.com",
+  "username":"ak47",
+  "password": "123456"
 }
 
 ### AUTH Login
@@ -19,7 +15,7 @@ POST http://localhost:3000/auth/login
 Content-Type: application/json
 
 {
-  "email": "tagakash@aros.com",
+  "email": "eroshi@aros.com",
   "password": "123456"
 }
 
@@ -37,9 +33,8 @@ Authorization: Bearer {{login.response.body.access_token}}
 Content-Type: application/json
 
 {
-  "username":"askaban",
   "profile":{
-    "bio":"fã de alguma coisa"
+    "gender":"M"
   }
 }
 
