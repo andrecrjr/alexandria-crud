@@ -28,11 +28,7 @@ export class UsersService {
         password: false,
         username: true,
         createdAt: true,
-        profile: {
-          select: {
-            id: true,
-          },
-        },
+        profile: true,
       },
     });
   }

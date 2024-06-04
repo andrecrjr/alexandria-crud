@@ -1,91 +1,91 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'prisma/prisma.service';
 import { exclude } from 'src/utils';
-import { ProfileDTO } from './profile.dto';
 import { Prisma } from '@prisma/client';
+import { UpdateUserProfileDTO } from '../User.dto';
 
 @Injectable()
 export class ProfileService {
   constructor(private readonly prismaService: PrismaService) {}
 
-  convertUpdatePrisma(data: ProfileDTO): Prisma.ProfileUpdateInput {
-    const { user, collections, ...profile } = data;
+  convertUpdatePrisma(
+    data: UpdateUserProfileDTO,
+    userData,
+  ): Prisma.UserUpdateInput {
     return {
-      ...profile,
-      user: {
+      ...data,
+      profile: {
         connect: {
-          email: user.email,
+          id: userData.sub,
         },
-      },
-      collections: {
-        connect: collections?.map((collection) => ({
-          id: collection.id,
-        })),
+        update: {
+          ...(data.profile as Prisma.ProfileUpdateWithoutUserInput),
+        },
       },
     };
   }
 
   getAllProfiles = async () => {
-    const data = await this.prismaService.profile.findMany({
+    const data = await this.prismaService.user.findMany({
       include: {
-        user: true,
+        profile: true,
       },
     });
     return data.map((userData) => ({
-      ...userData,
-      user: exclude(userData.user, ['password']),
+      ...exclude(userData, ['password']),
     }));
   };
 
   getProfile = async (user) => {
-    return await this.prismaService.profile.findUnique({
+    return await this.prismaService.user.findUnique({
       where: {
         id: parseInt(user.sub),
-        user: {
-          email: user.email, // assuming email is a field on the profile model
-        },
+        email: user.email, // assuming email is a field on the profile model
+      },
+      select: {
+        profile: true,
       },
     });
   };
 
   async getUserAndProfile(user) {
-    const updateData = await this.prismaService.profile.findFirstOrThrow({
+    const updateData = await this.prismaService.user.findFirstOrThrow({
       where: {
         id: user.sub,
       },
       include: {
-        user: true,
+        profile: true,
       },
     });
-    const newData = exclude(updateData.user, ['password']);
-    return { ...updateData, user: newData };
+    const newData = exclude(updateData, ['password']);
+    return newData;
   }
 
-  async updateProfile(data: ProfileDTO, user) {
-    const prismaData = this.convertUpdatePrisma(data);
-    const updateData = await this.prismaService.profile.update({
+  async updateProfile(data: UpdateUserProfileDTO, user) {
+    const prismaData = this.convertUpdatePrisma(data, user);
+    const updateData = await this.prismaService.user.update({
       where: {
         id: parseInt(user.sub),
-        user: {
-          email: user.email,
-        },
+        email: user.email,
       },
       data: {
         ...prismaData,
-        user: {
-          update: {
-            ...data.user,
-          },
-        },
       },
       include: {
-        user: true,
+        profile: true,
       },
     });
 
-    const newData = exclude(updateData.user, ['password']);
-    return { ...updateData, user: newData };
+    const newData = exclude(updateData, ['password']);
+    return { ...newData };
   }
 
-  //async createProfile(data) {}
+  async deleteProfile(user) {
+    await this.prismaService.user.delete({
+      where: {
+        id: user.sub,
+      },
+    });
+    return true;
+  }
 }

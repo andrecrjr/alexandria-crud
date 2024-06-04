@@ -4,8 +4,8 @@ POST http://localhost:3000/users
 Content-Type: application/json
 
 {
-  "email": "xablau@aros.com",
-  "username":"eroshi",
+  "email": "tagakash@aros.com",
+  "username":"taga",
   "password": "123456",
   "profile":{
     "location":"rio de janeiro",
@@ -19,7 +19,7 @@ POST http://localhost:3000/auth/login
 Content-Type: application/json
 
 {
-  "email": "andrezin@aros.com",
+  "email": "tagakash@aros.com",
   "password": "123456"
 }
 
@@ -37,11 +37,13 @@ Authorization: Bearer {{login.response.body.access_token}}
 Content-Type: application/json
 
 {
-    "age":25,
-    "gender":"macho",
-    "bio": "dev front end sagaz",
-    "location":"Rio de Janeiro",
-    "user":{
-      "username":"eroshiboy"
-    }
+  "username":"askaban",
+  "profile":{
+    "bio":"fã de alguma coisa"
+  }
 }
+
+### DELETE user/profile
+DELETE  http://localhost:3000/users/profile
+Authorization: Bearer {{login.response.body.access_token}}
+Content-Type: application/json

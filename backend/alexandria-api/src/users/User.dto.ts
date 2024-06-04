@@ -22,6 +22,27 @@ export class CreateUserDTO {
   profile: ProfileDTO;
 }
 
+export class UpdateUserProfileDTO {
+  @ApiProperty()
+  @IsEmail()
+  @IsOptional()
+  email: string;
+
+  @ApiProperty()
+  @MinLength(6)
+  @IsOptional()
+  password: string;
+
+  @ApiProperty()
+  @IsOptional()
+  username: string;
+
+  @ApiProperty()
+  @IsOptional()
+  @Type(() => ProfileDTO)
+  profile: ProfileDTO;
+}
+
 export class AuthLoginDTO {
   @ApiProperty()
   username: string;
