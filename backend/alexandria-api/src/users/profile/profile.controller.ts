@@ -7,12 +7,13 @@ import {
   Request,
   UseGuards,
 } from '@nestjs/common';
-import { ApiBearerAuth } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from 'src/auth/auth.guard';
 import { ProfileService } from './profile.service';
 import { UpdateUserProfileDTO } from '../User.dto';
 
 @Controller('users/profile')
+@ApiTags('User Profile')
 export class ProfileController {
   constructor(private readonly profileService: ProfileService) {}
   @UseGuards(AuthGuard)
@@ -27,7 +28,7 @@ export class ProfileController {
   editProfile(@Request() req, @Body() data: UpdateUserProfileDTO) {
     return this.profileService.updateProfile(data, req.user);
   }
-  @UseGuards(AuthGuard)
+
   @Get('all')
   getAll() {
     return this.profileService.getAllProfiles();

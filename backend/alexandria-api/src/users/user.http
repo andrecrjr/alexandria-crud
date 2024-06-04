@@ -4,8 +4,8 @@ POST http://localhost:3000/users
 Content-Type: application/json
 
 {
-  "email": "ak@aros.com",
-  "username":"ak47",
+  "email": "gigi@aros.com",
+  "username":"guigi",
   "password": "123456"
 }
 
@@ -15,7 +15,7 @@ POST http://localhost:3000/auth/login
 Content-Type: application/json
 
 {
-  "email": "eroshi@aros.com",
+  "email": "ak@aros.com",
   "password": "123456"
 }
 

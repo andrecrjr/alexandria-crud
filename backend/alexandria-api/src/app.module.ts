@@ -5,9 +5,16 @@ import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { ContentModule } from './content/content.module';
 import { ContenttypeModule } from './contenttype/contenttype.module';
+import { CollectionModule } from './collection/collection.module';
 
 @Module({
-  imports: [AuthModule, UsersModule, ContentModule, ContenttypeModule],
+  imports: [
+    AuthModule,
+    UsersModule,
+    ContentModule,
+    ContenttypeModule,
+    CollectionModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })

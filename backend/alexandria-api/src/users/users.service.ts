@@ -12,7 +12,9 @@ export class UsersService {
     const profilePrisma = profile as Prisma.ProfileCreateWithoutUserInput;
     return {
       ...rest,
-      profile: { create: profilePrisma || {} },
+      profile: {
+        create: profilePrisma || {},
+      },
     };
   }
   async create({ password, ...data }: CreateUserDTO) {

@@ -2,15 +2,29 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'prisma/prisma.service';
 import { UpdateContentDTO } from './content.dto';
 import { Prisma } from '@prisma/client';
+import { JwtDTO } from 'src/auth/jwt.dto';
 
 @Injectable()
 export class ContentService {
   constructor(private readonly prismaService: PrismaService) {}
 
-  convertCreatePrisma(data: UpdateContentDTO): Prisma.ContentCreateInput {
+  async getUniqueContent(id: number) {
+    return this.prismaService.content.findFirstOrThrow({
+      where: { id: id },
+      include: {
+        createdBy: true,
+        type: true,
+      },
+    });
+  }
+  convertCreatePrisma(
+    data: UpdateContentDTO,
+    user: JwtDTO,
+  ): Prisma.ContentCreateInput {
     const { collections, type, ...rest } = data;
     return {
       ...rest,
+      createdBy: { connect: { id: user.sub } },
       type: type?.id
         ? {
             connect: {
@@ -25,10 +39,10 @@ export class ContentService {
         : undefined,
     };
   }
-  async createContent(contentData: UpdateContentDTO) {
-    const prismaData = this.convertCreatePrisma(contentData);
+  async createContent(contentData: UpdateContentDTO, user: JwtDTO) {
+    const prismaData = this.convertCreatePrisma(contentData, user);
     const data = await this.prismaService.content.create({
-      data: prismaData,
+      data: { ...prismaData },
     });
     return data;
   }
@@ -42,8 +56,8 @@ export class ContentService {
     });
   }
 
-  async updateContent(id: number, contentData: UpdateContentDTO) {
-    const prismaData = this.convertCreatePrisma(contentData);
+  async updateContent(id: number, contentData: UpdateContentDTO, user: JwtDTO) {
+    const prismaData = this.convertCreatePrisma(contentData, user);
     const data = await this.prismaService.content.update({
       where: {
         id,
