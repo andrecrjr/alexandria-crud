@@ -50,7 +50,6 @@ export class ContentService {
   getAllContent() {
     return this.prismaService.content.findMany({
       include: {
-        collection: true,
         type: true,
       },
     });

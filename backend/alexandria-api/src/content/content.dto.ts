@@ -9,6 +9,7 @@ import {
 import { Type } from 'class-transformer';
 import { CollectionDTO } from 'src/collection/collection';
 import { PartialContentTypeDTO } from 'src/contenttype/contenttype';
+import { ApiProperty } from '@nestjs/swagger';
 
 export class ContentDTO {
   @IsInt()
@@ -16,29 +17,36 @@ export class ContentDTO {
   id: number;
 
   @IsString()
+  @ApiProperty()
   title: string;
 
   @IsString()
+  @ApiProperty()
   description?: string;
 
   @IsInt()
   @IsOptional()
+  @ApiProperty()
   typeId: number;
 
   @IsInt()
+  @ApiProperty()
   numberPages: number;
 
   @IsOptional()
+  @ApiProperty()
   @ValidateNested({ each: true })
   @Type(() => PartialContentTypeDTO)
   type: PartialContentTypeDTO;
 
   @IsOptional()
   @IsString()
+  @ApiProperty()
   isbn?: string;
 
   @IsOptional()
   @IsString()
+  @ApiProperty()
   imageUrl?: string;
 
   @IsOptional()

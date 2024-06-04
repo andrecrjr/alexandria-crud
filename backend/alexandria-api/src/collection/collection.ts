@@ -1,22 +1,28 @@
 // CollectionDTO.ts
+import { ApiProperty } from '@nestjs/swagger';
 import { IsInt, IsString, IsDate, IsOptional } from 'class-validator';
 
 export class CollectionDTO {
   @IsInt()
   id: number;
 
+  @ApiProperty()
   @IsString()
   name: string;
 
+  @ApiProperty()
   @IsString()
   type: string;
 
+  @ApiProperty()
   @IsInt()
   page: number;
 
+  @ApiProperty()
   @IsInt()
   userId: number;
 
+  @ApiProperty()
   @IsInt()
   contentId: number;
 

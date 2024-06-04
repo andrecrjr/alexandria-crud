@@ -17,6 +17,8 @@ Stack:
 
 [ x ] - Nest Auth User crud API
 
-[ ] - Nest Content crud API
+[ x ] - Nest Content crud API
+
+[ ] - Nest User Content Type CRUD API
 
 [ ] - Nest User Collection CRUD API
