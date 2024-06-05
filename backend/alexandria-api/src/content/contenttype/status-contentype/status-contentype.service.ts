@@ -26,7 +26,6 @@ export class StatusContentypeService {
     await this.prismaService.statusContentypeUser.update({
       where: { id },
       data: data,
-      
     });
     return `This action updates a #${id} statusContentype`;
   }

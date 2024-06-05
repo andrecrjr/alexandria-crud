@@ -33,6 +33,18 @@ Authorization: Bearer {{login.response.body.access_token}}
     }
 }
 
+### GET all content type
+GET http://localhost:3000/contenttype
+Content-Type: application/json
+Authorization: Bearer {{login.response.body.access_token}}
+
+{
+    "name":"book",
+    "statusType": {
+      "id": 1
+    }
+}
+
 ### create content
 POST http://localhost:3000/content
 Authorization: Bearer {{login.response.body.access_token}}

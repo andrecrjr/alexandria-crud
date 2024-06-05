@@ -6,11 +6,13 @@ import {
   Patch,
   Param,
   Delete,
+  UseGuards,
 } from '@nestjs/common';
 import { StatusContentypeService } from './status-contentype.service';
 import { CreateStatusContentypeDto } from './dto/create-status-contentype.dto';
 import { UpdateStatusContentypeDto } from './dto/update-status-contentype.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { AuthGuard } from 'src/auth/auth.guard';
 
 @Controller('status-contentype')
 @ApiTags('Status for Content Types')
@@ -20,6 +22,8 @@ export class StatusContentypeController {
   ) {}
 
   @Post()
+  @UseGuards(AuthGuard)
+  @ApiBearerAuth('defaultBearerAuth')
   create(@Body() createStatusContentypeDto: CreateStatusContentypeDto) {
     return this.statusContentypeService.create(createStatusContentypeDto);
   }

@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { PrismaService } from 'prisma/prisma.service';
 import { ContentTypeDTO } from './contenttype';
-import { PaginateAndFind } from 'src/decorators/Pagination';
 
 @Injectable()
 export class ContenttypeService {
@@ -36,8 +35,8 @@ export class ContenttypeService {
   }
 
   async getAll() {
-    const page = parseInt('0');
-    const limit = parseInt('10');
+    const page = parseInt('0') || 0;
+    const limit = parseInt('10') || 10;
 
     const results = await this.prismaService['contentType'].findMany({
       take: limit,
@@ -53,7 +52,7 @@ export class ContenttypeService {
     // Aqui você pode adicionar lógica para calcular o total de páginas, etc.
     const paginationResult = {
       data: results,
-      page,
+      page: page + 1,
       limit,
       // total, totalPages, etc.
       count,
