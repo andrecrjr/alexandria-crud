@@ -47,8 +47,7 @@ export class ContenttypeService {
     });
 
     const count = await this.prismaService['contentType'].count();
-    const totalPages = Math.ceil(count / limit) - 1;
-    console.log(totalPages);
+    const totalPages = Math.ceil(count / limit);
     // Aqui você pode adicionar lógica para calcular o total de páginas, etc.
     const paginationResult = {
       data: results,
