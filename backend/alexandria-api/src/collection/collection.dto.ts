@@ -1,4 +1,4 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, PartialType } from '@nestjs/swagger';
 import { IsInt, IsOptional, IsString, IsNotEmpty } from 'class-validator';
 
 export class CreateCollectionDto {
@@ -27,30 +27,4 @@ export class CreateCollectionDto {
   profileId?: number;
 }
 
-export class UpdateCollectionDto {
-  @IsOptional()
-  @IsString()
-  @IsNotEmpty()
-  @ApiProperty()
-  type?: string;
-
-  @IsOptional()
-  @IsInt()
-  @ApiProperty()
-  page?: number;
-
-  @IsOptional()
-  @IsInt()
-  @ApiProperty()
-  userId?: number;
-
-  @IsOptional()
-  @IsInt()
-  @ApiProperty()
-  contentId?: number;
-
-  @IsOptional()
-  @IsInt()
-  @ApiProperty()
-  profileId?: number;
-}
+export class UpdateCollectionDto extends PartialType(CreateCollectionDto) {}

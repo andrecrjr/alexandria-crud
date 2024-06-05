@@ -10,3 +10,9 @@ export class CreateStatusContentypeDto {
   @ApiProperty()
   name: string[];
 }
+
+export class PartialStatusSwaggerCTypeDTO {
+  @ApiProperty()
+  @IsInt()
+  id: number;
+}

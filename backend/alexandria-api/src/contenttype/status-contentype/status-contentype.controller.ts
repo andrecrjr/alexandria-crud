@@ -10,8 +10,10 @@ import {
 import { StatusContentypeService } from './status-contentype.service';
 import { CreateStatusContentypeDto } from './dto/create-status-contentype.dto';
 import { UpdateStatusContentypeDto } from './dto/update-status-contentype.dto';
+import { ApiTags } from '@nestjs/swagger';
 
 @Controller('status-contentype')
+@ApiTags('Status for Content Types')
 export class StatusContentypeController {
   constructor(
     private readonly statusContentypeService: StatusContentypeService,
