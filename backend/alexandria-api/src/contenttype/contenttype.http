@@ -1,7 +1,33 @@
-### create content type
-POST http://localhost:3000/contenttype
+### AUTH Login
+# @name login
+POST http://localhost:3000/auth/login
 Content-Type: application/json
 
 {
-    "name":"book"
+  "email": "kohado@aros.com",
+  "password": "123456"
+}
+
+### create status content type
+POST http://localhost:3000/status-contentype
+Content-Type: application/json
+
+{
+  "name": [
+    "lendo",
+    "lido",
+    "abandonado"
+  ]
+}
+
+### create content type
+POST http://localhost:3000/contenttype
+Content-Type: application/json
+Authorization: Bearer {{login.response.body.access_token}}
+
+{
+    "name":"book",
+    "statusType": {
+      "id": 1
+    }
 }

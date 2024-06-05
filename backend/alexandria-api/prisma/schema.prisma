@@ -14,50 +14,54 @@ datasource db {
 }
 
 model User {
-  id         Int          @id @default(autoincrement())
-  username   String?      @unique
-  email      String       @unique
-  password   String
-  profile    Profile?     @relation(fields: [profileId], references: [id])
-  profileId  Int?         @unique
-  createdAt  DateTime     @default(now())
-  updatedAt  DateTime     @updatedAt
-  userCollection Collection[]
-  userCreatedContent    Content[]
+  id                 Int       @id @default(autoincrement())
+  username           String?   @unique
+  email              String    @unique
+  password           String
+  profile            Profile?  @relation(fields: [id], references: [id])
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+  userCreatedContent Content[]
 }
 
 model Profile {
-  id          Int          @id @default(autoincrement())
-  bio         String?
-  location    String?
-  age         Int?
-  gender      String?
-  interests   String[] // Pode ser um array de interesses
-  collections Collection[]
-  createdAt   DateTime     @default(now())
-  updatedAt   DateTime     @updatedAt
-  user        User?
+  id              Int          @id @default(autoincrement())
+  bio             String?
+  location        String?
+  age             Int?
+  gender          String?
+  interests       String[] // Pode ser um array de interesses
+  userCollections Collection[]
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
+  user            User?
 }
 
 model Collection {
   id        Int      @id @default(autoincrement())
   type      String // Ex: Lendo, Lido, Pausado, Abandonado, etc.
   page      Int // Contador de páginas lidas ou posição atual de leitura
-  user      User     @relation(fields: [userId], references: [id])
-  userId    Int      @map("user_id")
-  contentId Int      @map("content_id") @unique
+  profileId Int      @map("profile_id")
+  contentId Int      @unique @map("content_id")
   content   Content  @relation(fields: [contentId], references: [id])
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   profile   Profile? @relation(fields: [profileId], references: [id])
-  profileId Int?
+}
+
+model StatusContentypeUser {
+  id          Int           @id @default(autoincrement())
+  name        String[]
+  contentType ContentType[]
 }
 
 // Este modelo representa o banco de dados separado para os tipos de conteúdo
 model ContentType {
-  id       Int       @id @default(autoincrement())
-  name     String    @unique
-  contents Content[]
+  id         Int                   @id @default(autoincrement())
+  name       String                @unique
+  statusType StatusContentypeUser? @relation(fields: [statusTypeId], references: [id])
+  statusTypeId Int
+  contents   Content[]
 }
 
 // Atualizando o modelo Content para usar o novo banco de dados para ContentType
@@ -73,6 +77,6 @@ model Content {
   createdById Int?
   createdAt   DateTime     @default(now())
   updatedAt   DateTime     @updatedAt
-  collection  Collection[] 
+  collection  Collection[]
   numberPages Int
 }

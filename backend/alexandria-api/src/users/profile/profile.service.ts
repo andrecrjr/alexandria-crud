@@ -83,15 +83,12 @@ export class ProfileService {
   async deleteProfile(user) {
     await this.prismaService.collection.deleteMany({
       where: {
-        profileId: user.subProf,
+        profile: { id: user.sub },
       },
     });
-    await this.prismaService.user.delete({
+    await this.prismaService.profile.delete({
       where: {
         id: user.sub,
-      },
-      include: {
-        userCollection: true,
       },
     });
     return true;

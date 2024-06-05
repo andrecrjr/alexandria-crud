@@ -8,7 +8,7 @@ export class ContenttypeService {
   constructor(private readonly prismaService: PrismaService) {}
 
   createContentTypePrisma(data: ContentTypeDTO): Prisma.ContentTypeCreateInput {
-    const { contents, ...rest } = data;
+    const { contents, statusType, ...rest } = data;
 
     return {
       ...rest,
@@ -16,6 +16,13 @@ export class ContenttypeService {
         connect: contents?.map((item) => ({
           id: item.id,
         })),
+      },
+      statusType: {
+        connect: statusType?.id
+          ? {
+              id: statusType.id,
+            }
+          : undefined,
       },
     };
   }

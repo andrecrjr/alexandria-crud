@@ -3,6 +3,7 @@ import { IsInt, IsOptional, IsString, ValidateNested } from 'class-validator';
 import { Type } from 'class-transformer';
 import { ContentDTO } from 'src/content/content.dto';
 import { ApiProperty } from '@nestjs/swagger';
+import { CreateStatusContentypeDto } from './status-contentype/dto/create-status-contentype.dto';
 
 export class ContentTypeDTO {
   @IsInt()
@@ -17,6 +18,12 @@ export class ContentTypeDTO {
   @ValidateNested({ each: true })
   @Type(() => ContentDTO)
   contents: ContentDTO[];
+
+  @ApiProperty()
+  @Type(() => CreateStatusContentypeDto)
+  statusType: CreateStatusContentypeDto;
+
+  statusTypeId: number;
 }
 
 export class PartialContentTypeDTO {
@@ -34,4 +41,11 @@ export class PartialContentTypeDTO {
   @ValidateNested({ each: true })
   @Type(() => ContentDTO)
   contents: ContentDTO[];
+
+  @ApiProperty()
+  @IsOptional()
+  @Type(() => CreateStatusContentypeDto)
+  statusType: CreateStatusContentypeDto;
+
+  statusTypeId: number;
 }

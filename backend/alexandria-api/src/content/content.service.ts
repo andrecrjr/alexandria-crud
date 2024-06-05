@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'prisma/prisma.service';
-import { UpdateContentDTO } from './content.dto';
+import { ContentDTO, UpdateContentDTO } from './content.dto';
 import { Prisma } from '@prisma/client';
 import { JwtDTO } from 'src/auth/jwt.dto';
 
@@ -25,7 +25,7 @@ export class ContentService {
     return {
       ...rest,
       createdBy: { connect: { id: user.sub } },
-      type: type?.id
+      type: type
         ? {
             connect: {
               id: type.id || 1,
@@ -39,7 +39,7 @@ export class ContentService {
         : undefined,
     };
   }
-  async createContent(contentData: UpdateContentDTO, user: JwtDTO) {
+  async createContent(contentData: ContentDTO, user: JwtDTO) {
     const prismaData = this.convertCreatePrisma(contentData, user);
     const data = await this.prismaService.content.create({
       data: { ...prismaData },
@@ -50,7 +50,11 @@ export class ContentService {
   getAllContent() {
     return this.prismaService.content.findMany({
       include: {
-        type: true,
+        type: {
+          include: {
+            statusType: true,
+          },
+        },
       },
     });
   }

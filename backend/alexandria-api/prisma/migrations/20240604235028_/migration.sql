@@ -4,7 +4,6 @@ CREATE TABLE "User" (
     "username" TEXT,
     "email" TEXT NOT NULL,
     "password" TEXT NOT NULL,
-    "profileId" INTEGER,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -28,16 +27,22 @@ CREATE TABLE "Profile" (
 -- CreateTable
 CREATE TABLE "Collection" (
     "id" SERIAL NOT NULL,
-    "name" TEXT NOT NULL,
     "type" TEXT NOT NULL,
     "page" INTEGER NOT NULL,
-    "user_id" INTEGER NOT NULL,
+    "profile_id" INTEGER NOT NULL,
     "content_id" INTEGER NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
-    "profileId" INTEGER,
 
     CONSTRAINT "Collection_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "StatusContentypeUser" (
+    "id" SERIAL NOT NULL,
+    "name" TEXT[],
+
+    CONSTRAINT "StatusContentypeUser_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -71,22 +76,22 @@ CREATE UNIQUE INDEX "User_username_key" ON "User"("username");
 CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "User_profileId_key" ON "User"("profileId");
+CREATE UNIQUE INDEX "Collection_content_id_key" ON "Collection"("content_id");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "ContentType_name_key" ON "ContentType"("name");
 
 -- AddForeignKey
-ALTER TABLE "User" ADD CONSTRAINT "User_profileId_fkey" FOREIGN KEY ("profileId") REFERENCES "Profile"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "Collection" ADD CONSTRAINT "Collection_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "User" ADD CONSTRAINT "User_id_fkey" FOREIGN KEY ("id") REFERENCES "Profile"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Collection" ADD CONSTRAINT "Collection_content_id_fkey" FOREIGN KEY ("content_id") REFERENCES "Content"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Collection" ADD CONSTRAINT "Collection_profileId_fkey" FOREIGN KEY ("profileId") REFERENCES "Profile"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "Collection" ADD CONSTRAINT "Collection_profile_id_fkey" FOREIGN KEY ("profile_id") REFERENCES "Profile"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "ContentType" ADD CONSTRAINT "ContentType_id_fkey" FOREIGN KEY ("id") REFERENCES "StatusContentypeUser"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Content" ADD CONSTRAINT "Content_typeId_fkey" FOREIGN KEY ("typeId") REFERENCES "ContentType"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

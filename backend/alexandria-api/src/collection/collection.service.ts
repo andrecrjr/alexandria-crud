@@ -11,8 +11,7 @@ export class CollectionService {
     const collectionUserData = await this.prismaService.collection.create({
       data: {
         ...data,
-        profileId: user.subProf,
-        userId: user.sub,
+        profileId: user.sub,
       },
     });
     return collectionUserData;
@@ -20,7 +19,7 @@ export class CollectionService {
 
   async getCollectionByUser(user) {
     const userCollection = await this.prismaService.collection.findMany({
-      where: { profileId: user.subProf },
+      where: { profileId: user.sub },
       include: {
         content: {
           include: {
@@ -35,7 +34,7 @@ export class CollectionService {
 
   async updateCollectionContentAndUser(user, data: UpdateCollectionDto) {
     return await this.prismaService.collection.update({
-      where: { profileId: user.subProf, contentId: data.contentId },
+      where: { profileId: user.sub, contentId: data.contentId },
       data: {
         ...data,
       },
