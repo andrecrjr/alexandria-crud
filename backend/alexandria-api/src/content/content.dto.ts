@@ -8,7 +8,7 @@ import {
 } from 'class-validator';
 import { Type } from 'class-transformer';
 import { CollectionDTO } from 'src/collection/collection';
-import { PartialContentTypeDTO } from 'src/content/contenttype/contenttype';
+import { PartialContentTypeDTO } from 'src/contenttype/contenttype';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class ContentDTO {
