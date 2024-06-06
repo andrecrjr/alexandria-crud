@@ -44,11 +44,13 @@ model Collection {
   type      String // Ex: Lendo, Lido, Pausado, Abandonado, etc.
   page      Int // Contador de páginas lidas ou posição atual de leitura
   profileId Int      @map("profile_id")
-  contentId Int      @unique @map("content_id")
+  contentId Int      @map("content_id")
   content   Content  @relation(fields: [contentId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   profile   Profile? @relation(fields: [profileId], references: [id], onDelete: Cascade)
+
+  @@unique([contentId, profileId])
 }
 
 model StatusContentypeUser {

@@ -6,6 +6,7 @@ CREATE TABLE "User" (
     "password" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
+    "userActive" BOOLEAN NOT NULL DEFAULT true,
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );
@@ -49,6 +50,7 @@ CREATE TABLE "StatusContentypeUser" (
 CREATE TABLE "ContentType" (
     "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
+    "statusTypeId" INTEGER NOT NULL,
 
     CONSTRAINT "ContentType_pkey" PRIMARY KEY ("id")
 );
@@ -69,6 +71,33 @@ CREATE TABLE "Content" (
     CONSTRAINT "Content_pkey" PRIMARY KEY ("id")
 );
 
+-- CreateTable
+CREATE TABLE "AuthorContent" (
+    "id" SERIAL NOT NULL,
+    "name" TEXT,
+    "bio" TEXT,
+    "born" TIMESTAMP(3),
+    "died" TIMESTAMP(3),
+    "nationality" TEXT,
+    "awards" TEXT[],
+    "photoUrl" TEXT,
+    "website" TEXT,
+    "genres" TEXT[],
+    "socialMedia" JSONB,
+    "bestSellers" TEXT[],
+    "influences" TEXT[],
+    "influenced" TEXT[],
+    "createdById" INTEGER,
+
+    CONSTRAINT "AuthorContent_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "_AuthorContentToContent" (
+    "A" INTEGER NOT NULL,
+    "B" INTEGER NOT NULL
+);
+
 -- CreateIndex
 CREATE UNIQUE INDEX "User_username_key" ON "User"("username");
 
@@ -76,25 +105,40 @@ CREATE UNIQUE INDEX "User_username_key" ON "User"("username");
 CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Collection_content_id_key" ON "Collection"("content_id");
+CREATE UNIQUE INDEX "Collection_content_id_profile_id_key" ON "Collection"("content_id", "profile_id");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "ContentType_name_key" ON "ContentType"("name");
 
--- AddForeignKey
-ALTER TABLE "User" ADD CONSTRAINT "User_id_fkey" FOREIGN KEY ("id") REFERENCES "Profile"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+-- CreateIndex
+CREATE UNIQUE INDEX "_AuthorContentToContent_AB_unique" ON "_AuthorContentToContent"("A", "B");
+
+-- CreateIndex
+CREATE INDEX "_AuthorContentToContent_B_index" ON "_AuthorContentToContent"("B");
 
 -- AddForeignKey
-ALTER TABLE "Collection" ADD CONSTRAINT "Collection_content_id_fkey" FOREIGN KEY ("content_id") REFERENCES "Content"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "User" ADD CONSTRAINT "User_id_fkey" FOREIGN KEY ("id") REFERENCES "Profile"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Collection" ADD CONSTRAINT "Collection_profile_id_fkey" FOREIGN KEY ("profile_id") REFERENCES "Profile"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Collection" ADD CONSTRAINT "Collection_content_id_fkey" FOREIGN KEY ("content_id") REFERENCES "Content"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "ContentType" ADD CONSTRAINT "ContentType_id_fkey" FOREIGN KEY ("id") REFERENCES "StatusContentypeUser"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Collection" ADD CONSTRAINT "Collection_profile_id_fkey" FOREIGN KEY ("profile_id") REFERENCES "Profile"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "ContentType" ADD CONSTRAINT "ContentType_statusTypeId_fkey" FOREIGN KEY ("statusTypeId") REFERENCES "StatusContentypeUser"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Content" ADD CONSTRAINT "Content_typeId_fkey" FOREIGN KEY ("typeId") REFERENCES "ContentType"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Content" ADD CONSTRAINT "Content_createdById_fkey" FOREIGN KEY ("createdById") REFERENCES "User"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "AuthorContent" ADD CONSTRAINT "AuthorContent_createdById_fkey" FOREIGN KEY ("createdById") REFERENCES "User"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "_AuthorContentToContent" ADD CONSTRAINT "_AuthorContentToContent_A_fkey" FOREIGN KEY ("A") REFERENCES "AuthorContent"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "_AuthorContentToContent" ADD CONSTRAINT "_AuthorContentToContent_B_fkey" FOREIGN KEY ("B") REFERENCES "Content"("id") ON DELETE CASCADE ON UPDATE CASCADE;

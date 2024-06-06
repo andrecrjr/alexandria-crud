@@ -21,6 +21,10 @@ export class PrismaExceptionFilter implements ExceptionFilter {
         message =
           'There is a unique constraint violation, a new record cannot be created with this data.';
         break;
+      case 'P2003':
+        status = HttpStatus.CONFLICT;
+        message = `There is a violation. It's not possible to create a new record with this data because already has a record with the same content.`;
+        break;
       case 'P1000':
         status = HttpStatus.UNAUTHORIZED;
         message =

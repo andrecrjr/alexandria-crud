@@ -4,7 +4,7 @@ POST http://localhost:3000/auth/login
 Content-Type: application/json
 
 {
-  "email": "kohado@aros.com",
+  "email": "eroshi@aros.com",
   "password": "123456"
 }
 
@@ -16,18 +16,18 @@ Content-Type: application/json
 
 {
     "type": "lendo",
-    "page":8,
+    "page":20,
     "contentId":1
 }
 
-### create collection between user
+### update collection between user
 PATCH http://localhost:3000/collection/page
 Authorization: Bearer {{login.response.body.access_token}}
 Content-Type: application/json
 
 {
-    "type":"lido",
-    "page":23,
+    "type":"lendo",
+    "page":255,
     "contentId":1
 }
 
