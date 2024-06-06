@@ -42,6 +42,6 @@ export class ContentController {
     @Request() req: IRequestJWT,
   ) {
     console.log(req.user);
-    return this.contentService.updateContent(parseInt(id), data, req.user);
+    return this.contentService.updateContent(parseInt(id), data);
   }
 }

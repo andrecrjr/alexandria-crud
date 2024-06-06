@@ -18,10 +18,10 @@ export class ContentService {
     });
   }
   convertCreatePrisma(
-    data: UpdateContentDTO,
+    data: ContentDTO,
     user: JwtDTO,
   ): Prisma.ContentCreateInput {
-    const { collections, type, ...rest } = data;
+    const { collections, type, authors, ...rest } = data;
     return {
       ...rest,
       createdBy: { connect: { id: user.sub } },
@@ -37,8 +37,38 @@ export class ContentService {
             connect: collections?.map((items) => ({ id: items.id })),
           }
         : undefined,
+      authors: authors
+        ? {
+            connect: authors?.map((items) => ({ id: items.id })),
+          }
+        : undefined,
     };
   }
+
+  convertUpdatePrisma(data: UpdateContentDTO): Prisma.ContentUpdateInput {
+    const { collections, type, authors, ...rest } = data;
+    return {
+      ...rest,
+      type: type
+        ? {
+            connect: {
+              id: type.id,
+            },
+          }
+        : undefined,
+      collection: collections
+        ? {
+            connect: collections?.map((items) => ({ id: items.id })),
+          }
+        : undefined,
+      authors: authors
+        ? {
+            connect: authors?.map((items) => ({ id: items.id })),
+          }
+        : undefined,
+    };
+  }
+
   async createContent(contentData: ContentDTO, user: JwtDTO) {
     const prismaData = this.convertCreatePrisma(contentData, user);
     const data = await this.prismaService.content.create({
@@ -59,8 +89,8 @@ export class ContentService {
     });
   }
 
-  async updateContent(id: number, contentData: UpdateContentDTO, user: JwtDTO) {
-    const prismaData = this.convertCreatePrisma(contentData, user);
+  async updateContent(id: number, contentData: UpdateContentDTO) {
+    const prismaData = this.convertUpdatePrisma(contentData);
     const data = await this.prismaService.content.update({
       where: {
         id,

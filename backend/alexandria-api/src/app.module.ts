@@ -6,6 +6,7 @@ import { UsersModule } from './users/users.module';
 import { ContentModule } from './content/content.module';
 import { ContenttypeModule } from './contenttype/contenttype.module';
 import { CollectionModule } from './collection/collection.module';
+import { AuthorContentModule } from './author-content/author-content.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { CollectionModule } from './collection/collection.module';
     ContentModule,
     ContenttypeModule,
     CollectionModule,
+    AuthorContentModule,
   ],
   controllers: [AppController],
   providers: [AppService],

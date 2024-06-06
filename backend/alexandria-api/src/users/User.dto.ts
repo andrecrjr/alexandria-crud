@@ -1,8 +1,8 @@
+import { PartialType } from '@nestjs/mapped-types';
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEmail, IsOptional, MinLength } from 'class-validator';
+import { IsBoolean, IsEmail, IsOptional, MinLength } from 'class-validator';
 import { ProfileDTO } from './profile/profile.dto';
 import { Type } from 'class-transformer';
-
 export class CreateUserDTO {
   @ApiProperty()
   @IsEmail()
@@ -13,39 +13,24 @@ export class CreateUserDTO {
   password: string;
 
   @ApiProperty()
-  @IsOptional()
   username: string;
 
   @IsOptional()
   @ApiProperty()
   @Type(() => ProfileDTO)
   profile: ProfileDTO;
+
+  @IsBoolean()
+  @IsOptional()
+  userActive: boolean;
 }
 
-export class UpdateUserProfileDTO {
-  @ApiProperty()
-  @IsEmail()
-  @IsOptional()
-  email: string;
-
-  @ApiProperty()
-  @MinLength(6)
-  @IsOptional()
-  password: string;
-
-  @ApiProperty()
-  @IsOptional()
-  username: string;
-
-  @ApiProperty()
-  @IsOptional()
-  @Type(() => ProfileDTO)
-  profile: ProfileDTO;
-}
+export class UpdateUserProfileDTO extends PartialType(CreateUserDTO) {}
 
 export class AuthLoginDTO {
   @ApiProperty()
-  username: string;
+  @IsEmail()
+  email: string;
   @ApiProperty()
   password: string;
 }

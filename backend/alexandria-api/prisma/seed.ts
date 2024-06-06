@@ -3,8 +3,7 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 async function main() {
-  await prisma.collection.deleteMany();
-  console.log('Inserted seed data');
+  console.log(await prisma.user.findMany());
 }
 
 main()

@@ -18,10 +18,12 @@ model User {
   username           String?   @unique
   email              String    @unique
   password           String
-  profile            Profile?  @relation(fields: [id], references: [id])
+  profile            Profile?  @relation(fields: [id], references: [id], onDelete: Cascade)
   createdAt          DateTime  @default(now())
   updatedAt          DateTime  @updatedAt
   userCreatedContent Content[]
+  userCreatedAuthors AuthorContent[]
+  userActive Boolean @default(true)
 }
 
 model Profile {
@@ -43,10 +45,10 @@ model Collection {
   page      Int // Contador de páginas lidas ou posição atual de leitura
   profileId Int      @map("profile_id")
   contentId Int      @unique @map("content_id")
-  content   Content  @relation(fields: [contentId], references: [id])
+  content   Content  @relation(fields: [contentId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  profile   Profile? @relation(fields: [profileId], references: [id])
+  profile   Profile? @relation(fields: [profileId], references: [id], onDelete: Cascade)
 }
 
 model StatusContentypeUser {
@@ -64,7 +66,6 @@ model ContentType {
   contents   Content[]
 }
 
-// Atualizando o modelo Content para usar o novo banco de dados para ContentType
 model Content {
   id          Int          @id @default(autoincrement())
   title       String
@@ -79,4 +80,25 @@ model Content {
   updatedAt   DateTime     @updatedAt
   collection  Collection[]
   numberPages Int
+  authors AuthorContent[]
+}
+
+model AuthorContent {
+  id            Int          @id @default(autoincrement())
+  name          String?
+  bio           String?
+  born          DateTime?
+  died          DateTime?
+  nationality   String?
+  awards        String[]
+  photoUrl      String?      // URL to a photo of the author
+  website       String?      // Official website or profile
+  genres        String[]     // List of genres the author writes in
+  socialMedia   Json?        // Social media links, stored in JSON format
+  bestSellers   String[]     // List of best-selling works
+  influences    String[]     // List of authors who influenced this author
+  influenced    String[]     // List of authors influenced by this author
+  contents      Content[]
+  createdBy   User?        @relation(fields: [createdById], references: [id])
+  createdById Int?
 }
