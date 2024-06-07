@@ -8,6 +8,7 @@ export class CreateCollectionDto {
   type: string;
 
   @IsInt()
+  @IsOptional()
   @ApiProperty()
   page: number;
 

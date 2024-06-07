@@ -28,7 +28,7 @@ model User {
 
 model Profile {
   id              Int          @id @default(autoincrement())
-  bio             String?
+  bio             String? @default("")
   location        String?
   age             Int?
   gender          String?
@@ -42,7 +42,7 @@ model Profile {
 model Collection {
   id        Int      @id @default(autoincrement())
   type      String // Ex: Lendo, Lido, Pausado, Abandonado, etc.
-  page      Int // Contador de páginas lidas ou posição atual de leitura
+  page      Int      @default(10)
   profileId Int      @map("profile_id")
   contentId Int      @map("content_id")
   content   Content  @relation(fields: [contentId], references: [id], onDelete: Cascade)

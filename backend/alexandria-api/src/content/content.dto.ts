@@ -71,7 +71,7 @@ export class ContentDTO {
   @IsOptional()
   @ApiProperty()
   @Type(() => AuthorSwaggerDTO)
-  authors: AuthorSwaggerDTO[];
+  authors?: AuthorSwaggerDTO[];
 }
 
 export class UpdateContentDTO extends PartialType(ContentDTO) {}
