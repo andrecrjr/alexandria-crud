@@ -73,3 +73,7 @@ Content-Type: application/json
 {
     "title":"Percy Jackson e o ladrão de raios"
 }
+
+### Search content
+GET http://localhost:3000/content/search?q=Harry
+Authorization: Bearer {{login.response.body.access_token}}

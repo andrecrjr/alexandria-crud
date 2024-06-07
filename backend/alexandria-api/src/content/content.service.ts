@@ -101,4 +101,19 @@ export class ContentService {
     });
     return data;
   }
+
+  async searchInsideCollectionByContentName(query: string) {
+    const data = await this.prismaService.content.findMany({
+      where: {
+        title: {
+          contains: query,
+        },
+      },
+      include: {
+        authors: true,
+        type: true,
+      },
+    });
+    return data;
+  }
 }

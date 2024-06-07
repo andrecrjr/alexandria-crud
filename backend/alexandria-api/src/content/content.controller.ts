@@ -5,6 +5,7 @@ import {
   Param,
   Patch,
   Post,
+  Query,
   Request,
   UseGuards,
 } from '@nestjs/common';
@@ -43,5 +44,11 @@ export class ContentController {
   ) {
     console.log(req.user);
     return this.contentService.updateContent(parseInt(id), data);
+  }
+
+  @ApiBearerAuth('defaultBearerAuth')
+  @Get('search')
+  searchContentByTitle(@Query('q') query) {
+    return this.contentService.searchInsideCollectionByContentName(query);
   }
 }

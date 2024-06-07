@@ -21,6 +21,8 @@ Stack:
 
 [ x ] - Nest Prisma Filter Catch Exceptions for API
 
+[ x ] - Search content collection by name
+
 [ ] - Nest User Content Type CRUD API
 
 [ ] - Nest User Collection CRUD API
