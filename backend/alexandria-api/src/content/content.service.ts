@@ -28,7 +28,7 @@ export class ContentService {
       type: type
         ? {
             connect: {
-              id: type.id || 1,
+              id: type.id,
             },
           }
         : undefined,
@@ -47,6 +47,7 @@ export class ContentService {
 
   convertUpdatePrisma(data: UpdateContentDTO): Prisma.ContentUpdateInput {
     const { collections, type, authors, ...rest } = data;
+    console.log(authors);
     return {
       ...rest,
       type: type
@@ -80,6 +81,7 @@ export class ContentService {
   getAllContent() {
     return this.prismaService.content.findMany({
       include: {
+        authors: true,
         type: {
           include: {
             statusType: true,

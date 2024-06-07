@@ -36,5 +36,5 @@ GET http://localhost:3000/collection
 Authorization: Bearer {{login.response.body.access_token}}
 
 ### get search book in collection by name
-GET http://localhost:3000/collection/search?q=Percy
+GET http://localhost:3000/collection/search?q=Harry
 Authorization: Bearer {{login.response.body.access_token}}

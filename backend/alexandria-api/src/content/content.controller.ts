@@ -37,12 +37,7 @@ export class ContentController {
   @ApiBearerAuth('defaultBearerAuth')
   @Patch(':id')
   @UseGuards(AuthGuard)
-  updateOneContent(
-    @Param('id') id: string,
-    @Body() data: UpdateContentDTO,
-    @Request() req: IRequestJWT,
-  ) {
-    console.log(req.user);
+  updateOneContent(@Param('id') id: string, @Body() data: UpdateContentDTO) {
     return this.contentService.updateContent(parseInt(id), data);
   }
 

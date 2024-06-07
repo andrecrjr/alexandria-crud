@@ -36,7 +36,7 @@ Content-Type: application/json
 Authorization: Bearer {{login.response.body.access_token}}
 
 {
-    "bestSellers": ["Harry Porco"]
+    "bestSellers": ["Banano"]
 }
 
 ### DELETE one author

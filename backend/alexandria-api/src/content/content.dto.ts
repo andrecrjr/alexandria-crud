@@ -11,7 +11,7 @@ import { CollectionDTO } from 'src/collection/collection';
 import { PartialContentTypeDTO } from 'src/contenttype/contenttype';
 import { ApiProperty } from '@nestjs/swagger';
 import { PartialType } from '@nestjs/mapped-types';
-import { AuthorContentDTO } from 'src/author-content/entities/author-content.entity';
+import { AuthorSwaggerDTO } from 'src/author-content/entities/author-content.entity';
 
 export class ContentDTO {
   @IsInt()
@@ -69,9 +69,9 @@ export class ContentDTO {
   collections: CollectionDTO[];
 
   @IsOptional()
-  @ValidateNested({ each: true })
-  @Type(() => AuthorContentDTO)
-  authors: AuthorContentDTO[];
+  @ApiProperty()
+  @Type(() => AuthorSwaggerDTO)
+  authors: AuthorSwaggerDTO[];
 }
 
 export class UpdateContentDTO extends PartialType(ContentDTO) {}

@@ -23,6 +23,7 @@ export class AuthorContentDTO {
 
   @ApiProperty()
   @IsString()
+  @IsOptional()
   bio?: string;
 
   @ApiProperty()
@@ -42,6 +43,7 @@ export class AuthorContentDTO {
 
   @ApiProperty()
   @IsArray()
+  @IsOptional()
   @IsString({ each: true })
   awards: string[];
 
@@ -57,6 +59,7 @@ export class AuthorContentDTO {
 
   @ApiProperty()
   @IsArray()
+  @IsOptional()
   @IsString({ each: true })
   genres: string[];
 
@@ -90,5 +93,11 @@ export class AuthorContentDTO {
   @IsOptional()
   @ValidateNested({ each: true })
   @Type(() => CreateUserDTO)
-  createdBy: CreateUserDTO[];
+  createdBy: CreateUserDTO;
+}
+
+export class AuthorSwaggerDTO {
+  @ApiProperty()
+  @IsInt()
+  id: number;
 }

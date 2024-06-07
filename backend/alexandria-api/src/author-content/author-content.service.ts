@@ -61,6 +61,9 @@ export class AuthorContentService {
       where: {
         id,
       },
+      include: {
+        contents: true,
+      },
     });
   }
 
