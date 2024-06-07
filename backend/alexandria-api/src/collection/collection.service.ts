@@ -49,4 +49,25 @@ export class CollectionService {
       },
     });
   }
+
+  async searchInsideCollectionByContentName(
+    partialContent: string,
+    user: JwtDTO,
+  ) {
+    const data = await this.prismaService.collection.findMany({
+      where: {
+        profileId: user.sub,
+        content: {
+          title: {
+            contains: partialContent,
+          },
+        },
+      },
+      include: {
+        content: true,
+      },
+    });
+
+    return data;
+  }
 }

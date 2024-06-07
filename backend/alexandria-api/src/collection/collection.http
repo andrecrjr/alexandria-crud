@@ -16,8 +16,8 @@ Content-Type: application/json
 
 {
     "type": "lendo",
-    "page":20,
-    "contentId":1
+    "page":22,
+    "contentId":5
 }
 
 ### update collection between user
@@ -31,6 +31,10 @@ Content-Type: application/json
     "contentId":1
 }
 
-### create collection between user
+### get collection between user
 GET http://localhost:3000/collection
+Authorization: Bearer {{login.response.body.access_token}}
+
+### get search book in collection by name
+GET http://localhost:3000/collection/search?q=Percy
 Authorization: Bearer {{login.response.body.access_token}}

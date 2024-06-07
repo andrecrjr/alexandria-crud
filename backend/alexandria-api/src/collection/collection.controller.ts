@@ -4,6 +4,7 @@ import {
   Get,
   Patch,
   Post,
+  Query,
   Request,
   UseGuards,
 } from '@nestjs/common';
@@ -41,6 +42,15 @@ export class CollectionController {
     return this.collectionService.updateCollectionContentAndUser(
       req.user,
       data,
+    );
+  }
+  @ApiBearerAuth('defaultBearerAuth')
+  @Get('search')
+  @UseGuards(AuthGuard)
+  searchCollectionByUser(@Query('q') query, @Request() req) {
+    return this.collectionService.searchInsideCollectionByContentName(
+      query,
+      req.user,
     );
   }
 }
