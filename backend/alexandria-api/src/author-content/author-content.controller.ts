@@ -13,8 +13,10 @@ import { AuthorContentService } from './author-content.service';
 import { CreateAuthorContentDto } from './dto/create-author-content.dto';
 import { UpdateAuthorContentDto } from './dto/update-author-content.dto';
 import { AuthGuard } from 'src/auth/auth.guard';
+import { ApiTags } from '@nestjs/swagger';
 
 @Controller('author-content')
+@ApiTags('Content Creator or Author')
 export class AuthorContentController {
   constructor(private readonly authorContentService: AuthorContentService) {}
 
@@ -28,6 +30,7 @@ export class AuthorContentController {
   }
 
   @Get()
+  @UseGuards(AuthGuard)
   findAll() {
     return this.authorContentService.findAll();
   }
@@ -38,6 +41,7 @@ export class AuthorContentController {
   }
 
   @Patch(':id')
+  @UseGuards(AuthGuard)
   update(
     @Param('id') id: string,
     @Body() updateAuthorContentDto: UpdateAuthorContentDto,

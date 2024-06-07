@@ -4,10 +4,19 @@ import { UpdateAuthorContentDto } from './dto/update-author-content.dto';
 import { PrismaService } from 'prisma/prisma.service';
 import { Prisma } from '@prisma/client';
 import { JwtDTO } from 'src/auth/jwt.dto';
+import { ContentDTO } from 'src/content/content.dto';
 
 @Injectable()
 export class AuthorContentService {
   constructor(private readonly prismaService: PrismaService) {}
+
+  connectContents(contents?: ContentDTO[]) {
+    return contents ? { connect: this.connectContents(contents) } : undefined;
+  }
+
+  connectUser(userId?: number) {
+    return userId ? { connect: { id: userId } } : undefined;
+  }
 
   convertAuthorPrisma(
     data: CreateAuthorContentDto,
@@ -16,38 +25,19 @@ export class AuthorContentService {
     const { contents, ...rest } = data;
     return {
       ...rest,
-      contents: contents
-        ? {
-            connect: contents?.map((items) => ({ id: items.id })),
-          }
-        : undefined,
-      createdBy: user.sub
-        ? {
-            connect: {
-              id: user.sub,
-            },
-          }
-        : undefined,
+      contents: this.connectContents(contents),
+      createdBy: this.connectUser(user.sub),
     };
   }
+
   convertUpdateAuthorPrisma(
     data: UpdateAuthorContentDto,
   ): Prisma.AuthorContentUpdateInput {
     const { contents, createdById, ...rest } = data;
     return {
       ...rest,
-      contents: contents
-        ? {
-            connect: contents?.map((items) => ({ id: items.id })),
-          }
-        : undefined,
-      createdBy: createdById
-        ? {
-            connect: {
-              id: createdById,
-            },
-          }
-        : undefined,
+      contents: this.connectContents(contents),
+      createdBy: this.connectUser(createdById),
     };
   }
   async create(createAuthorContentDto: CreateAuthorContentDto, user: JwtDTO) {
@@ -83,7 +73,11 @@ export class AuthorContentService {
     });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} authorContent`;
+  async remove(id: number) {
+    return await this.prismaService.authorContent.delete({
+      where: {
+        id,
+      },
+    });
   }
 }
