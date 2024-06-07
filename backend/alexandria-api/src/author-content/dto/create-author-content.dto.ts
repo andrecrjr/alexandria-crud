@@ -63,30 +63,30 @@ export class CreateAuthorContentDto {
   socialMedia?: any;
 
   @ApiProperty()
-  @IsOptional()
   @IsArray()
   @IsString({ each: true })
+  @IsOptional()
   bestSellers: string[];
 
   @ApiProperty()
-  @IsOptional()
   @IsArray()
   @IsString({ each: true })
+  @IsOptional()
   influences: string[];
 
   @ApiProperty()
-  @IsOptional()
   @IsArray()
   @IsString({ each: true })
+  @IsOptional()
   influenced: string[];
 
-  @IsOptional()
   @IsInt()
+  @IsOptional()
   createdById?: number;
 
-  @IsOptional()
   @Type(() => CreateUserDTO)
   @ApiProperty()
+  @IsOptional()
   createdBy: CreateUserDTO;
 
   @IsOptional()

@@ -7,16 +7,19 @@ import {
   Param,
   Delete,
   Request,
+  UseGuards,
 } from '@nestjs/common';
 import { AuthorContentService } from './author-content.service';
 import { CreateAuthorContentDto } from './dto/create-author-content.dto';
 import { UpdateAuthorContentDto } from './dto/update-author-content.dto';
+import { AuthGuard } from 'src/auth/auth.guard';
 
 @Controller('author-content')
 export class AuthorContentController {
   constructor(private readonly authorContentService: AuthorContentService) {}
 
   @Post()
+  @UseGuards(AuthGuard)
   create(
     @Body() createAuthorContentDto: CreateAuthorContentDto,
     @Request() req,

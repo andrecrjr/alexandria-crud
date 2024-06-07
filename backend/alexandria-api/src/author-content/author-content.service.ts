@@ -66,8 +66,12 @@ export class AuthorContentService {
     });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} authorContent`;
+  async findOne(id: number) {
+    return await this.prismaService.authorContent.findFirst({
+      where: {
+        id,
+      },
+    });
   }
 
   async update(id: number, updateAuthorContentDto: UpdateAuthorContentDto) {
