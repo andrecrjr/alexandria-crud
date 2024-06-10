@@ -14,7 +14,7 @@ import { ApiProperty } from '@nestjs/swagger';
 export class ProfileDTO {
   @IsInt()
   @IsOptional()
-  id: number;
+  id?: number;
 
   @ApiProperty()
   @IsOptional()
@@ -40,21 +40,21 @@ export class ProfileDTO {
   @IsArray()
   @IsString({ each: true })
   @IsOptional()
-  interests: string[];
+  interests?: string[];
 
   @ApiProperty()
   @ValidateNested({ each: true })
   @Type(() => CollectionDTO)
   @IsOptional()
-  collections: CollectionDTO[];
+  collections?: CollectionDTO[];
 
   @IsDate()
   @IsOptional()
-  createdAt: Date;
+  createdAt?: Date;
 
   @IsDate()
   @IsOptional()
-  updatedAt: Date;
+  updatedAt?: Date;
 
   @IsOptional()
   @IsInt()
@@ -62,5 +62,5 @@ export class ProfileDTO {
 
   @IsOptional()
   @Type(() => CreateUserDTO)
-  user: CreateUserDTO;
+  user?: CreateUserDTO;
 }

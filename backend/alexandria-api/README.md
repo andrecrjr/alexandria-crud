@@ -27,7 +27,9 @@ API created to be the hub web service for entertainment social network.
 
 - [x] User Collection CRUD API
 
-- [x] Content genre CRUD API
+- [x] Swagger
+
+- [] Content genre CRUD API
 
 - [] Refresh Token User Service
 
@@ -37,4 +39,10 @@ API created to be the hub web service for entertainment social network.
 
 - [] Search Content Pagination
 
-- []
+- [] Implement middleware for logging and error handling
+
+- [] Set up automated testing for all endpoints
+
+- [] Develop a rate limiting feature to prevent abuse of the API
+
+- [ ] Design and implement a backup and restore strategy for the database
