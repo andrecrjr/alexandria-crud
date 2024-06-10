@@ -29,9 +29,9 @@ API created to be the hub web service for entertainment social network.
 
 - [x] Swagger
 
-- [] Content genre CRUD API
-
 - [] Refresh Token User Service
+
+- [] Content genre CRUD API
 
 - [] List user content pagination
 

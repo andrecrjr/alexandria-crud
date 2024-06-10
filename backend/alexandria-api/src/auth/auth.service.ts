@@ -26,10 +26,35 @@ export class AuthService {
       const payload = { email: email, sub: id };
       return {
         access_token: await this.jwtService.signAsync(payload),
+        refresh_token: await this.refreshTokenCreation(payload),
       };
     } catch (error) {
       console.log(error);
       throw new NotFoundException(`User Account not found`);
+    }
+  }
+
+  async rotationToken() {}
+
+  async refreshTokenCreation(user: { email: string; sub: number }) {
+    return await this.jwtService.signAsync(user, {
+      expiresIn: process.env.LOCAL_EXPIRE_REFRESH_TOKEN,
+    });
+  }
+
+  async refreshToken(refreshToken: string) {
+    // Verificar se o refreshToken é válido
+    const userData: { email: string; sub: number } =
+      this.jwtService.verify(refreshToken);
+    if (userData) {
+      const userPayload = { email: userData.email, sub: userData.sub };
+      const newRefreshToken = await this.refreshTokenCreation(userPayload);
+      return {
+        access_token: await this.jwtService.signAsync({ ...userPayload }),
+        refresh_token: newRefreshToken,
+      };
+    } else {
+      throw new Error('Invalid or expired refresh token');
     }
   }
 }

@@ -7,12 +7,14 @@ import {
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ValidationPipe } from '@nestjs/common';
 import { PrismaExceptionFilter } from './utils/filters/ExceptionFilterPrisma';
+import * as cookie from 'fastify-cookie';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(
     AppModule,
     new FastifyAdapter(),
   );
+
   const config = new DocumentBuilder()
     .setTitle('Alexandria Swagger')
     .setDescription('The Alexandria API description')
@@ -21,6 +23,9 @@ async function bootstrap() {
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
+  app.register(cookie, {
+    secret: process.env.SECRET,
+  });
   app.useGlobalPipes(new ValidationPipe());
   app.useGlobalFilters(new PrismaExceptionFilter());
   await app.listen(3000);

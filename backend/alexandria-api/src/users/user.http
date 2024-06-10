@@ -21,7 +21,6 @@ Content-Type: application/json
 
 ### AUTH GET All user Profile
 GET http://localhost:3000/users/profile/all
-Authorization: Bearer {{login.response.body.access_token}}
 
 ### AUTH GET User Profile
 GET http://localhost:3000/users/profile
@@ -42,3 +41,7 @@ Content-Type: application/json
 DELETE  http://localhost:3000/users/profile
 Authorization: Bearer {{login.response.body.access_token}}
 Content-Type: application/json
+
+### REFRESH COOKIE
+POST http://localhost:3000/auth/refresh
+set-cookie: refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVyb3NoaUBhcm9zLmNvbSIsInN1YiI6MSwiaWF0IjoxNzE4MDYyMzQ0LCJleHAiOjE3MjA2NTQzNDR9.YADXnDi4FXP6YvNjdKveQMTFA8xcGPQ85M9SC7TPOKI; Max-Age=86400000; Path=/auth/refresh; HttpOnly; Secure
