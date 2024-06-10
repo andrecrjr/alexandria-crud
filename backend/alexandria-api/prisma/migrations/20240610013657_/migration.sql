@@ -14,7 +14,7 @@ CREATE TABLE "User" (
 -- CreateTable
 CREATE TABLE "Profile" (
     "id" SERIAL NOT NULL,
-    "bio" TEXT,
+    "bio" TEXT DEFAULT '',
     "location" TEXT,
     "age" INTEGER,
     "gender" TEXT,
@@ -29,7 +29,7 @@ CREATE TABLE "Profile" (
 CREATE TABLE "Collection" (
     "id" SERIAL NOT NULL,
     "type" TEXT NOT NULL,
-    "page" INTEGER NOT NULL,
+    "page" INTEGER NOT NULL DEFAULT 10,
     "profile_id" INTEGER NOT NULL,
     "content_id" INTEGER NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
