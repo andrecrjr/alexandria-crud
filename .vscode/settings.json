@@ -1,0 +1,4 @@
+{
+    "rest-client.enableTelemetry": false,
+    "rest-client.rememberCookiesForSubsequentRequests": true
+}

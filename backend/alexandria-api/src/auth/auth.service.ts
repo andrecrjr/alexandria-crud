@@ -29,7 +29,6 @@ export class AuthService {
         refresh_token: await this.refreshTokenCreation(payload),
       };
     } catch (error) {
-      console.log(error);
       throw new NotFoundException(`User Account not found`);
     }
   }

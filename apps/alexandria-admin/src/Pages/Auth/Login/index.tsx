@@ -7,9 +7,15 @@ import { Button } from "@alexandria/ui/src/components/ui/button";
 import { Input } from "@alexandria/ui/src/components/ui/input";
 import { Checkbox } from "@alexandria/ui/src/components/ui/checkbox";
 import { Label } from "@alexandria/ui/src/components/ui/label";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import axios from "axios";
 
 export default function LoginPage() {
+  const [email, setEmail] = useState("");
+  const [pass, setPass] = useState("");
+  const nav = useNavigate();
+
   return (
     <div className="flex w-screen min-h-screen flex-col items-center justify-center bg-gray-100 py-12 px-4 sm:px-6 lg:px-8 dark:bg-gray-950">
       <div className="w-full max-w-md space-y-8">
@@ -27,7 +33,26 @@ export default function LoginPage() {
             </Link>
           </p>
         </div>
-        <form className="mt-8 space-y-6" action="#" method="POST">
+        <form
+          className="mt-8 space-y-6"
+          action="#"
+          method="POST"
+          onSubmit={async (e) => {
+            e.preventDefault();
+            const { data } = await axios.post(
+              "http://localhost:3000/auth/login",
+              {
+                email,
+                password: pass,
+              },
+              {
+                withCredentials: true,
+              },
+            );
+            // localStorage.setItem("access_token", data.access_token);
+            nav("/create");
+          }}
+        >
           <input type="hidden" name="remember" defaultValue="true" />
           <div className="-space-y-px rounded-md shadow-sm">
             <div>
@@ -38,6 +63,11 @@ export default function LoginPage() {
                 id="email"
                 name="email"
                 type="email"
+                value={email}
+                onChange={(e) => {
+                  e.preventDefault();
+                  setEmail(e.target.value);
+                }}
                 autoComplete="email"
                 required
                 className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-50 dark:placeholder-gray-400 sm:text-sm"
@@ -52,6 +82,11 @@ export default function LoginPage() {
                 id="password"
                 name="password"
                 type="password"
+                value={pass}
+                onChange={(e) => {
+                  e.preventDefault();
+                  setPass(e.target.value);
+                }}
                 autoComplete="current-password"
                 required
                 className="relative block w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-50 dark:placeholder-gray-400 sm:text-sm"

@@ -16,9 +16,15 @@ export class AuthController {
       httpOnly: true,
       path: '/',
       maxAge: 24 * 60 * 60 * 1000, // 1 dia
-      secure: true,
+      secure: process.env.NODE_ENV === 'prod',
     });
-    return { access_token: tokens.access_token };
+    res.setCookie('accessToken', tokens.access_token, {
+      httpOnly: true,
+      path: '/',
+      maxAge: 60, // 1 dia
+      secure: process.env.NODE_ENV === 'prod',
+    });
+    return { message: 'account logged' };
   }
 
   @Post('refresh')
@@ -29,8 +35,15 @@ export class AuthController {
       httpOnly: true,
       path: '/',
       maxAge: 24 * 60 * 60 * 1000, // 1 dia
-      secure: true,
+      secure: process.env.NODE_ENV === 'prod',
     });
-    return { access_token: tokens.access_token };
+
+    res.setCookie('accessToken', tokens.access_token, {
+      httpOnly: true,
+      path: '/',
+      maxAge: 60, // 1 dia
+      secure: process.env.NODE_ENV === 'prod',
+    });
+    return { message: 'token refreshed' };
   }
 }

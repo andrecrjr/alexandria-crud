@@ -13,7 +13,7 @@ import { ContentService } from './content.service';
 import { ContentDTO, UpdateContentDTO } from './content.dto';
 import { AuthGuard } from 'src/auth/auth.guard';
 import { IRequestJWT } from 'src/auth/jwt.dto';
-import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { ApiCookieAuth, ApiTags } from '@nestjs/swagger';
 
 @Controller('content')
 @ApiTags('Content Creation')
@@ -28,21 +28,22 @@ export class ContentController {
   getUnique(@Param('id') id: string) {
     return this.contentService.getUniqueContent(parseInt(id));
   }
-  @ApiBearerAuth('defaultBearerAuth')
+  @ApiCookieAuth('accessToken')
   @Post()
   @UseGuards(AuthGuard)
   createContent(@Body() body: ContentDTO, @Request() req: IRequestJWT) {
     return this.contentService.createContent(body, req.user);
   }
-  @ApiBearerAuth('defaultBearerAuth')
+  @ApiCookieAuth('accessToken')
   @Patch(':id')
   @UseGuards(AuthGuard)
   updateOneContent(@Param('id') id: string, @Body() data: UpdateContentDTO) {
     return this.contentService.updateContent(parseInt(id), data);
   }
 
-  @ApiBearerAuth('defaultBearerAuth')
+  @ApiCookieAuth('accessToken')
   @Get('search')
+  @UseGuards(AuthGuard)
   searchContentByTitle(@Query('q') query) {
     return this.contentService.searchInsideCollectionByContentName(query);
   }

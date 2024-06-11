@@ -47,7 +47,6 @@ export class ContentService {
 
   convertUpdatePrisma(data: UpdateContentDTO): Prisma.ContentUpdateInput {
     const { collections, type, authors, ...rest } = data;
-    console.log(authors);
     return {
       ...rest,
       type: type

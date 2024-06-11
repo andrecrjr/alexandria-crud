@@ -14,12 +14,20 @@ async function bootstrap() {
     AppModule,
     new FastifyAdapter(),
   );
+  const localRoutes = ['http://127.0.0.1:5173', 'http://localhost:5173'];
+
+  app.enableCors({
+    origin: [...localRoutes],
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true,
+    allowedHeaders: 'Content-Type, Accept, Authorization',
+  });
 
   const config = new DocumentBuilder()
     .setTitle('Alexandria Swagger')
     .setDescription('The Alexandria API description')
     .setVersion('1.0')
-    .addBearerAuth(undefined, 'defaultBearerAuth')
+    .addCookieAuth('accessToken')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);

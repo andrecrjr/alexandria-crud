@@ -11,7 +11,6 @@ Content-Type: application/json
 ### create status content type
 POST http://localhost:3000/status-contentype
 Content-Type: application/json
-Authorization: Bearer {{login.response.body.access_token}}
 
 {
   "name": [
@@ -24,7 +23,6 @@ Authorization: Bearer {{login.response.body.access_token}}
 ### create content type
 POST http://localhost:3000/contenttype
 Content-Type: application/json
-Authorization: Bearer {{login.response.body.access_token}}
 
 {
     "name":"book",
@@ -37,7 +35,6 @@ Authorization: Bearer {{login.response.body.access_token}}
 ### GET all content type
 GET http://localhost:3000/contenttype
 Content-Type: application/json
-Authorization: Bearer {{login.response.body.access_token}}
 
 {
     "name":"book",

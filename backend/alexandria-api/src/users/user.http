@@ -19,16 +19,18 @@ Content-Type: application/json
   "password": "123456"
 }
 
+### REFRESH COOKIE 
+POST http://localhost:3000/auth/refresh
+Cookie: refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVyb3NoaUBhcm9zLmNvbSIsInN1YiI6MSwiaWF0IjoxNzE4MDczMzE3LCJleHAiOjE3MjA2NjUzMTd9.3Vt0YgnmQu1kPTRjvJBARTokuPsCcA0jVAZFf4K7kNk; Max-Age=86400000; Path=/; HttpOnly,accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVyb3NoaUBhcm9zLmNvbSIsInN1YiI6MSwiaWF0IjoxNzE4MDczMzE3LCJleHAiOjE3MTgxNTk3MTd9.iYIWTjFBgN315XTdNtFadDlXNJp-F3WQ4L230g0kXDM; Max-Age=60; Path=/; HttpOnly
+
 ### AUTH GET All user Profile
 GET http://localhost:3000/users/profile/all
 
 ### AUTH GET User Profile
 GET http://localhost:3000/users/profile
-Authorization: Bearer {{login.response.body.access_token}}
 
 ### UPDATE profile
 PATCH  http://localhost:3000/users/profile
-Authorization: Bearer {{login.response.body.access_token}}
 Content-Type: application/json
 
 {
@@ -39,9 +41,3 @@ Content-Type: application/json
 
 ### DELETE user/profile
 DELETE  http://localhost:3000/users/profile
-Authorization: Bearer {{login.response.body.access_token}}
-Content-Type: application/json
-
-### REFRESH COOKIE
-POST http://localhost:3000/auth/refresh
-set-cookie: refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVyb3NoaUBhcm9zLmNvbSIsInN1YiI6MSwiaWF0IjoxNzE4MDYyMzQ0LCJleHAiOjE3MjA2NTQzNDR9.YADXnDi4FXP6YvNjdKveQMTFA8xcGPQ85M9SC7TPOKI; Max-Age=86400000; Path=/auth/refresh; HttpOnly; Secure

@@ -7,7 +7,7 @@ import {
   Request,
   UseGuards,
 } from '@nestjs/common';
-import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { ApiCookieAuth, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from 'src/auth/auth.guard';
 import { ProfileService } from './profile.service';
 import { UpdateUserProfileDTO } from '../User.dto';
@@ -17,7 +17,7 @@ import { UpdateUserProfileDTO } from '../User.dto';
 export class ProfileController {
   constructor(private readonly profileService: ProfileService) {}
   @UseGuards(AuthGuard)
-  @ApiBearerAuth('defaultBearerAuth')
+  @ApiCookieAuth('accessToken')
   @Get()
   getProfile(@Request() req) {
     return this.profileService.getUserAndProfile(req.user);
