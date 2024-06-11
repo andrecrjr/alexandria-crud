@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'prisma/prisma.service';
-import { ContentDTO, UpdateContentDTO } from './content.dto';
+import { CreateContentDTO, UpdateContentDTO } from './content.dto';
 import { Prisma } from '@prisma/client';
 import { JwtDTO } from 'src/auth/jwt.dto';
 
@@ -18,7 +18,7 @@ export class ContentService {
     });
   }
   convertCreatePrisma(
-    data: ContentDTO,
+    data: CreateContentDTO,
     user: JwtDTO,
   ): Prisma.ContentCreateInput {
     const { collections, type, authors, ...rest } = data;
@@ -69,7 +69,7 @@ export class ContentService {
     };
   }
 
-  async createContent(contentData: ContentDTO, user: JwtDTO) {
+  async createContent(contentData: CreateContentDTO, user: JwtDTO) {
     const prismaData = this.convertCreatePrisma(contentData, user);
     const data = await this.prismaService.content.create({
       data: { ...prismaData },

@@ -10,7 +10,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { ContentService } from './content.service';
-import { ContentDTO, UpdateContentDTO } from './content.dto';
+import { CreateContentDTO, UpdateContentDTO } from './content.dto';
 import { AuthGuard } from 'src/auth/auth.guard';
 import { IRequestJWT } from 'src/auth/jwt.dto';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
@@ -31,7 +31,7 @@ export class ContentController {
   @ApiBearerAuth('defaultBearerAuth')
   @Post()
   @UseGuards(AuthGuard)
-  createContent(@Body() body: ContentDTO, @Request() req: IRequestJWT) {
+  createContent(@Body() body: CreateContentDTO, @Request() req: IRequestJWT) {
     return this.contentService.createContent(body, req.user);
   }
   @ApiBearerAuth('defaultBearerAuth')
