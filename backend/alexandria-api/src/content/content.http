@@ -15,6 +15,7 @@ Cookie: refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVyb3NoaU
 
 ### create status content type
 POST http://localhost:3000/status-contentype
+Authorization: Bearer {{login.response.body.accessToken}}
 Content-Type: application/json
 
 {
@@ -27,6 +28,7 @@ Content-Type: application/json
 
 ### create content type
 POST http://localhost:3000/contenttype
+Authorization: Bearer {{login.response.body.accessToken}}
 Content-Type: application/json
 
 {
@@ -38,6 +40,7 @@ Content-Type: application/json
 
 ### GET all content type
 GET http://localhost:3000/contenttype
+Authorization: Bearer {{login.response.body.accessToken}}
 Content-Type: application/json
 
 {
@@ -49,6 +52,7 @@ Content-Type: application/json
 
 ### create content
 POST http://localhost:3000/content
+Authorization: Bearer {{login.response.body.accessToken}}
 Content-Type: application/json
 
 {
@@ -67,6 +71,7 @@ GET http://localhost:3000/content/all
 
 ### update one content
 PATCH http://localhost:3000/content/5
+Authorization: Bearer {{login.response.body.accessToken}}
 Content-Type: application/json
 
 {
@@ -75,3 +80,4 @@ Content-Type: application/json
 
 ### Search content
 GET http://localhost:3000/content/search?q=Harry
+Authorization: Bearer {{login.response.body.accessToken}}

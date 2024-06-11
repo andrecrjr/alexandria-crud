@@ -10,7 +10,6 @@ import { Type } from 'class-transformer';
 import { CollectionDTO } from 'src/collection/collection';
 import { PartialContentTypeDTO } from 'src/contenttype/contenttype';
 import { ApiProperty } from '@nestjs/swagger';
-import { PartialType } from '@nestjs/mapped-types';
 import { AuthorSwaggerDTO } from 'src/author-content/entities/author-content.entity';
 
 export class ContentDTO {
@@ -69,9 +68,15 @@ export class ContentDTO {
   collections: CollectionDTO[];
 
   @IsOptional()
-  @ApiProperty()
+  @ApiProperty({ type: [AuthorSwaggerDTO] })
   @Type(() => AuthorSwaggerDTO)
   authors?: AuthorSwaggerDTO[];
 }
 
-export class UpdateContentDTO extends PartialType(ContentDTO) {}
+export class CreateContentDTO extends ContentDTO {}
+
+export class UpdateContentDTO extends ContentDTO {
+  @IsInt()
+  @ApiProperty({ description: 'Author id' })
+  id: number;
+}

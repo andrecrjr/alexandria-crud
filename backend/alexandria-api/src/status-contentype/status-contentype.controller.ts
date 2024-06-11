@@ -11,7 +11,7 @@ import {
 import { StatusContentypeService } from './status-contentype.service';
 import { CreateStatusContentypeDto } from './dto/create-status-contentype.dto';
 import { UpdateStatusContentypeDto } from './dto/update-status-contentype.dto';
-import { ApiCookieAuth, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from 'src/auth/auth.guard';
 
 @Controller('status-contentype')
@@ -23,7 +23,7 @@ export class StatusContentypeController {
 
   @Post()
   @UseGuards(AuthGuard)
-  @ApiCookieAuth('accessToken')
+  @ApiBearerAuth('defaultBearerAuth')
   create(@Body() createStatusContentypeDto: CreateStatusContentypeDto) {
     return this.statusContentypeService.create(createStatusContentypeDto);
   }

@@ -11,14 +11,14 @@ import {
 import { CollectionService } from './collection.service';
 import { CreateCollectionDto, UpdateCollectionDto } from './collection.dto';
 import { AuthGuard } from 'src/auth/auth.guard';
-import { ApiCookieAuth, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('User Pagination and Content Update')
 @Controller('collection')
 export class CollectionController {
   constructor(private readonly collectionService: CollectionService) {}
 
-  @ApiCookieAuth('accessToken')
+  @ApiBearerAuth('defaultBearerAuth')
   @Post('page')
   @UseGuards(AuthGuard)
   createUserWithContent(@Request() req, @Body() data: CreateCollectionDto) {
@@ -27,12 +27,12 @@ export class CollectionController {
 
   @UseGuards(AuthGuard)
   @Get('')
-  @ApiCookieAuth('accessToken')
+  @ApiBearerAuth('defaultBearerAuth')
   getUserWithContent(@Request() req) {
     return this.collectionService.getCollectionByUser(req.user);
   }
 
-  @ApiCookieAuth('accessToken')
+  @ApiBearerAuth('defaultBearerAuth')
   @Patch('page')
   @UseGuards(AuthGuard)
   updateUserPaginationWithContent(
@@ -44,7 +44,7 @@ export class CollectionController {
       data,
     );
   }
-  @ApiCookieAuth('accessToken')
+  @ApiBearerAuth('defaultBearerAuth')
   @Get('search')
   @UseGuards(AuthGuard)
   searchCollectionByUser(@Query('q') query, @Request() req) {

@@ -98,5 +98,6 @@ export class AuthorContentDTO {
 
 export class AuthorSwaggerDTO {
   @IsInt()
+  @ApiProperty()
   id: number;
 }
