@@ -11,7 +11,7 @@ import { CollectionDTO } from 'src/collection/collection';
 import { PartialContentTypeDTO } from 'src/contenttype/contenttype';
 import { ApiProperty } from '@nestjs/swagger';
 import { AuthorSwaggerDTO } from 'src/author-content/entities/author-content.entity';
-import { PartialType } from '@nestjs/mapped-types';
+import { PartialType, PickType } from '@nestjs/mapped-types';
 
 export class ContentDTO {
   @IsInt()
@@ -174,4 +174,11 @@ export class UpdateContentDTO extends PartialType(ContentDTO) {
     required: false,
   })
   updatedAt?: Date;
+}
+
+export class ContentIdDTO extends PickType(ContentDTO, ['id']) {
+  @IsInt()
+  @IsOptional()
+  @ApiProperty({ required: false })
+  id: number;
 }

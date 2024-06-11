@@ -5,20 +5,21 @@ POST http://localhost:3000/auth/login
 Content-Type: application/json
 
 {
-  "email": "kohado@aros.com",
+  "email": "eroshi@aros.com",
   "password": "123456"
 }
 
 ### Create author
 POST http://localhost:3000/author-content
 Content-Type: application/json
-Authorization: Bearer {{login.response.body.access_token}}
+Authorization: Bearer {{login.response.body.accessToken}}
 
 {
-    "name":"JK Rowling",
-    "bio":"Autor de algum lugar",
+    "name":"Masashi Kishimoto",
+    "bio":"Japão",
     "awards": [],
-    "genres": ["Ação", "Noticia", "Mistério"]
+    "genres": ["Gênio", "Avenutura", "Mistério"],
+    "createdById": 1
 }
 
 ### GET one author
@@ -28,12 +29,12 @@ Content-Type: application/json
 ### GET all authors
 GET http://localhost:3000/author-content
 Content-Type: application/json
-Authorization: Bearer {{login.response.body.access_token}}
+Authorization: Bearer {{login.response.body.accessToken}}
 
 ### Update one author
 PATCH http://localhost:3000/author-content/1
 Content-Type: application/json
-Authorization: Bearer {{login.response.body.access_token}}
+Authorization: Bearer {{login.response.body.accessToken}}
 
 {
     "bestSellers": ["Banano"]
@@ -41,5 +42,5 @@ Authorization: Bearer {{login.response.body.access_token}}
 
 ### DELETE one author
 DELETE http://localhost:3000/author-content/3
-Authorization: Bearer {{login.response.body.access_token}}
+Authorization: Bearer {{login.response.body.accessToken}}
 Content-Type: application/json

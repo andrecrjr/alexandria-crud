@@ -4,14 +4,20 @@ import { UpdateAuthorContentDto } from './dto/update-author-content.dto';
 import { PrismaService } from 'prisma/prisma.service';
 import { Prisma } from '@prisma/client';
 import { JwtDTO } from 'src/auth/jwt.dto';
-import { ContentDTO } from 'src/content/content.dto';
+import { ContentIdDTO } from 'src/content/content.dto';
 
 @Injectable()
 export class AuthorContentService {
   constructor(private readonly prismaService: PrismaService) {}
 
-  connectContents(contents?: ContentDTO[]) {
-    return contents ? { connect: this.connectContents(contents) } : undefined;
+  connectContents(contents?: ContentIdDTO[]) {
+    return contents
+      ? {
+          connect: contents.map((item) => ({
+            id: item.id,
+          })),
+        }
+      : undefined;
   }
 
   connectUser(userId?: number) {

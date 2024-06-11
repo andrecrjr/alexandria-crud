@@ -27,6 +27,12 @@ export class CreateUserDTO {
 
 export class UpdateUserProfileDTO extends PartialType(CreateUserDTO) {}
 
+export class UserIdDTO {
+  @IsOptional()
+  @ApiProperty()
+  id: number;
+}
+
 export class AuthLoginDTO {
   @ApiProperty()
   @IsEmail()

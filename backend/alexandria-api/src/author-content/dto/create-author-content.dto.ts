@@ -10,87 +10,90 @@ import {
   IsInt,
   ValidateNested,
 } from 'class-validator';
-import { ContentDTO } from 'src/content/content.dto';
-import { CreateUserDTO } from 'src/users/User.dto';
+import { ContentIdDTO } from 'src/content/content.dto';
+import { UserIdDTO } from 'src/users/User.dto';
 
 export class CreateAuthorContentDto {
   @ApiProperty()
   @IsString()
-  name?: string;
+  name: string;
 
-  @ApiProperty()
+  @ApiProperty({ required: true })
   @IsString()
   bio?: string;
 
-  @ApiProperty()
+  @ApiProperty({ required: true })
   @IsOptional()
   @IsDateString()
   born?: Date;
 
-  @ApiProperty()
+  @ApiProperty({ required: false })
   @IsOptional()
   @IsDateString()
   died?: Date;
 
-  @ApiProperty()
+  @ApiProperty({ required: false })
   @IsOptional()
   @IsString()
   nationality?: string;
 
-  @ApiProperty()
+  @ApiProperty({ required: false })
   @IsArray()
+  @IsOptional()
   @IsString({ each: true })
-  awards: string[];
+  awards?: string[];
 
-  @ApiProperty()
+  @ApiProperty({ required: false })
   @IsOptional()
   @IsUrl()
   photoUrl?: string;
 
-  @ApiProperty()
+  @ApiProperty({ required: false })
   @IsOptional()
   @IsUrl()
   website?: string;
 
-  @ApiProperty()
+  @ApiProperty({ required: true })
   @IsArray()
   @IsString({ each: true })
   genres: string[];
 
-  @ApiProperty()
+  @ApiProperty({ required: false })
   @IsOptional()
   @IsJSON()
   socialMedia?: any;
 
-  @ApiProperty()
+  @ApiProperty({ required: false })
   @IsArray()
   @IsString({ each: true })
   @IsOptional()
-  bestSellers: string[];
+  bestSellers?: string[];
 
-  @ApiProperty()
+  @ApiProperty({ required: false })
   @IsArray()
   @IsString({ each: true })
   @IsOptional()
-  influences: string[];
+  influences?: string[];
 
-  @ApiProperty()
+  @ApiProperty({ required: false })
+  @IsOptional()
   @IsArray()
   @IsString({ each: true })
-  @IsOptional()
-  influenced: string[];
+  influenced?: string[];
 
+  @ApiProperty({ required: true })
   @IsInt()
-  @IsOptional()
   createdById?: number;
 
-  @Type(() => CreateUserDTO)
-  @ApiProperty()
+  @ValidateNested({ each: true })
+  @Type(() => UserIdDTO)
   @IsOptional()
-  createdBy: CreateUserDTO;
+  @ApiProperty({ type: [UserIdDTO] })
+  createdBy: UserIdDTO;
 
+  @ApiProperty({ required: false, type: [ContentIdDTO] })
   @IsOptional()
   @ValidateNested({ each: true })
-  @Type(() => ContentDTO)
-  contents: ContentDTO[];
+  @Type(() => ContentIdDTO)
+  contents: ContentIdDTO[];
 }
