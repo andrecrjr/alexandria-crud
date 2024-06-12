@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import { CreateStatusTrackDto } from './dto/create-status-contentype.dto';
+import { CreateStatusTrackDto } from './dto/create-status-tracker.dto';
 import { PrismaService } from 'prisma/prisma.service';
-import { UpdateStatusTrackDto } from './dto/update-status-contentype.dto';
+import { UpdateStatusTrackDto } from './dto/update-status-tracker.dto';
 
 @Injectable()
-export class StatusContentypeService {
+export class StatusTrackerService {
   constructor(private readonly prismaService: PrismaService) {}
 
   async create(data: CreateStatusTrackDto) {

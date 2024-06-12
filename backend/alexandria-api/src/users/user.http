@@ -4,8 +4,8 @@ POST http://localhost:3000/users
 Content-Type: application/json
 
 {
-  "email": "eroshi@aros.com",
-  "username":"eroshi",
+  "email": "arashi@aros.com",
+  "username":"arashi",
   "password": "123456"
 }
 
@@ -38,7 +38,8 @@ Authorization: Bearer {{login.response.body.accessToken}}
 
 {
   "profile":{
-    "gender":"F"
+    "gender":"M",
+    "bio":"um jovem desenvolvedor otaku"
   }
 }
 

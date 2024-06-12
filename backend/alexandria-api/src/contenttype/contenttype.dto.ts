@@ -9,7 +9,7 @@ import {
 import { Type } from 'class-transformer';
 import { ContentIdDTO } from 'src/content/content.dto';
 import { ApiProperty, PartialType } from '@nestjs/swagger';
-import { StatusTrackIdDTO } from '../status-tracker/dto/create-status-contentype.dto';
+import { StatusTrackIdDTO } from '../status-tracker/dto/create-status-tracker.dto';
 
 export class ContentTypeDTO {
   @IsInt()
