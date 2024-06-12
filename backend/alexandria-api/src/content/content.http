@@ -75,7 +75,7 @@ Authorization: Bearer {{login.response.body.accessToken}}
 Content-Type: application/json
 
 {
-    "description":"Aquele bruxo viado"
+    "description":"Aquele bruxo estranho"
 }
 
 ### Search content
