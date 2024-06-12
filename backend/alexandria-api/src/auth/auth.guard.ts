@@ -15,11 +15,25 @@ export class AuthGuard implements CanActivate {
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const request = context.switchToHttp().getRequest();
     const token = this.extractTokenFromHeader(request);
+    let payload;
     if (!token) {
       throw new UnauthorizedException();
     }
+
     try {
-      const payload = await this.jwtService.verifyAsync(token, {
+      /*
+      if (token.includes("Atza|")){
+        const data = await fetch("https://api.amazon.com/user/profile", {
+          headers:{
+            "Authorization": `Bearer ${token}`
+          }
+        })
+        const {email} = await response.json()
+        const data = this.usersService.findOne({ where: {email}})
+        payload = {sub: data.id, email: email}
+      }
+      */
+      payload = await this.jwtService.verifyAsync(token, {
         secret: jwtConstants.secret,
       });
       // 💡 We're assigning the payload to the request object here
