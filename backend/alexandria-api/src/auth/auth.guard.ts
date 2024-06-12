@@ -21,6 +21,7 @@ export class AuthGuard implements CanActivate {
     }
 
     try {
+      
       /*
       if (token.includes("Atza|")){
         const data = await fetch("https://api.amazon.com/user/profile", {
@@ -32,6 +33,7 @@ export class AuthGuard implements CanActivate {
         const data = this.usersService.findOne({ where: {email}})
         payload = {sub: data.id, email: email}
       }
+
       */
       payload = await this.jwtService.verifyAsync(token, {
         secret: jwtConstants.secret,
