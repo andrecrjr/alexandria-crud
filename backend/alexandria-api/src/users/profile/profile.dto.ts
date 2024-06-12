@@ -10,6 +10,7 @@ import { Type } from 'class-transformer';
 import { CollectionDTO } from 'src/collection/collection';
 import { CreateUserDTO } from '../User.dto';
 import { ApiProperty } from '@nestjs/swagger';
+import { PartialType } from '@nestjs/mapped-types';
 
 export class ProfileDTO {
   @IsInt()
@@ -63,4 +64,40 @@ export class ProfileDTO {
   @IsOptional()
   @Type(() => CreateUserDTO)
   user?: CreateUserDTO;
+}
+
+export class UpdateProfileDTO extends PartialType(ProfileDTO) {
+  @ApiProperty({ required: false })
+  @IsOptional()
+  @IsString()
+  bio?: string;
+
+  @ApiProperty({ required: false })
+  @IsOptional()
+  @IsString()
+  location?: string;
+
+  @ApiProperty({ required: false })
+  @IsOptional()
+  @IsInt()
+  age?: number;
+
+  @ApiProperty({ required: false })
+  @IsOptional()
+  @IsString()
+  gender?: string;
+
+  @ApiProperty({ required: false })
+  @IsArray()
+  @IsString({ each: true })
+  @IsOptional()
+  interests?: string[];
+
+  @IsDate()
+  @IsOptional()
+  createdAt?: Date = new Date();
+
+  @IsDate()
+  @IsOptional()
+  updatedAt?: Date = new Date();
 }

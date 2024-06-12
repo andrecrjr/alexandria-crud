@@ -8,14 +8,14 @@ export class CreateStatusTrackDto {
   id: number;
 
   @IsArray()
-  @ApiProperty()
+  @ApiProperty({ required: true })
   statusHistory: string[];
 }
 
 export class StatusTrackIdDTO extends PickType(CreateStatusTrackDto, [
   'id',
 ] as const) {
-  @ApiProperty()
+  @ApiProperty({ required: false })
   @IsInt()
   id: number;
 }

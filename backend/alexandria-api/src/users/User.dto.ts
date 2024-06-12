@@ -8,7 +8,7 @@ import {
   IsString,
   MinLength,
 } from 'class-validator';
-import { ProfileDTO } from './profile/profile.dto';
+import { UpdateProfileDTO } from './profile/profile.dto';
 import { Type } from 'class-transformer';
 export class CreateUserDTO {
   @ApiProperty()
@@ -26,9 +26,9 @@ export class CreateUserDTO {
   username: string;
 
   @IsOptional()
-  @ApiProperty()
-  @Type(() => ProfileDTO)
-  profile: ProfileDTO;
+  @ApiProperty({ required: false })
+  @Type(() => UpdateProfileDTO)
+  profile: UpdateProfileDTO;
 
   @IsBoolean()
   @IsOptional()

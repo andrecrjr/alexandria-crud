@@ -9,11 +9,10 @@ export class UsersService {
   private convertToPrisma(data: CreateUserDTO): Prisma.UserCreateInput {
     const { profile, ...rest } = data;
 
-    const profilePrisma = profile as Prisma.ProfileCreateWithoutUserInput;
     return {
       ...rest,
       profile: {
-        create: profilePrisma || {},
+        create: profile || {},
       },
     };
   }
