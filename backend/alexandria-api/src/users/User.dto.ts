@@ -32,10 +32,38 @@ export class CreateUserDTO {
 
   @IsBoolean()
   @IsOptional()
-  userActive: boolean;
+  userActive: boolean = true;
 }
 
-export class UpdateUserProfileDTO extends PartialType(CreateUserDTO) {}
+export class UpdateUserProfileDTO extends PartialType(CreateUserDTO) {
+  @ApiProperty({ required: false })
+  @IsEmail()
+  @MinLength(1)
+  @IsOptional()
+  email: string;
+
+  @ApiProperty({ required: false })
+  @MinLength(6)
+  @IsOptional()
+  password: string;
+
+  @ApiProperty({ required: false })
+  @MinLength(5)
+  @IsString()
+  @IsOptional()
+  username: string;
+
+  @IsOptional()
+  @ApiProperty({ required: false })
+  @Type(() => UpdateProfileDTO)
+  @IsOptional()
+  profile: UpdateProfileDTO;
+
+  @IsBoolean()
+  @IsOptional()
+  @ApiProperty({ required: false })
+  userActive: boolean;
+}
 
 export class UserIdDTO {
   @ApiProperty({ required: false })
