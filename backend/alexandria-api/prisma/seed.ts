@@ -77,27 +77,29 @@ async function main() {
   //     data: status,
   //   });
   // }
+  await prisma.content.deleteMany();
+  await prisma.contentType.deleteMany();
 
   // Seed AuthorContent
-  const authors = [];
-  for (const author of authorData) {
-    const createdAuthor = await prisma.authorContent.create({
-      data: author,
-    });
-    authors.push(createdAuthor);
-  }
+  // const authors = [];
+  // for (const author of authorData) {
+  //   const createdAuthor = await prisma.authorContent.create({
+  //     data: author,
+  //   });
+  //   authors.push(createdAuthor);
+  // }
 
-  // Seed Content e vincule com AuthorContent
-  for (const content of contentData) {
-    await prisma.content.create({
-      data: {
-        ...content,
-        authors: {
-          connect: authors.map((author) => ({ id: author.id })),
-        },
-      },
-    });
-  }
+  // // Seed Content e vincule com AuthorContent
+  // for (const content of contentData) {
+  //   await prisma.content.create({
+  //     data: {
+  //       ...content,
+  //       authors: {
+  //         connect: authors.map((author) => ({ id: author.id })),
+  //       },
+  //     },
+  //   });
+  // }
 }
 
 main()

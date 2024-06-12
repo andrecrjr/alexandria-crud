@@ -1,14 +1,16 @@
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { PrismaService } from 'prisma/prisma.service';
-import { ContentTypeDTO } from './contenttype';
+import { CreateContentTypeDTO } from './contenttype.dto';
 
 @Injectable()
 export class ContenttypeService {
   constructor(private readonly prismaService: PrismaService) {}
 
-  createContentTypePrisma(data: ContentTypeDTO): Prisma.ContentTypeCreateInput {
-    const { contents, statusType, ...rest } = data;
+  createContentTypePrisma(
+    data: CreateContentTypeDTO,
+  ): Prisma.ContentTypeCreateInput {
+    const { contents, statusTracker, ...rest } = data;
 
     return {
       ...rest,
@@ -17,16 +19,16 @@ export class ContenttypeService {
           id: item.id,
         })),
       },
-      statusType: {
-        connect: statusType?.id
+      statusTracker: {
+        connect: statusTracker?.id
           ? {
-              id: statusType.id,
+              id: statusTracker.id,
             }
           : undefined,
       },
     };
   }
-  async createContentType(data: ContentTypeDTO) {
+  async createContentType(data: CreateContentTypeDTO) {
     const prismaData = this.createContentTypePrisma(data);
     const created = await this.prismaService.contentType.create({
       data: prismaData,
@@ -42,7 +44,7 @@ export class ContenttypeService {
       take: limit,
       skip: page * limit,
       include: {
-        statusType: true,
+        statusTracker: true,
       },
     });
 

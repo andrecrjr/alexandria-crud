@@ -1,3 +1,4 @@
+import { PickType } from '@nestjs/mapped-types';
 import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 import {
@@ -96,8 +97,8 @@ export class AuthorContentDTO {
   createdBy: CreateUserDTO;
 }
 
-export class AuthorSwaggerDTO {
+export class AuthorIdDTO extends PickType(AuthorContentDTO, ['id'] as const) {
   @IsInt()
-  @ApiProperty()
+  @ApiProperty({ required: false })
   id: number;
 }

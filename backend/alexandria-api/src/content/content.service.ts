@@ -13,7 +13,7 @@ export class ContentService {
       where: { id: id },
       include: {
         createdBy: true,
-        type: true,
+        contentType: true,
       },
     });
   }
@@ -21,14 +21,14 @@ export class ContentService {
     data: CreateContentDTO,
     user: JwtDTO,
   ): Prisma.ContentCreateInput {
-    const { collections, type, authors, ...rest } = data;
+    const { collections, contentType, authors, ...rest } = data;
     return {
       ...rest,
       createdBy: { connect: { id: user.sub } },
-      type: type
+      contentType: contentType
         ? {
             connect: {
-              id: type.id,
+              id: contentType.id,
             },
           }
         : undefined,
@@ -46,13 +46,13 @@ export class ContentService {
   }
 
   convertUpdatePrisma(data: UpdateContentDTO): Prisma.ContentUpdateInput {
-    const { collections, type, authors, ...rest } = data;
+    const { collections, contentType, authors, ...rest } = data;
     return {
       ...rest,
-      type: type
+      contentType: contentType
         ? {
             connect: {
-              id: type.id,
+              id: contentType.id,
             },
           }
         : undefined,
@@ -81,9 +81,9 @@ export class ContentService {
     return this.prismaService.content.findMany({
       include: {
         authors: true,
-        type: {
+        contentType: {
           include: {
-            statusType: true,
+            statusTracker: true,
           },
         },
       },
@@ -112,7 +112,7 @@ export class ContentService {
       },
       include: {
         authors: true,
-        type: true,
+        contentType: true,
       },
     });
     return data;

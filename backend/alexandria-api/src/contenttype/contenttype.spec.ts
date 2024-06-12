@@ -1,4 +1,4 @@
-import { Contenttype } from './contenttype';
+import { Contenttype } from './contenttype.dto';
 
 describe('Contenttype', () => {
   it('should be defined', () => {

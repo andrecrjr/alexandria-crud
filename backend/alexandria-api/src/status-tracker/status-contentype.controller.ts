@@ -9,12 +9,12 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { StatusContentypeService } from './status-contentype.service';
-import { CreateStatusContentypeDto } from './dto/create-status-contentype.dto';
-import { UpdateStatusContentypeDto } from './dto/update-status-contentype.dto';
+import { CreateStatusTrackDto } from './dto/create-status-contentype.dto';
+import { UpdateStatusTrackDto } from './dto/update-status-contentype.dto';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from 'src/auth/auth.guard';
 
-@Controller('status-contentype')
+@Controller('status-tracker')
 @ApiTags('Status for Content Types')
 export class StatusContentypeController {
   constructor(
@@ -24,7 +24,7 @@ export class StatusContentypeController {
   @Post()
   @UseGuards(AuthGuard)
   @ApiBearerAuth('defaultBearerAuth')
-  create(@Body() createStatusContentypeDto: CreateStatusContentypeDto) {
+  create(@Body() createStatusContentypeDto: CreateStatusTrackDto) {
     return this.statusContentypeService.create(createStatusContentypeDto);
   }
 
@@ -41,7 +41,7 @@ export class StatusContentypeController {
   @Patch(':id')
   update(
     @Param('id') id: string,
-    @Body() updateStatusContentypeDto: UpdateStatusContentypeDto,
+    @Body() updateStatusContentypeDto: UpdateStatusTrackDto,
   ) {
     return this.statusContentypeService.update(+id, updateStatusContentypeDto);
   }

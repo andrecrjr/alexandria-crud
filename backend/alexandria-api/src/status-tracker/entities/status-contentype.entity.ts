@@ -1,6 +1,6 @@
 import { Type } from 'class-transformer';
 import { IsInt, IsOptional, IsString } from 'class-validator';
-import { ContentTypeDTO } from 'src/contenttype/contenttype';
+import { ContentTypeDTO } from 'src/contenttype/contenttype.dto';
 
 export class StatusContentype {
   @IsInt()

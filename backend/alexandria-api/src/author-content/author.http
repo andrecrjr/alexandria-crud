@@ -19,7 +19,6 @@ Authorization: Bearer {{login.response.body.accessToken}}
     "bio":"Japão",
     "awards": [],
     "genres": ["Gênio", "Avenutura", "Mistério"],
-    "createdById": 1
 }
 
 ### GET one author

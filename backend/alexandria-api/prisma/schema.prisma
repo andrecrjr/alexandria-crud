@@ -41,7 +41,7 @@ model Profile {
 
 model Collection {
   id        Int      @id @default(autoincrement())
-  type      String // Ex: Lendo, Lido, Pausado, Abandonado, etc.
+  currentStatusTrack  String? // Ex: Lendo, Lido, Pausado, Abandonado, etc.
   page      Int      @default(10)
   profileId Int      @map("profile_id")
   contentId Int      @map("content_id")
@@ -53,18 +53,19 @@ model Collection {
   @@unique([contentId, profileId])
 }
 
-model StatusContentypeUser {
+model StatusTrackUser {
   id          Int           @id @default(autoincrement())
-  name        String[]
+  statusHistory String[]
   contentType ContentType[]
 }
 
 // Este modelo representa o banco de dados separado para os tipos de conteúdo
 model ContentType {
-  id         Int                   @id @default(autoincrement())
-  name       String                @unique
-  statusType StatusContentypeUser? @relation(fields: [statusTypeId], references: [id])
-  statusTypeId Int
+  id          Int                    @id @default(autoincrement())
+  title       String                @unique
+  description String?
+  statusTracker StatusTrackUser? @relation(fields: [statusTrackerId], references: [id])
+  statusTrackerId Int?
   contents   Content[]
 }
 
@@ -72,7 +73,7 @@ model Content {
   id          Int          @id @default(autoincrement())
   title       String
   description String?
-  type        ContentType  @relation(fields: [typeId], references: [id])
+  contentType        ContentType  @relation(fields: [typeId], references: [id])
   typeId      Int
   isbn        String?
   imageUrl    String?

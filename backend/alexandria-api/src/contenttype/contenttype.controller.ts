@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
 import { ContenttypeService } from './contenttype.service';
-import { ContentTypeDTO } from './contenttype';
+import { CreateContentTypeDTO } from './contenttype.dto';
 import { AuthGuard } from 'src/auth/auth.guard';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
@@ -11,7 +11,7 @@ export class ContenttypeController {
   @ApiBearerAuth('defaultBearerAuth')
   @Post()
   @UseGuards(AuthGuard)
-  createType(@Body() data: ContentTypeDTO) {
+  createType(@Body() data: CreateContentTypeDTO) {
     return this.contentTypeService.createContentType(data);
   }
 

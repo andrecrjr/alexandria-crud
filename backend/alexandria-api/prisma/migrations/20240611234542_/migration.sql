@@ -28,7 +28,7 @@ CREATE TABLE "Profile" (
 -- CreateTable
 CREATE TABLE "Collection" (
     "id" SERIAL NOT NULL,
-    "type" TEXT NOT NULL,
+    "currentStatusTrack" TEXT,
     "page" INTEGER NOT NULL DEFAULT 10,
     "profile_id" INTEGER NOT NULL,
     "content_id" INTEGER NOT NULL,
@@ -39,18 +39,19 @@ CREATE TABLE "Collection" (
 );
 
 -- CreateTable
-CREATE TABLE "StatusContentypeUser" (
+CREATE TABLE "StatusTrackUser" (
     "id" SERIAL NOT NULL,
-    "name" TEXT[],
+    "statusHistory" TEXT[],
 
-    CONSTRAINT "StatusContentypeUser_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "StatusTrackUser_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "ContentType" (
     "id" SERIAL NOT NULL,
-    "name" TEXT NOT NULL,
-    "statusTypeId" INTEGER NOT NULL,
+    "title" TEXT NOT NULL,
+    "description" TEXT,
+    "statusTrackerId" INTEGER,
 
     CONSTRAINT "ContentType_pkey" PRIMARY KEY ("id")
 );
@@ -108,7 +109,7 @@ CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 CREATE UNIQUE INDEX "Collection_content_id_profile_id_key" ON "Collection"("content_id", "profile_id");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "ContentType_name_key" ON "ContentType"("name");
+CREATE UNIQUE INDEX "ContentType_title_key" ON "ContentType"("title");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "_AuthorContentToContent_AB_unique" ON "_AuthorContentToContent"("A", "B");
@@ -126,7 +127,7 @@ ALTER TABLE "Collection" ADD CONSTRAINT "Collection_content_id_fkey" FOREIGN KEY
 ALTER TABLE "Collection" ADD CONSTRAINT "Collection_profile_id_fkey" FOREIGN KEY ("profile_id") REFERENCES "Profile"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "ContentType" ADD CONSTRAINT "ContentType_statusTypeId_fkey" FOREIGN KEY ("statusTypeId") REFERENCES "StatusContentypeUser"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "ContentType" ADD CONSTRAINT "ContentType_statusTrackerId_fkey" FOREIGN KEY ("statusTrackerId") REFERENCES "StatusTrackUser"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Content" ADD CONSTRAINT "Content_typeId_fkey" FOREIGN KEY ("typeId") REFERENCES "ContentType"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

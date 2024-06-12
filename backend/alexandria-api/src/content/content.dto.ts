@@ -8,9 +8,9 @@ import {
 } from 'class-validator';
 import { Type } from 'class-transformer';
 import { CollectionDTO } from 'src/collection/collection';
-import { PartialContentTypeDTO } from 'src/contenttype/contenttype';
+import { UpdateContentTypeDTO } from 'src/contenttype/contenttype.dto';
 import { ApiProperty } from '@nestjs/swagger';
-import { AuthorSwaggerDTO } from 'src/author-content/entities/author-content.entity';
+import { AuthorIdDTO } from 'src/author-content/entities/author-content.entity';
 import { PartialType, PickType } from '@nestjs/mapped-types';
 
 export class ContentDTO {
@@ -57,8 +57,8 @@ export class ContentDTO {
     description: `The content type's track for this Content`,
   })
   @ValidateNested({ each: true })
-  @Type(() => PartialContentTypeDTO)
-  type: PartialContentTypeDTO;
+  @Type(() => UpdateContentTypeDTO)
+  contentType: UpdateContentTypeDTO;
 
   @IsOptional()
   @IsString()
@@ -78,19 +78,11 @@ export class ContentDTO {
 
   @IsOptional()
   @IsDate()
-  @ApiProperty({
-    description: 'The date and time when the content was created.',
-    required: false,
-  })
-  createdAt: Date;
+  createdAt: Date = new Date();
 
   @IsOptional()
   @IsDate()
-  @ApiProperty({
-    description: 'The date and time when the content was last updated.',
-    required: false,
-  })
-  updatedAt: Date;
+  updatedAt: Date = new Date();
 
   @IsOptional()
   @ValidateNested({ each: true })
@@ -105,14 +97,12 @@ export class ContentDTO {
   @IsOptional()
   @ApiProperty({
     description: 'The authors of the content.',
-    type: [AuthorSwaggerDTO],
+    type: [AuthorIdDTO],
     required: false,
   })
-  @Type(() => AuthorSwaggerDTO)
-  authors?: AuthorSwaggerDTO[];
+  @Type(() => AuthorIdDTO)
+  authors?: AuthorIdDTO[];
 }
-
-// The CollectionDTO and AuthorSwaggerDTO classes should be defined elsewhere in your code.
 
 export class CreateContentDTO extends ContentDTO {
   @IsString()
@@ -163,16 +153,7 @@ export class UpdateContentDTO extends PartialType(ContentDTO) {
   })
   createdById?: number;
 
-  @ApiProperty({
-    description: 'The date and time when the content was created.',
-    required: false,
-  })
   createdAt?: Date;
-
-  @ApiProperty({
-    description: 'The date and time when the content was last updated.',
-    required: false,
-  })
   updatedAt?: Date;
 }
 

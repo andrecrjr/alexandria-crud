@@ -24,7 +24,7 @@ export class CollectionService {
       include: {
         content: {
           include: {
-            type: true,
+            contentType: true,
             createdBy: true,
           },
         },

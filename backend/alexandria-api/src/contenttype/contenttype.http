@@ -4,16 +4,17 @@ POST http://localhost:3000/auth/login
 Content-Type: application/json
 
 {
-  "email": "kohado@aros.com",
+  "email": "eroshi@aros.com",
   "password": "123456"
 }
 
-### create status content type
-POST http://localhost:3000/status-contentype
+### create status tracker
+POST http://localhost:3000/status-tracker
+Authorization: Bearer {{login.response.body.accessToken}}
 Content-Type: application/json
 
 {
-  "name": [
+  "statusHistory": [
     "lendo",
     "lido",
     "abandonado"
@@ -23,10 +24,12 @@ Content-Type: application/json
 ### create content type
 POST http://localhost:3000/contenttype
 Content-Type: application/json
+Authorization: Bearer {{login.response.body.accessToken}}
 
 {
-    "name":"book",
-    "statusType": {
+    "title":"manga",
+    "description":"Tracker for books",
+    "statusTracker": {
       "id": 1
     }
 }
@@ -35,6 +38,7 @@ Content-Type: application/json
 ### GET all content type
 GET http://localhost:3000/contenttype
 Content-Type: application/json
+Authorization: Bearer {{login.response.body.accessToken}}
 
 {
     "name":"book",
