@@ -8,7 +8,7 @@ import { JwtDTO } from 'src/auth/jwt.dto';
 @ApiTags('User Collection')
 export class CollectionService {
   constructor(private readonly prismaService: PrismaService) {}
-  async createUserWithContent(user, data: CreateCollectionDto) {
+  async createUserWithContent(user: JwtDTO, data: CreateCollectionDto) {
     const collectionUserData = await this.prismaService.collection.create({
       data: {
         ...data,

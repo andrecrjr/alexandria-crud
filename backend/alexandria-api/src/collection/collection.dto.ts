@@ -1,21 +1,37 @@
 import { ApiProperty, PartialType } from '@nestjs/swagger';
+import { Type } from 'class-transformer';
 import { IsInt, IsOptional, IsString, IsNotEmpty } from 'class-validator';
+import { ContentDTO } from 'src/content/content.dto';
 
+export class CollectionDto {
+  @IsString()
+  @IsNotEmpty()
+  currentStatusTrack: string;
+
+  @IsInt()
+  @IsOptional()
+  page: number;
+
+  @IsInt()
+  @IsNotEmpty()
+  contentId: number;
+
+  @IsInt()
+  profileId?: number;
+
+  @Type(() => ContentDTO)
+  content: ContentDTO;
+}
 export class CreateCollectionDto {
   @IsString()
   @IsNotEmpty()
   @ApiProperty()
-  type: string;
+  currentStatusTrack: string;
 
   @IsInt()
-  @IsOptional()
+  @IsNotEmpty()
   @ApiProperty()
   page: number;
-
-  @IsInt()
-  @IsOptional()
-  @ApiProperty()
-  userId: number;
 
   @IsInt()
   @IsNotEmpty()
@@ -23,7 +39,7 @@ export class CreateCollectionDto {
   contentId: number;
 
   @IsInt()
-  @IsOptional()
+  @IsNotEmpty()
   @ApiProperty()
   profileId?: number;
 }

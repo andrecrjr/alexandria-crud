@@ -11,30 +11,30 @@ Content-Type: application/json
 
 ### create collection/page between user
 POST http://localhost:3000/collection/page
-Authorization: Bearer {{login.response.body.access_token}}
+Authorization: Bearer {{login.response.body.accessToken}}
 Content-Type: application/json
 
 {
-    "type": "lendo",
+    "currentStatusTrack": "lendo",
     "page":22,
-    "contentId":5
+    "contentId":1
 }
 
 ### update collection between user
 PATCH http://localhost:3000/collection/page
-Authorization: Bearer {{login.response.body.access_token}}
+Authorization: Bearer {{login.response.body.accessToken}}
 Content-Type: application/json
 
 {
-    "type":"lendo",
-    "page":255,
+    "currentStatusTrack":"lendo",
+    "page":285,
     "contentId":1
 }
 
 ### get collection between user
 GET http://localhost:3000/collection
-Authorization: Bearer {{login.response.body.access_token}}
+Authorization: Bearer {{login.response.body.accessToken}}
 
 ### get search book in collection by name
 GET http://localhost:3000/collection/search?q=Harry
-Authorization: Bearer {{login.response.body.access_token}}
+Authorization: Bearer {{login.response.body.accessToken}}

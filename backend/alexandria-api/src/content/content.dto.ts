@@ -16,10 +16,6 @@ import { PartialType, PickType } from '@nestjs/mapped-types';
 export class ContentDTO {
   @IsInt()
   @IsOptional()
-  @ApiProperty({
-    description:
-      'The unique identifier for the content, automatically generated.',
-  })
   id: number;
 
   @IsString()
