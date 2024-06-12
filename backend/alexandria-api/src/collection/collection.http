@@ -17,7 +17,7 @@ Content-Type: application/json
 {
     "currentStatusTrack": "lendo",
     "page":22,
-    "contentId":1
+    "contentId":3
 }
 
 ### update collection between user
@@ -36,5 +36,5 @@ GET http://localhost:3000/collection
 Authorization: Bearer {{login.response.body.accessToken}}
 
 ### get search book in collection by name
-GET http://localhost:3000/collection/search?q=Harry
+GET http://localhost:3000/collection/search
 Authorization: Bearer {{login.response.body.accessToken}}

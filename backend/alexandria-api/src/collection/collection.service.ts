@@ -64,7 +64,15 @@ export class CollectionService {
         },
       },
       include: {
-        content: true,
+        content: {
+          include: {
+            contentType: {
+              include: {
+                statusTracker: true,
+              },
+            },
+          },
+        },
       },
     });
 

@@ -38,7 +38,6 @@ Authorization: Bearer {{login.response.body.accessToken}}
 ### GET all content type
 GET http://localhost:3000/contenttype
 Content-Type: application/json
-Authorization: Bearer {{login.response.body.accessToken}}
 
 {
     "name":"book",

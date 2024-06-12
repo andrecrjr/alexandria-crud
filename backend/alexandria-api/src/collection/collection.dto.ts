@@ -26,7 +26,7 @@ export class CreateCollectionDto {
   @IsString()
   @IsNotEmpty()
   @ApiProperty()
-  currentStatusTrack: string;
+  currentStatusTrack: string = 'Not started';
 
   @IsInt()
   @IsNotEmpty()
@@ -37,11 +37,6 @@ export class CreateCollectionDto {
   @IsNotEmpty()
   @ApiProperty()
   contentId: number;
-
-  @IsInt()
-  @IsNotEmpty()
-  @ApiProperty()
-  profileId?: number;
 }
 
 export class UpdateCollectionDto extends PartialType(CreateCollectionDto) {}

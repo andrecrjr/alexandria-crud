@@ -44,7 +44,7 @@ Authorization: Bearer {{login.response.body.accessToken}}
 Content-Type: application/json
 
 {
-    "name":"book",
+    "name":"mangá",
     "statusType": {
       "id": 1
     }
@@ -56,14 +56,13 @@ Authorization: Bearer {{login.response.body.accessToken}}
 Content-Type: application/json
 
 {
-    "title":"Harry potter e o prisioneiro de askaban",
+    "title":"One Piece Vol 100",
     "numberPages": 500,
-    "isbn": "578457542",
+    "isbn": "54545788",
     "description":"new book",
     "contentType": {
-        "id": 1
+        "id": 4
     }
-
 }
 
 ### get all content
