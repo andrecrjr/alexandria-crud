@@ -1,16 +1,21 @@
 import {
   CanActivate,
   ExecutionContext,
+  Inject,
   Injectable,
   UnauthorizedException,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { jwtConstants } from 'src/constants';
 import { Request } from 'express';
+import { AmazonService } from './amazon-service/amazon-service.service';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
-  constructor(private jwtService: JwtService) {}
+  constructor(
+    private jwtService: JwtService,
+    @Inject(AmazonService) private amazonService: AmazonService,
+  ) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const request = context.switchToHttp().getRequest();
@@ -21,20 +26,11 @@ export class AuthGuard implements CanActivate {
     }
 
     try {
-      
-      /*
-      if (token.includes("Atza|")){
-        const data = await fetch("https://api.amazon.com/user/profile", {
-          headers:{
-            "Authorization": `Bearer ${token}`
-          }
-        })
-        const {email} = await response.json()
-        const data = this.usersService.findOne({ where: {email}})
-        payload = {sub: data.id, email: email}
+      if (token.includes('Atza|')) {
+        const payload = await this.amazonService.validateUserProfile(token);
+        request['user'] = payload;
+        return true;
       }
-
-      */
       payload = await this.jwtService.verifyAsync(token, {
         secret: jwtConstants.secret,
       });

@@ -6,26 +6,20 @@ import { UsersModule } from 'src/users/users.module';
 import { JwtModule } from '@nestjs/jwt';
 import { jwtConstants } from 'src/constants';
 import { LocalStrategy } from './local.strategy';
+import { AmazonServiceModule } from './amazon-service/amazon-service.module';
 
 @Module({
   imports: [
     UsersModule,
     PassportModule,
+    AmazonServiceModule,
     JwtModule.register({
       global: true,
       secret: jwtConstants.secret,
       signOptions: { expiresIn: process.env.LOCAL_EXPIRE_ACCESS_TOKEN! },
     }),
   ],
-  providers: [
-    AuthService,
-    // define authentication globally in all routes
-    // {
-    //   provide: APP_GUARD,
-    //   useClass: AuthGuard,
-    // },
-    LocalStrategy,
-  ],
+  providers: [AuthService, LocalStrategy],
   controllers: [AuthController],
 })
 export class AuthModule {}
