@@ -60,6 +60,7 @@ export class CollectionService {
         content: {
           title: {
             contains: partialContent,
+            mode: 'insensitive',
           },
         },
       },

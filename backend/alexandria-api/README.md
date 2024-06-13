@@ -33,6 +33,10 @@ API created to be the hub web service for entertainment social network.
 
 - [x] Fix Swagger with DTO
 
+- [x] Amazon Access Token accessing
+
+- [] Create a alexa intent to update some item in my collection database
+
 - [] Content genre CRUD API
 
 - [] List user content pagination
@@ -47,4 +51,6 @@ API created to be the hub web service for entertainment social network.
 
 - [] Develop a rate limiting feature to prevent abuse of the API
 
-- [ ] Design and implement a backup and restore strategy for the database
+- [] Design and implement a backup and restore strategy for the database
+
+- [] Caching results with redis

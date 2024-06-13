@@ -26,8 +26,7 @@ Authorization: Bearer {{login.response.body.accessToken}}
 Content-Type: application/json
 
 {
-    "currentStatusTrack":"lendo",
-    "page":285,
+    "currentStatusTrack":"lido",
     "contentId":1
 }
 
@@ -36,5 +35,5 @@ GET http://localhost:3000/collection
 Authorization: Bearer {{login.response.body.accessToken}}
 
 ### get search book in collection by name
-GET http://localhost:3000/collection/search
+GET http://localhost:3000/collection/search?q=one
 Authorization: Bearer {{login.response.body.accessToken}}
