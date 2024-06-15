@@ -3,6 +3,7 @@ import { PrismaService } from 'prisma/prisma.service';
 import { CreateCollectionDto, UpdateCollectionDto } from './collection.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { JwtDTO } from 'src/auth/jwt.dto';
+import { numberToWord } from './utils';
 
 @Injectable()
 @ApiTags('User Collection')
@@ -54,26 +55,50 @@ export class CollectionService {
     partialContent: string,
     user: JwtDTO,
   ) {
+    const partial = numberToWord(partialContent);
     const data = await this.prismaService.collection.findMany({
       where: {
         profileId: user.sub,
         content: {
           title: {
-            contains: partialContent,
+            contains: partial,
             mode: 'insensitive',
           },
         },
       },
       include: {
+        content: true,
+      },
+    });
+
+    return data;
+  }
+
+  async searchInsideCollectionWithStatusByContentName(
+    partialContent: string,
+    statusTrack: string,
+    user: JwtDTO,
+  ) {
+    const partial = numberToWord(partialContent);
+    const data = await this.prismaService.collection.findMany({
+      where: {
+        profileId: user.sub,
         content: {
-          include: {
-            contentType: {
-              include: {
-                statusTracker: true,
+          title: {
+            contains: partial,
+            mode: 'insensitive',
+          },
+          contentType: {
+            statusTracker: {
+              statusHistory: {
+                has: statusTrack || '',
               },
             },
           },
         },
+      },
+      include: {
+        content: true,
       },
     });
 

@@ -53,4 +53,19 @@ export class CollectionController {
       req.user,
     );
   }
+
+  @ApiBearerAuth('defaultBearerAuth')
+  @Get('alexa/search')
+  @UseGuards(AuthGuard)
+  searchByCollectionAndStatus(
+    @Query('q') query,
+    @Query('status') status,
+    @Request() req,
+  ) {
+    return this.collectionService.searchInsideCollectionWithStatusByContentName(
+      query,
+      status,
+      req.user,
+    );
+  }
 }

@@ -4,7 +4,7 @@ POST http://localhost:3000/auth/login
 Content-Type: application/json
 
 {
-  "email": "eroshi@aros.com",
+  "email": "andre-carlos@Live.com",
   "password": "123456"
 }
 
@@ -16,8 +16,8 @@ Content-Type: application/json
 
 {
     "currentStatusTrack": "lendo",
-    "page":22,
-    "contentId":3
+    "page":5,
+    "contentId":4
 }
 
 ### update collection between user
@@ -26,7 +26,7 @@ Authorization: Bearer {{login.response.body.accessToken}}
 Content-Type: application/json
 
 {
-    "currentStatusTrack":"lido",
+    "currentStatusTrack":"lendo",
     "contentId":1
 }
 
@@ -35,5 +35,10 @@ GET http://localhost:3000/collection
 Authorization: Bearer {{login.response.body.accessToken}}
 
 ### get search book in collection by name
-GET http://localhost:3000/collection/search?q=one
+GET http://localhost:3000/collection/search?q=
+Authorization: Bearer {{login.response.body.accessToken}}
+
+
+### GET REQUEST ALEXA
+GET http://localhost:3000/collection/alexa/search?q=&status=
 Authorization: Bearer {{login.response.body.accessToken}}
