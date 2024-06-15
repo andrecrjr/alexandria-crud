@@ -69,12 +69,12 @@ Content-Type: application/json
 GET http://localhost:3000/content/all
 
 ### update one content
-PATCH http://localhost:3000/content/1
+PATCH http://localhost:3000/content/5
 Authorization: Bearer {{login.response.body.accessToken}}
 Content-Type: application/json
 
 {
-    "description":"Aquele bruxo estranho"
+    "title":"One Piece Volume 3"
 }
 
 ### Search content
