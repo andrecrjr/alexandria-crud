@@ -1,26 +1,42 @@
-// import { Injectable } from '@nestjs/common';
-// import { CreateSeriesContentDto } from './dto/create-series-content.dto';
-// import { UpdateSeriesContentDto } from './dto/update-series-content.dto';
+import { Injectable } from '@nestjs/common';
+import { Prisma, SeriesContent } from '@prisma/client';
+import { PrismaService } from 'prisma/prisma.service';
+import { CreateSeriesContentDto } from './dto/create-series-content.dto';
 
-// @Injectable()
-// export class SeriesContentService {
-//   create(createSeriesContentDto: CreateSeriesContentDto) {
-//     return 'This action adds a new seriesContent';
-//   }
+@Injectable()
+export class SeriesContentService {
+  constructor(private prisma: PrismaService) {}
 
-//   findAll() {
-//     return `This action returns all seriesContent`;
-//   }
+  async create(data: CreateSeriesContentDto): Promise<SeriesContent> {
+    const prismaData = data as Prisma.SeriesContentCreateInput;
+    return this.prisma.seriesContent.create({
+      data: prismaData,
+    });
+  }
 
-//   findOne(id: number) {
-//     return `This action returns a #${id} seriesContent`;
-//   }
+  async findAll(): Promise<SeriesContent[]> {
+    return this.prisma.seriesContent.findMany();
+  }
 
-//   update(id: number, updateSeriesContentDto: UpdateSeriesContentDto) {
-//     return `This action updates a #${id} seriesContent`;
-//   }
+  async findOne(id: number): Promise<SeriesContent | null> {
+    return this.prisma.seriesContent.findUnique({
+      where: { id },
+    });
+  }
 
-//   remove(id: number) {
-//     return `This action removes a #${id} seriesContent`;
-//   }
-// }
+  async update(
+    id: number,
+    data: Prisma.SeriesContentUpdateInput,
+  ): Promise<SeriesContent> {
+    return this.prisma.seriesContent.update({
+      where: { id },
+      data,
+    });
+  }
+
+  async remove(id: number): Promise<SeriesContent> {
+    return this.prisma.seriesContent.delete({
+      where: { id },
+    });
+  }
+}

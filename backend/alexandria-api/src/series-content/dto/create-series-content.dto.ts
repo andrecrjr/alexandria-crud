@@ -7,9 +7,9 @@ import {
   IsInt,
 } from 'class-validator';
 
-class CreateSeriesContentDto {
+export class CreateSeriesContentDto {
   @IsInt()
-  id: string;
+  id: number;
 
   @IsString()
   title: string;
@@ -42,5 +42,3 @@ class CreateSeriesContentDto {
   @IsOptional()
   genres?: string[];
 }
-
-export default CreateSeriesContentDto;
