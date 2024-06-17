@@ -8,6 +8,7 @@ import { ContenttypeModule } from './contenttype/contenttype.module';
 import { CollectionModule } from './collection/collection.module';
 import { AuthorContentModule } from './author-content/author-content.module';
 import { AmazonServiceModule } from './auth/amazon-service/amazon-service.module';
+import { SeriesContentModule } from './series-content/series-content.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { AmazonServiceModule } from './auth/amazon-service/amazon-service.module
     CollectionModule,
     AuthorContentModule,
     AmazonServiceModule,
+    SeriesContentModule,
   ],
   controllers: [AppController],
   providers: [AppService],

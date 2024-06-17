@@ -24,6 +24,7 @@ model User {
   userCreatedContent Content[]
   userCreatedAuthors AuthorContent[]
   userActive Boolean @default(true)
+  seriesCreated     Series[]
 }
 
 model Profile {
@@ -59,7 +60,6 @@ model StatusTrackUser {
   contentType ContentType[]
 }
 
-// Este modelo representa o banco de dados separado para os tipos de conteúdo
 model ContentType {
   id          Int                    @id @default(autoincrement())
   title       String                @unique
@@ -83,6 +83,8 @@ model Content {
   updatedAt   DateTime     @updatedAt
   collection  Collection[]
   numberPages Int
+  series  Series? @relation(fields: [seriesId], references: [id])
+  seriesId Int?
   authors AuthorContent[]
 }
 
@@ -94,14 +96,47 @@ model AuthorContent {
   died          DateTime?
   nationality   String?
   awards        String[]
-  photoUrl      String?      // URL to a photo of the author
-  website       String?      // Official website or profile
-  genres        String[]     // List of genres the author writes in
-  socialMedia   Json?        // Social media links, stored in JSON format
-  bestSellers   String[]     // List of best-selling works
-  influences    String[]     // List of authors who influenced this author
-  influenced    String[]     // List of authors influenced by this author
+  photoUrl      String?
+  website       String?
+  genres        String[]  
+  socialMedia   Json? 
+  bestSellers   String[]  
+  influences    String[]    
+  influenced    String[]     
   contents      Content[]
-  createdBy   User?        @relation(fields: [createdById], references: [id])
+  createdBy   User? @relation(fields: [createdById], references: [id])
   createdById Int?
+  series Series[]
+}
+
+enum ContentCategory {
+  BOOK 
+  ANIME 
+  MANGA
+  MOVIE
+  SERIES 
+  PODCAST
+  MUSIC
+  DOCUMENTARY
+  GAME
+  MAGAZINE
+  WEBTOON
+  SHORT_FILM
+  PLAY
+  RADIO_SHOW
+  VIDEO_COURSE
+}
+
+model Series {
+  id             Int            @id @default(autoincrement())
+  title          String
+  description    String?
+  category       ContentCategory
+  imageUrl       String?
+  createdBy      User?          @relation(fields: [createdById], references: [id])
+  authors         AuthorContent[]
+  createdById    Int?
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+  contents       Content[]
 }
