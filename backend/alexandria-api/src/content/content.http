@@ -5,7 +5,7 @@ POST http://localhost:3000/auth/login
 Content-Type: application/json
 
 {
-  "email": "eroshi@aros.com",
+  "email": "andre-carlos@Live.com",
   "password": "123456"
 }
 
@@ -61,7 +61,7 @@ Content-Type: application/json
     "isbn": "54545788",
     "description":"new book",
     "contentType": {
-        "id": 4
+        "id": 1
     }
 }
 

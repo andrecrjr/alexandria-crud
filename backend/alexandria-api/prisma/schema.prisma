@@ -61,7 +61,8 @@ model SeriesContent {
   createdAt      DateTime       @default(now())
   updatedAt      DateTime       @updatedAt
   contents       Content[]
-  genres       Genre[]     
+  genres       Genre[] 
+  synonyms String[]    
 }
 
 model Genre {
@@ -106,6 +107,7 @@ model Content {
   seriesId Int?
   authors AuthorContent[]
   genres Genre[]
+  synonyms String[]
 }
 
 model AuthorContent {
