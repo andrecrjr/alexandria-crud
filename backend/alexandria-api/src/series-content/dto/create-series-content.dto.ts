@@ -1,3 +1,4 @@
+import { Type } from 'class-transformer';
 import {
   IsString,
   IsOptional,
@@ -6,6 +7,7 @@ import {
   ArrayNotEmpty,
   IsInt,
 } from 'class-validator';
+import { ContentIdDTO } from 'src/content/content.dto';
 
 export class CreateSeriesContentDto {
   @IsInt()
@@ -37,7 +39,8 @@ export class CreateSeriesContentDto {
   createdById?: string;
 
   @IsOptional()
-  contents?: string[];
+  @Type(() => ContentIdDTO)
+  contents?: ContentIdDTO[];
 
   @IsOptional()
   genres?: string[];

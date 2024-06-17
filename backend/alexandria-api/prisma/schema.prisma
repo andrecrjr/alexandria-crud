@@ -101,7 +101,7 @@ model Content {
   createdById Int?
   createdAt   DateTime     @default(now())
   collection  Collection[]
-  numberPages Int
+  numberPages Int?
   series  SeriesContent? @relation(fields: [seriesId], references: [id])
   seriesId Int?
   authors AuthorContent[]
