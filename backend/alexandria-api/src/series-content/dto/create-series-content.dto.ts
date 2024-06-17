@@ -2,13 +2,13 @@ import {
   IsString,
   IsOptional,
   IsUrl,
-  IsUUID,
   IsArray,
   ArrayNotEmpty,
+  IsInt,
 } from 'class-validator';
 
 class CreateSeriesContentDto {
-  @IsUUID()
+  @IsInt()
   id: string;
 
   @IsString()

@@ -9,7 +9,7 @@ datasource db {
 }
 
 model User {
-  id          String          @id @default(uuid())
+  id                 Int       @id @default(autoincrement())
   username           String?   @unique
   email              String    @unique
   password           String
@@ -23,7 +23,7 @@ model User {
 }
 
 model Profile {
-  id          String          @id @default(uuid())
+  id              Int    @id @default(autoincrement())
   bio             String? @default("")
   location        String?
   age             Int?
@@ -37,10 +37,10 @@ model Profile {
 
 model Collection {
   id        Int      @id @default(autoincrement())
-  currentStatusTrack  String? // Ex: Lendo, Lido, Pausado, Abandonado, etc.
+  currentStatusTrack String? // Ex: Lendo, Lido, Pausado, Abandonado, etc.
   page      Int      @default(10)
-  profileId String      @map("profile_id")
-  contentId String      @map("content_id")
+  profileId Int      @map("profile_id")
+  contentId Int      @map("content_id")
   content   Content  @relation(fields: [contentId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -50,14 +50,14 @@ model Collection {
 }
 
 model SeriesContent {
-  id          String          @id @default(uuid())
+  id        Int      @id @default(autoincrement())
   title          String
   description    String?
   category       ContentType[]
   imageUrl       String?
   createdBy      User?          @relation(fields: [createdById], references: [id])
   seriesCreator  AuthorContent[]
-  createdById    String?
+  createdById    Int?
   createdAt      DateTime       @default(now())
   updatedAt      DateTime       @updatedAt
   contents       Content[]
@@ -80,7 +80,7 @@ model StatusTrackUser {
 }
 
 model ContentType {
-  id          String          @id @default(uuid())
+  id        Int      @id @default(autoincrement())
   title       String                @unique
   description String?
   statusTracker StatusTrackUser? @relation(fields: [statusTrackerId], references: [id])
@@ -90,26 +90,26 @@ model ContentType {
 }
 
 model Content {
-  id          String          @id @default(uuid())
+  id          Int      @id @default(autoincrement())
   title       String
   description String?
-  contentType     ContentType  @relation(fields: [typeId], references: [id])
-  typeId      String
+  contentType     ContentType  @relation(fields: [contentTypeId], references: [id])
+  contentTypeId      Int
   isbn        String?
   imageUrl    String?
   createdBy   User?        @relation(fields: [createdById], references: [id])
-  createdById String?
+  createdById Int?
   createdAt   DateTime     @default(now())
   collection  Collection[]
   numberPages Int
   series  SeriesContent? @relation(fields: [seriesId], references: [id])
-  seriesId String?
+  seriesId Int?
   authors AuthorContent[]
   genres Genre[]
 }
 
 model AuthorContent {
-  id          String          @id @default(uuid())
+  id            Int      @id @default(autoincrement())
   name          String?
   bio           String?
   born          DateTime?
@@ -125,6 +125,6 @@ model AuthorContent {
   influenced    String[]     
   contents      Content[]
   createdBy   User? @relation(fields: [createdById], references: [id])
-  createdById String?
+  createdById Int?
   series SeriesContent[]
 }

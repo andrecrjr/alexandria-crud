@@ -14,9 +14,9 @@ import { AuthorIdDTO } from 'src/author-content/entities/author-content.entity';
 import { PartialType, PickType } from '@nestjs/mapped-types';
 
 export class ContentDTO {
-  @IsString()
+  @IsInt()
   @IsOptional()
-  id: string;
+  id: number;
 
   @IsString()
   @ApiProperty({ description: 'The title of the content.' })
@@ -70,7 +70,7 @@ export class ContentDTO {
     description: 'The identifier of the user who created the content.',
     required: false,
   })
-  createdById?: string;
+  createdById?: number;
 
   @IsOptional()
   @IsDate()
@@ -123,7 +123,7 @@ export class UpdateContentDTO extends PartialType(ContentDTO) {
     description: 'The identifier for the associated content type.',
     required: false,
   })
-  typeId?: string;
+  contentTypeId?: number;
 
   @ApiProperty({
     description: 'The total number of pages in the content.',
@@ -148,15 +148,15 @@ export class UpdateContentDTO extends PartialType(ContentDTO) {
     description: 'The identifier of the user who created the content.',
     required: false,
   })
-  createdById?: string;
+  createdById?: number;
 
   createdAt?: Date;
   updatedAt?: Date;
 }
 
 export class ContentIdDTO extends PickType(ContentDTO, ['id']) {
-  @IsString()
+  @IsInt()
   @IsOptional()
   @ApiProperty({ required: false })
-  id: string;
+  id: number;
 }

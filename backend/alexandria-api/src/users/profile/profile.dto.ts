@@ -13,9 +13,9 @@ import { ApiProperty } from '@nestjs/swagger';
 import { PartialType } from '@nestjs/mapped-types';
 
 export class ProfileDTO {
-  @IsString()
+  @IsInt()
   @IsOptional()
-  id?: string;
+  id?: number;
 
   @ApiProperty()
   @IsOptional()

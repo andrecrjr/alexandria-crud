@@ -1,6 +1,6 @@
 -- CreateTable
 CREATE TABLE "User" (
-    "id" TEXT NOT NULL,
+    "id" SERIAL NOT NULL,
     "username" TEXT,
     "email" TEXT NOT NULL,
     "password" TEXT NOT NULL,
@@ -13,7 +13,7 @@ CREATE TABLE "User" (
 
 -- CreateTable
 CREATE TABLE "Profile" (
-    "id" TEXT NOT NULL,
+    "id" SERIAL NOT NULL,
     "bio" TEXT DEFAULT '',
     "location" TEXT,
     "age" INTEGER,
@@ -30,8 +30,8 @@ CREATE TABLE "Collection" (
     "id" SERIAL NOT NULL,
     "currentStatusTrack" TEXT,
     "page" INTEGER NOT NULL DEFAULT 10,
-    "profile_id" TEXT NOT NULL,
-    "content_id" TEXT NOT NULL,
+    "profile_id" INTEGER NOT NULL,
+    "content_id" INTEGER NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -40,11 +40,11 @@ CREATE TABLE "Collection" (
 
 -- CreateTable
 CREATE TABLE "SeriesContent" (
-    "id" TEXT NOT NULL,
+    "id" SERIAL NOT NULL,
     "title" TEXT NOT NULL,
     "description" TEXT,
     "imageUrl" TEXT,
-    "createdById" TEXT,
+    "createdById" INTEGER,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -71,7 +71,7 @@ CREATE TABLE "StatusTrackUser" (
 
 -- CreateTable
 CREATE TABLE "ContentType" (
-    "id" TEXT NOT NULL,
+    "id" SERIAL NOT NULL,
     "title" TEXT NOT NULL,
     "description" TEXT,
     "statusTrackerId" INTEGER,
@@ -81,23 +81,23 @@ CREATE TABLE "ContentType" (
 
 -- CreateTable
 CREATE TABLE "Content" (
-    "id" TEXT NOT NULL,
+    "id" SERIAL NOT NULL,
     "title" TEXT NOT NULL,
     "description" TEXT,
-    "typeId" TEXT NOT NULL,
+    "contentTypeId" INTEGER NOT NULL,
     "isbn" TEXT,
     "imageUrl" TEXT,
-    "createdById" TEXT,
+    "createdById" INTEGER,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "numberPages" INTEGER NOT NULL,
-    "seriesId" TEXT,
+    "seriesId" INTEGER,
 
     CONSTRAINT "Content_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "AuthorContent" (
-    "id" TEXT NOT NULL,
+    "id" SERIAL NOT NULL,
     "name" TEXT,
     "bio" TEXT,
     "born" TIMESTAMP(3),
@@ -111,7 +111,7 @@ CREATE TABLE "AuthorContent" (
     "bestSellers" TEXT[],
     "influences" TEXT[],
     "influenced" TEXT[],
-    "createdById" TEXT,
+    "createdById" INTEGER,
 
     CONSTRAINT "AuthorContent_pkey" PRIMARY KEY ("id")
 );
@@ -119,31 +119,31 @@ CREATE TABLE "AuthorContent" (
 -- CreateTable
 CREATE TABLE "_GenreToSeriesContent" (
     "A" INTEGER NOT NULL,
-    "B" TEXT NOT NULL
+    "B" INTEGER NOT NULL
 );
 
 -- CreateTable
 CREATE TABLE "_ContentTypeToSeriesContent" (
-    "A" TEXT NOT NULL,
-    "B" TEXT NOT NULL
+    "A" INTEGER NOT NULL,
+    "B" INTEGER NOT NULL
 );
 
 -- CreateTable
 CREATE TABLE "_ContentToGenre" (
-    "A" TEXT NOT NULL,
+    "A" INTEGER NOT NULL,
     "B" INTEGER NOT NULL
 );
 
 -- CreateTable
 CREATE TABLE "_AuthorContentToContent" (
-    "A" TEXT NOT NULL,
-    "B" TEXT NOT NULL
+    "A" INTEGER NOT NULL,
+    "B" INTEGER NOT NULL
 );
 
 -- CreateTable
 CREATE TABLE "_AuthorContentToSeriesContent" (
-    "A" TEXT NOT NULL,
-    "B" TEXT NOT NULL
+    "A" INTEGER NOT NULL,
+    "B" INTEGER NOT NULL
 );
 
 -- CreateIndex
@@ -207,7 +207,7 @@ ALTER TABLE "SeriesContent" ADD CONSTRAINT "SeriesContent_createdById_fkey" FORE
 ALTER TABLE "ContentType" ADD CONSTRAINT "ContentType_statusTrackerId_fkey" FOREIGN KEY ("statusTrackerId") REFERENCES "StatusTrackUser"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Content" ADD CONSTRAINT "Content_typeId_fkey" FOREIGN KEY ("typeId") REFERENCES "ContentType"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Content" ADD CONSTRAINT "Content_contentTypeId_fkey" FOREIGN KEY ("contentTypeId") REFERENCES "ContentType"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Content" ADD CONSTRAINT "Content_createdById_fkey" FOREIGN KEY ("createdById") REFERENCES "User"("id") ON DELETE SET NULL ON UPDATE CASCADE;

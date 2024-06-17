@@ -1,5 +1,6 @@
 // ContentTypeDTO.ts
 import {
+  IsInt,
   IsOptional,
   IsString,
   MinLength,
@@ -11,9 +12,9 @@ import { ApiProperty, PartialType } from '@nestjs/swagger';
 import { StatusTrackIdDTO } from '../status-tracker/dto/create-status-tracker.dto';
 
 export class ContentTypeDTO {
-  @IsString()
+  @IsInt()
   @IsOptional()
-  id: string;
+  id: number;
 
   @IsString()
   title: string;
@@ -32,9 +33,9 @@ export class ContentTypeDTO {
 }
 
 export class CreateContentTypeDTO extends ContentTypeDTO {
-  @IsString()
+  @IsInt()
   @IsOptional()
-  id: string;
+  id: number;
 
   @ApiProperty()
   @IsString()
