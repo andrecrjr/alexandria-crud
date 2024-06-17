@@ -35,7 +35,7 @@ API created to be the hub web service for entertainment social network.
 
 - [x] Amazon Access Token accessing
 
-- [] Create a alexa intent to update some item in my collection database
+- [x] Create a alexa intent to update some item in my collection database
 
 - [] Content genre CRUD API
 

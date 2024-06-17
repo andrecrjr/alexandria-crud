@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { Prisma, SeriesContent } from '@prisma/client';
 import { PrismaService } from 'prisma/prisma.service';
 import { CreateSeriesContentDto } from './dto/create-series-content.dto';
+import { UpdateSeriesContentDto } from './dto/update-series-content.dto';
 
 @Injectable()
 export class SeriesContentService {
@@ -26,11 +27,12 @@ export class SeriesContentService {
 
   async update(
     id: number,
-    data: Prisma.SeriesContentUpdateInput,
+    data: UpdateSeriesContentDto,
   ): Promise<SeriesContent> {
+    const prismaData = data as Prisma.SeriesContentUpdateInput;
     return this.prisma.seriesContent.update({
       where: { id },
-      data,
+      data: prismaData,
     });
   }
 

@@ -9,6 +9,7 @@ import { CollectionModule } from './collection/collection.module';
 import { AuthorContentModule } from './author-content/author-content.module';
 import { AmazonServiceModule } from './auth/amazon-service/amazon-service.module';
 // import { SeriesContentModule } from './series-content/series-content.module';
+import { GenreContentModule } from './genre-content/genre-content.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { AmazonServiceModule } from './auth/amazon-service/amazon-service.module
     CollectionModule,
     AuthorContentModule,
     AmazonServiceModule,
+    GenreContentModule,
     // SeriesContentModule,
   ],
   controllers: [AppController],
