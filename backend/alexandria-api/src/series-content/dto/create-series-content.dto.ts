@@ -1,32 +1,16 @@
 import {
-  IsNotEmpty,
-  IsOptional,
   IsString,
+  IsOptional,
   IsUrl,
-  IsEnum,
+  IsUUID,
   IsArray,
+  ArrayNotEmpty,
 } from 'class-validator';
 
-enum ContentCategory {
-  BOOK = 'BOOK',
-  ANIME = 'ANIME',
-  MANGA = 'MANGA',
-  MOVIE = 'MOVIE',
-  SERIES = 'SERIES',
-  PODCAST = 'PODCAST',
-  MUSIC = 'MUSIC',
-  DOCUMENTARY = 'DOCUMENTARY',
-  GAME = 'GAME',
-  MAGAZINE = 'MAGAZINE',
-  WEBTOON = 'WEBTOON',
-  SHORT_FILM = 'SHORT_FILM',
-  PLAY = 'PLAY',
-  RADIO_SHOW = 'RADIO_SHOW',
-  VIDEO_COURSE = 'VIDEO_COURSE',
-}
+class CreateSeriesContentDto {
+  @IsUUID()
+  id: string;
 
-export class CreateSeriesDto {
-  @IsNotEmpty()
   @IsString()
   title: string;
 
@@ -34,21 +18,29 @@ export class CreateSeriesDto {
   @IsString()
   description?: string;
 
-  @IsNotEmpty()
-  @IsEnum(ContentCategory)
-  category: ContentCategory;
+  @IsOptional()
+  @IsArray()
+  @ArrayNotEmpty()
+  category?: string[];
 
   @IsOptional()
   @IsUrl()
   imageUrl?: string;
 
   @IsOptional()
-  createdBy?: number; // Assuming createdBy is the ID of the User
+  createdBy?: string;
 
   @IsOptional()
-  @IsArray()
-  authors?: number[]; // Assuming authors are represented by their IDs
+  seriesCreator?: string[];
 
-  createdAt?: Date;
-  updatedAt?: Date;
+  @IsOptional()
+  createdById?: string;
+
+  @IsOptional()
+  contents?: string[];
+
+  @IsOptional()
+  genres?: string[];
 }
+
+export default CreateSeriesContentDto;

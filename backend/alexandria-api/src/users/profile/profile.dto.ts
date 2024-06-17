@@ -13,9 +13,9 @@ import { ApiProperty } from '@nestjs/swagger';
 import { PartialType } from '@nestjs/mapped-types';
 
 export class ProfileDTO {
-  @IsInt()
+  @IsString()
   @IsOptional()
-  id?: number;
+  id?: string;
 
   @ApiProperty()
   @IsOptional()
@@ -58,8 +58,8 @@ export class ProfileDTO {
   updatedAt?: Date;
 
   @IsOptional()
-  @IsInt()
-  userId?: number;
+  @IsString()
+  userId?: string;
 
   @IsOptional()
   @Type(() => CreateUserDTO)

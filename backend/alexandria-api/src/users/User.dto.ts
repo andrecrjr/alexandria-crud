@@ -3,7 +3,6 @@ import { ApiProperty } from '@nestjs/swagger';
 import {
   IsBoolean,
   IsEmail,
-  IsInt,
   IsOptional,
   IsString,
   MinLength,
@@ -68,8 +67,8 @@ export class UpdateUserProfileDTO extends PartialType(CreateUserDTO) {
 export class UserIdDTO {
   @ApiProperty({ required: false })
   @IsOptional()
-  @IsInt()
-  id: number;
+  @IsString()
+  id: string;
 }
 
 export class AuthLoginDTO {
