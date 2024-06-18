@@ -40,5 +40,5 @@ Authorization: Bearer {{login.response.body.accessToken}}
 
 
 ### GET REQUEST ALEXA
-GET http://localhost:3000/collection/alexa/search?q=1%20piece%202&status=reading
+GET http://localhost:3000/collection/alexa/search?q=1%20piece%202&contenttype=anime
 Authorization: Bearer {{login.response.body.accessToken}}

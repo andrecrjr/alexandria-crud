@@ -69,14 +69,18 @@ Content-Type: application/json
 GET http://localhost:3000/content/all
 
 ### update one content
-PATCH http://localhost:3000/content/5
+PATCH http://localhost:3000/content/4
 Authorization: Bearer {{login.response.body.accessToken}}
 Content-Type: application/json
 
 {
-    "title":"One Piece Volume 3"
+    "synonyms": [
+      "My Hero Academia One",
+      "My Hero Academia 1",
+      "my hero academia 1"
+    ]
 }
 
 ### Search content
-GET http://localhost:3000/content/search?q=naruto volume 1
+GET http://localhost:3000/content/search?q=
 Authorization: Bearer {{login.response.body.accessToken}}

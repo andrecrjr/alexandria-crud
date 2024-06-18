@@ -75,7 +75,7 @@ export class CollectionService {
 
   async searchInsideCollectionBySynonim(
     partialContent: string,
-    statusTrack: string,
+    contentType: string,
     user: JwtDTO,
   ) {
     const data = await this.prismaService.collection.findMany({
@@ -86,10 +86,9 @@ export class CollectionService {
             has: partialContent,
           },
           contentType: {
-            statusTracker: {
-              statusHistory: {
-                has: statusTrack || '',
-              },
+            title: {
+              contains: contentType,
+              mode: 'insensitive',
             },
           },
         },

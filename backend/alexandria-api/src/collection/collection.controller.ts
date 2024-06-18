@@ -59,12 +59,12 @@ export class CollectionController {
   @UseGuards(AuthGuard)
   searchByCollectionAndStatus(
     @Query('q') query,
-    @Query('status') status,
+    @Query('contenttype') contenttype,
     @Request() req,
   ) {
     return this.collectionService.searchInsideCollectionBySynonim(
       query,
-      status,
+      contenttype,
       req.user,
     );
   }
