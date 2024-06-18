@@ -11,7 +11,8 @@ Content-Type: application/json
 
 ### REFRESH COOKIE 
 POST http://localhost:3000/auth/refresh
-Cookie: refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVyb3NoaUBhcm9zLmNvbSIsInN1YiI6MSwiaWF0IjoxNzE4MDczMzE3LCJleHAiOjE3MjA2NjUzMTd9.3Vt0YgnmQu1kPTRjvJBARTokuPsCcA0jVAZFf4K7kNk; Max-Age=86400000; Path=/; HttpOnly,accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVyb3NoaUBhcm9zLmNvbSIsInN1YiI6MSwiaWF0IjoxNzE4MDczMzE3LCJleHAiOjE3MTgxNTk3MTd9.iYIWTjFBgN315XTdNtFadDlXNJp-F3WQ4L230g0kXDM; Max-Age=60; Path=/; HttpOnly
+Authorization: Bearer {{login.response.body.accessToken}}
+Cookie: refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXJAZXhhbXBsZS5jb20iLCJzdWIiOjEsImlhdCI6MTcxODc1MzE1NiwiZXhwIjoxNzIxMzQ1MTU2fQ.mrmfu82jpo890pvfl_P581zRLLaDE6c9w9yDNYD0ovs; Max-Age=86400000; Path=/; HttpOnly
 
 ### create status content type
 POST http://localhost:3000/status-contentype

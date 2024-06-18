@@ -36,6 +36,7 @@ export class AuthService {
   async rotationToken() {}
 
   async refreshTokenCreation(user: { email: string; sub: number }) {
+    console.log(user);
     return await this.jwtService.signAsync(user, {
       expiresIn: process.env.LOCAL_EXPIRE_REFRESH_TOKEN,
     });

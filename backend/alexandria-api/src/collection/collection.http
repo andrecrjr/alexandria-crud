@@ -8,6 +8,11 @@ Content-Type: application/json
   "password": "123456"
 }
 
+### REFRESH COOKIE 
+# @name login
+POST http://localhost:3000/auth/refresh
+Authorization: Bearer {{login.response.body.accessToken}}
+Cookie: refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFuZHJlLWNhcmxvc0BMaXZlLmNvbSIsInN1YiI6MiwiaWF0IjoxNzE4NzUzOTU2LCJleHAiOjE3MjEzNDU5NTZ9.A6dbSbp7nyg0R7snMFudVdWHTMsRPnbYhBEShPLdANE; Max-Age=86400000; Path=/; HttpOnly
 
 ### create collection/page between user
 POST http://localhost:3000/collection/page
@@ -38,7 +43,6 @@ Authorization: Bearer {{login.response.body.accessToken}}
 GET http://localhost:3000/collection/search?q=
 Authorization: Bearer {{login.response.body.accessToken}}
 
-
 ### GET REQUEST ALEXA
-GET http://localhost:3000/collection/alexa/search?q=1%20piece%202&contenttype=anime
+GET http://localhost:3000/collection/alexa/search?q=1%20piece%202&contenttype=manga
 Authorization: Bearer {{login.response.body.accessToken}}
