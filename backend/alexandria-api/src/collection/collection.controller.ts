@@ -62,7 +62,7 @@ export class CollectionController {
     @Query('status') status,
     @Request() req,
   ) {
-    return this.collectionService.searchInsideCollectionWithStatusByContentName(
+    return this.collectionService.searchInsideCollectionBySynonim(
       query,
       status,
       req.user,

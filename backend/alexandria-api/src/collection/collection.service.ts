@@ -3,7 +3,6 @@ import { PrismaService } from 'prisma/prisma.service';
 import { CreateCollectionDto, UpdateCollectionDto } from './collection.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { JwtDTO } from 'src/auth/jwt.dto';
-import { numberToWord } from './utils';
 
 @Injectable()
 @ApiTags('User Collection')
@@ -74,7 +73,7 @@ export class CollectionService {
     return data;
   }
 
-  async searchInsideCollectionWithStatusByContentName(
+  async searchInsideCollectionBySynonim(
     partialContent: string,
     statusTrack: string,
     user: JwtDTO,
