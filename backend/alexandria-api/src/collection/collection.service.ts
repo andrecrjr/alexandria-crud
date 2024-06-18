@@ -54,7 +54,6 @@ export class CollectionService {
     partialContent: string,
     user: JwtDTO,
   ) {
-    console.log(partialContent);
     const data = await this.prismaService.collection.findMany({
       where: {
         profileId: user.sub,
