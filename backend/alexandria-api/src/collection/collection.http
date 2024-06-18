@@ -15,9 +15,9 @@ Authorization: Bearer {{login.response.body.accessToken}}
 Content-Type: application/json
 
 {
-    "currentStatusTrack": "lendo",
-    "page":5,
-    "contentId":4
+    "currentStatusTrack": "reading",
+    "page":8,
+    "contentId":28
 }
 
 ### update collection between user
@@ -40,5 +40,5 @@ Authorization: Bearer {{login.response.body.accessToken}}
 
 
 ### GET REQUEST ALEXA
-GET http://localhost:3000/collection/alexa/search?q=&status=
+GET http://localhost:3000/collection/alexa/search?q=1%20piece%202&status=reading
 Authorization: Bearer {{login.response.body.accessToken}}

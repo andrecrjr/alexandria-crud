@@ -28,7 +28,7 @@ export class StatusTrackerService {
       where: { id },
       data: data,
     });
-    return `This action updates a #${id} statusContentype`;
+    return true;
   }
 
   remove(id: number) {

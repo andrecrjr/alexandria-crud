@@ -26,7 +26,7 @@ export class StatusContentypeController {
     return this.statusTrackerService.create(createStatusContentypeDto);
   }
 
-  @Get()
+  @Get('/all')
   findAll() {
     return this.statusTrackerService.findAll();
   }

@@ -55,13 +55,13 @@ export class CollectionService {
     partialContent: string,
     user: JwtDTO,
   ) {
-    const partial = numberToWord(partialContent);
+    console.log(partialContent);
     const data = await this.prismaService.collection.findMany({
       where: {
         profileId: user.sub,
         content: {
           title: {
-            contains: partial,
+            contains: partialContent,
             mode: 'insensitive',
           },
         },
@@ -79,14 +79,12 @@ export class CollectionService {
     statusTrack: string,
     user: JwtDTO,
   ) {
-    const partial = numberToWord(partialContent);
     const data = await this.prismaService.collection.findMany({
       where: {
         profileId: user.sub,
         content: {
-          title: {
-            contains: partial,
-            mode: 'insensitive',
+          synonyms: {
+            has: partialContent,
           },
           contentType: {
             statusTracker: {

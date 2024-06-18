@@ -78,5 +78,5 @@ Content-Type: application/json
 }
 
 ### Search content
-GET http://localhost:3000/content/search?q=Harry
+GET http://localhost:3000/content/search?q=naruto volume 1
 Authorization: Bearer {{login.response.body.accessToken}}
