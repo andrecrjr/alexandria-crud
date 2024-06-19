@@ -21,7 +21,7 @@ export class ContentService {
     data: CreateContentDTO,
     user: JwtDTO,
   ): Prisma.ContentCreateInput {
-    const { collections, contentType, authors, ...rest } = data;
+    const { collections, contentType, authors, genres, ...rest } = data;
     return {
       ...rest,
       createdBy: { connect: { id: user.sub } },
@@ -42,11 +42,18 @@ export class ContentService {
             connect: authors?.map((items) => ({ id: items.id })),
           }
         : undefined,
+      genres: genres
+        ? {
+            connect: genres.map((genre) => ({
+              id: genre.id,
+            })),
+          }
+        : undefined,
     };
   }
 
   convertUpdatePrisma(data: UpdateContentDTO): Prisma.ContentUpdateInput {
-    const { collections, contentType, authors, ...rest } = data;
+    const { collections, contentType, authors, genres, ...rest } = data;
     return {
       ...rest,
       contentType: contentType
@@ -64,6 +71,13 @@ export class ContentService {
       authors: authors
         ? {
             connect: authors?.map((items) => ({ id: items.id })),
+          }
+        : undefined,
+      genres: genres
+        ? {
+            connect: genres.map((genre) => ({
+              id: genre.id,
+            })),
           }
         : undefined,
     };

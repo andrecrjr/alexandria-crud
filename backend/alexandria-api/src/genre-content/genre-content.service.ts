@@ -1,26 +1,42 @@
 import { Injectable } from '@nestjs/common';
-import { CreateGenreContentDto } from './dto/create-genre-content.dto';
+import { GenreContentDTO } from './dto/genre-content.dto';
 import { UpdateGenreContentDto } from './dto/update-genre-content.dto';
+import { CreateGenreContentDto } from './dto/create-genre-content.dto';
+import { PrismaService } from 'prisma/prisma.service';
 
 @Injectable()
 export class GenreContentService {
-  create(createGenreContentDto: CreateGenreContentDto) {
-    return 'This action adds a new genreContent';
+  constructor(private prisma: PrismaService) {}
+
+  async create(data: CreateGenreContentDto): Promise<GenreContentDTO> {
+    return this.prisma.genre.create({ data });
   }
 
-  findAll() {
-    return `This action returns all genreContent`;
+  async findAll(): Promise<GenreContentDTO[]> {
+    return this.prisma.genre.findMany({});
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} genreContent`;
+  async findOne(id: number): Promise<GenreContentDTO | null> {
+    return this.prisma.genre.findUnique({
+      where: { id },
+      include: {
+        content: true,
+        series: true,
+      },
+    });
   }
 
-  update(id: number, updateGenreContentDto: UpdateGenreContentDto) {
-    return `This action updates a #${id} genreContent`;
+  async update(
+    id: number,
+    data: UpdateGenreContentDto,
+  ): Promise<GenreContentDTO | null> {
+    return this.prisma.genre.update({
+      where: { id },
+      data,
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} genreContent`;
+  async delete(id: number): Promise<GenreContentDTO | null> {
+    return this.prisma.genre.delete({ where: { id } });
   }
 }
