@@ -8,20 +8,12 @@ import { JwtDTO } from 'src/auth/jwt.dto';
 export class ContentService {
   constructor(private readonly prismaService: PrismaService) {}
 
-  async getUniqueContent(id: number) {
-    return this.prismaService.content.findFirstOrThrow({
-      where: { id: id },
-      include: {
-        createdBy: true,
-        contentType: true,
-      },
-    });
-  }
   convertCreatePrisma(
     data: CreateContentDTO,
     user: JwtDTO,
   ): Prisma.ContentCreateInput {
     const { collections, contentType, authors, genres, ...rest } = data;
+
     return {
       ...rest,
       createdBy: { connect: { id: user.sub } },
@@ -70,17 +62,46 @@ export class ContentService {
         : undefined,
       authors: authors
         ? {
+            set: [],
             connect: authors?.map((items) => ({ id: items.id })),
           }
         : undefined,
       genres: genres
         ? {
+            set: [],
             connect: genres.map((genre) => ({
               id: genre.id,
             })),
           }
         : undefined,
     };
+  }
+
+  async getUniqueContent(id: number) {
+    return this.prismaService.content.findFirstOrThrow({
+      where: { id: id },
+      include: {
+        createdBy: {
+          select: {
+            updatedAt: false,
+            createdAt: true,
+            username: true,
+          },
+        },
+        contentType: {
+          include: {
+            statusTracker: true,
+          },
+        },
+        genres: {
+          select: {
+            id: true,
+            name: true,
+          },
+        },
+        series: true,
+      },
+    });
   }
 
   async createContent(contentData: CreateContentDTO, user: JwtDTO) {

@@ -70,16 +70,19 @@ Content-Type: application/json
 ### get all content
 GET http://localhost:3000/content/all
 
+### get one content
+GET http://localhost:3000/content/3
+Authorization: Bearer {{login.response.body.accessToken}}
+
 ### update one content
-PATCH http://localhost:3000/content/26
+PATCH http://localhost:3000/content/3
 Authorization: Bearer {{login.response.body.accessToken}}
 Content-Type: application/json
 
 {
-    "synonyms": [
-        "Naruto 2",
-        "naruto volume 2"
-      ]
+    "genres": [
+        {"id":1}, {"id":2}
+    ]
 }
 
 ### Search content

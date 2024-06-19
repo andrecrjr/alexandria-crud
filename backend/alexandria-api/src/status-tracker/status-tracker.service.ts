@@ -31,7 +31,10 @@ export class StatusTrackerService {
     return true;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} statusContentype`;
+  async remove(id: number) {
+    await this.prismaService.statusTrackUser.delete({
+      where: { id },
+    });
+    return true;
   }
 }
