@@ -5,8 +5,12 @@ const prisma = new PrismaClient();
 
 const createContent = async () => {
   for (const item of contentWithSynonyms) {
+    const items = {
+      ...item,
+      synonyms: item.synonyms.map((item) => item.toLowerCase()),
+    };
     await prisma.content.create({
-      data: item,
+      data: items,
     });
   }
   return true;

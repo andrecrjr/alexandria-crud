@@ -11,7 +11,7 @@ export const contentWithSynonyms = [
   },
   {
     title: 'One Piece Volume 1',
-    synonyms: ['One Piece One', 'One Piece 1', '1 Piece 1'],
+    synonyms: ['One Piece One', 'One Piece 1', '1 piece volume 1'],
     description: 'Adventures of Monkey D. Luffy.',
     contentTypeId: 1,
     isbn: '9781569319017',

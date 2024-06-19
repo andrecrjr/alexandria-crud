@@ -20,9 +20,8 @@ Authorization: Bearer {{login.response.body.accessToken}}
 Content-Type: application/json
 
 {
-    "currentStatusTrack": "reading",
     "page":8,
-    "contentId":28
+    "contentId":3
 }
 
 ### update collection between user

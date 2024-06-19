@@ -61,9 +61,9 @@ Content-Type: application/json
     "title":"One Piece Vol 100",
     "numberPages": 500,
     "isbn": "54545788",
-    "description":"new book",
+    "description":"new volume",
     "contentType": {
-        "id": 1
+        "id": 2
     }
 }
 
