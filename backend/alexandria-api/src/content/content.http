@@ -10,6 +10,7 @@ Content-Type: application/json
 }
 
 ### REFRESH COOKIE 
+# @name login
 POST http://localhost:3000/auth/refresh
 Authorization: Bearer {{login.response.body.accessToken}}
 Cookie: refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXJAZXhhbXBsZS5jb20iLCJzdWIiOjEsImlhdCI6MTcxODc1MzE1NiwiZXhwIjoxNzIxMzQ1MTU2fQ.mrmfu82jpo890pvfl_P581zRLLaDE6c9w9yDNYD0ovs; Max-Age=86400000; Path=/; HttpOnly
@@ -70,16 +71,15 @@ Content-Type: application/json
 GET http://localhost:3000/content/all
 
 ### update one content
-PATCH http://localhost:3000/content/4
+PATCH http://localhost:3000/content/26
 Authorization: Bearer {{login.response.body.accessToken}}
 Content-Type: application/json
 
 {
     "synonyms": [
-      "My Hero Academia One",
-      "My Hero Academia 1",
-      "my hero academia 1"
-    ]
+        "Naruto 2",
+        "naruto volume 2"
+      ]
 }
 
 ### Search content
