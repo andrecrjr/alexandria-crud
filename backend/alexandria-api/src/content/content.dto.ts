@@ -10,7 +10,7 @@ import { Type } from 'class-transformer';
 import { CollectionDTO } from 'src/collection/collection';
 import { UpdateContentTypeDTO } from 'src/contenttype/contenttype.dto';
 import { ApiProperty } from '@nestjs/swagger';
-import { AuthorIdDTO } from 'src/author-content/entities/author-content.entity';
+import { AuthorIdDTO } from 'src/author-content/entities/author-content.dto';
 import { PartialType, PickType } from '@nestjs/mapped-types';
 import { GenreContentId } from 'src/genre-content/dto/create-genre-content.dto';
 

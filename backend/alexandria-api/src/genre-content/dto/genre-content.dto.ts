@@ -1,7 +1,7 @@
 import { Type } from 'class-transformer';
 import { IsDate, IsInt, IsString } from 'class-validator';
 import { ContentDTO } from 'src/content/content.dto';
-import { SeriesContent } from 'src/series-content/entities/series-content.entity';
+import { SeriesContentDTO } from 'src/series-content/entities/series-content.entity';
 
 export class GenreContentDTO {
   @IsInt()
@@ -14,8 +14,8 @@ export class GenreContentDTO {
   @IsDate()
   updatedAt: Date; // Optional: Include timestamps if needed
 
-  @Type(() => SeriesContent)
-  series?: SeriesContent[];
+  @Type(() => SeriesContentDTO)
+  series?: SeriesContentDTO[];
 
   @Type(() => ContentDTO)
   contents?: ContentDTO[];
