@@ -3,6 +3,7 @@ import { PrismaService } from 'prisma/prisma.service';
 import { CreateCollectionDto, UpdateCollectionDto } from './collection.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { JwtDTO } from 'src/auth/jwt.dto';
+import { CollectionDTO } from './collection';
 
 @Injectable()
 @ApiTags('User Collection')
@@ -18,7 +19,7 @@ export class CollectionService {
     return collectionUserData;
   }
 
-  async getCollectionByUser(user: JwtDTO) {
+  async getCollectionByUser(user: JwtDTO): Promise<CollectionDTO[]> {
     const userCollection = await this.prismaService.collection.findMany({
       where: { profileId: user.sub },
       include: {
@@ -36,7 +37,7 @@ export class CollectionService {
   async updateCollectionContentAndUser(
     user: JwtDTO,
     data: UpdateCollectionDto,
-  ) {
+  ): Promise<CollectionDTO> {
     return await this.prismaService.collection.update({
       where: {
         contentId_profileId: {
@@ -53,7 +54,7 @@ export class CollectionService {
   async searchInsideCollectionByContentName(
     partialContent: string,
     user: JwtDTO,
-  ) {
+  ): Promise<CollectionDTO[]> {
     const data = await this.prismaService.collection.findMany({
       where: {
         profileId: user.sub,
@@ -76,7 +77,7 @@ export class CollectionService {
     partialContent: string,
     contentType: string,
     user: JwtDTO,
-  ) {
+  ): Promise<CollectionDTO[]> {
     const data = await this.prismaService.collection.findMany({
       where: {
         profileId: user.sub,

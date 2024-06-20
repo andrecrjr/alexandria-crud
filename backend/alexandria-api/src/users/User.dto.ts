@@ -3,31 +3,52 @@ import { ApiProperty } from '@nestjs/swagger';
 import {
   IsBoolean,
   IsEmail,
+  IsNotEmpty,
   IsOptional,
   IsString,
   MinLength,
 } from 'class-validator';
-import { UpdateProfileDTO } from './profile/profile.dto';
+import { ProfileDTO, UpdateProfileDTO } from './profile/profile.dto';
 import { Type } from 'class-transformer';
+
+export class UserDTO {
+  @IsEmail()
+  email?: string;
+
+  @IsString()
+  password?: string;
+
+  @IsString()
+  username?: string;
+
+  @Type(() => ProfileDTO)
+  profile?: ProfileDTO;
+
+  @IsBoolean()
+  @IsOptional()
+  userActive?: boolean = true;
+}
 export class CreateUserDTO {
   @ApiProperty()
   @IsEmail()
-  @MinLength(1)
+  @IsNotEmpty()
   email: string;
 
   @ApiProperty()
   @MinLength(6)
+  @IsNotEmpty()
   password: string;
 
   @ApiProperty()
   @MinLength(5)
   @IsString()
+  @IsNotEmpty()
   username: string;
 
   @IsOptional()
   @ApiProperty({ required: false })
   @Type(() => UpdateProfileDTO)
-  profile: UpdateProfileDTO;
+  profile?: UpdateProfileDTO;
 
   @IsBoolean()
   @IsOptional()

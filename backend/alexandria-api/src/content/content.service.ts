@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'prisma/prisma.service';
-import { CreateContentDTO, UpdateContentDTO } from './content.dto';
+import { ContentDTO, CreateContentDTO, UpdateContentDTO } from './content.dto';
 import { Prisma } from '@prisma/client';
 import { JwtDTO } from 'src/auth/jwt.dto';
 
@@ -77,7 +77,7 @@ export class ContentService {
     };
   }
 
-  async getUniqueContent(id: number) {
+  async getUniqueContent(id: number): Promise<ContentDTO> {
     return this.prismaService.content.findFirstOrThrow({
       where: { id: id },
       include: {
@@ -104,7 +104,10 @@ export class ContentService {
     });
   }
 
-  async createContent(contentData: CreateContentDTO, user: JwtDTO) {
+  async createContent(
+    contentData: CreateContentDTO,
+    user: JwtDTO,
+  ): Promise<ContentDTO> {
     const prismaData = this.convertCreatePrisma(contentData, user);
     const data = await this.prismaService.content.create({
       data: { ...prismaData },
@@ -112,7 +115,7 @@ export class ContentService {
     return data;
   }
 
-  getAllContent() {
+  getAllContent(): Promise<ContentDTO[]> {
     return this.prismaService.content.findMany({
       include: {
         authors: true,
@@ -125,7 +128,10 @@ export class ContentService {
     });
   }
 
-  async updateContent(id: number, contentData: UpdateContentDTO) {
+  async updateContent(
+    id: number,
+    contentData: UpdateContentDTO,
+  ): Promise<ContentDTO> {
     const prismaData = this.convertUpdatePrisma(contentData);
     const data = await this.prismaService.content.update({
       where: {
@@ -138,7 +144,9 @@ export class ContentService {
     return data;
   }
 
-  async searchInsideCollectionByContentName(query: string) {
+  async searchInsideCollectionByContentName(
+    query: string,
+  ): Promise<ContentDTO[]> {
     const data = await this.prismaService.content.findMany({
       where: {
         title: {

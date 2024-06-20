@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Prisma, SeriesContent } from '@prisma/client';
+import { Prisma } from '@prisma/client';
 import { PrismaService } from 'prisma/prisma.service';
 import { CreateSeriesContentDto } from './dto/create-series-content.dto';
 import { UpdateSeriesContentDto } from './dto/update-series-content.dto';
@@ -40,14 +40,14 @@ export class SeriesContentService {
 
   async create(
     data: CreateSeriesContentDto,
-  ): Promise<SeriesContentDTOForGenre> {
+  ): Promise<SeriesContentDTOForGenre | null> {
     const prismaData = this.convertPrismaData(data);
     return await this.prisma.seriesContent.create({
       data: prismaData,
     });
   }
 
-  async findAll(): Promise<SeriesContentDTOForGenre[]> {
+  async findAll(): Promise<SeriesContentDTOForGenre[] | null> {
     const data = await this.prisma.seriesContent.findMany({
       include: {
         category: true,
@@ -56,7 +56,7 @@ export class SeriesContentService {
     return data;
   }
 
-  async findOne(id: number) {
+  async findOne(id: number): Promise<SeriesContentDTOForGenre | null> {
     return await this.prisma.seriesContent.findUnique({
       where: { id },
       select: {
@@ -68,7 +68,7 @@ export class SeriesContentService {
   async update(
     id: number,
     data: UpdateSeriesContentDto,
-  ): Promise<SeriesContent> {
+  ): Promise<SeriesContentDTOForGenre | null> {
     const prismaData = data as Prisma.SeriesContentUpdateInput;
     return await this.prisma.seriesContent.update({
       where: { id },
@@ -76,7 +76,7 @@ export class SeriesContentService {
     });
   }
 
-  async remove(id: number): Promise<SeriesContent> {
+  async remove(id: number): Promise<SeriesContentDTOForGenre | null> {
     return await this.prisma.seriesContent.delete({
       where: { id },
     });

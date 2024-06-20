@@ -94,7 +94,7 @@ export class AuthorContentDTO {
   @IsOptional()
   @ValidateNested({ each: true })
   @Type(() => CreateUserDTO)
-  createdBy: CreateUserDTO;
+  createdBy?: CreateUserDTO;
 }
 
 export class AuthorIdDTO extends PickType(AuthorContentDTO, ['id'] as const) {

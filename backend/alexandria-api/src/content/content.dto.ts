@@ -8,7 +8,7 @@ import {
 } from 'class-validator';
 import { Type } from 'class-transformer';
 import { CollectionDTO } from 'src/collection/collection';
-import { UpdateContentTypeDTO } from 'src/contenttype/contenttype.dto';
+import { ContentTypeDTO } from 'src/contenttype/contenttype.dto';
 import { ApiProperty } from '@nestjs/swagger';
 import { AuthorIdDTO } from 'src/author-content/entities/author-content.dto';
 import { PartialType, PickType } from '@nestjs/mapped-types';
@@ -36,7 +36,7 @@ export class ContentDTO {
     description: 'The identifier for the associated content type.',
     required: false,
   })
-  typeId: string;
+  contentTypeId: number;
 
   @IsInt()
   @ApiProperty({ description: 'The total number of pages in the content.' })
@@ -54,8 +54,8 @@ export class ContentDTO {
     description: `The content type's track for this Content`,
   })
   @ValidateNested({ each: true })
-  @Type(() => UpdateContentTypeDTO)
-  contentType: UpdateContentTypeDTO;
+  @Type(() => ContentTypeDTO)
+  contentType?: ContentTypeDTO;
 
   @IsOptional()
   @IsString()
@@ -79,7 +79,7 @@ export class ContentDTO {
 
   @IsOptional()
   @IsDate()
-  updatedAt: Date = new Date();
+  updatedAt?: Date = new Date();
 
   @IsOptional()
   @ValidateNested({ each: true })
@@ -89,8 +89,8 @@ export class ContentDTO {
     type: [CollectionDTO],
     required: false,
   })
-  collections: CollectionDTO[];
-
+  collections?: CollectionDTO[];
+  //typeId, contentType, updatedAt, collections
   @IsOptional()
   @ApiProperty({
     description: 'The authors of the content.',
@@ -160,7 +160,8 @@ export class UpdateContentDTO extends PartialType(ContentDTO) {
   createdById?: number;
 
   createdAt?: Date;
-  updatedAt?: Date;
+
+  updatedAt: Date;
 }
 
 export class ContentIdDTO extends PickType(ContentDTO, ['id']) {

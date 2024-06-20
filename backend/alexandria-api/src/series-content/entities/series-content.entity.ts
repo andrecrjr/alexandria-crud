@@ -50,7 +50,7 @@ export class SeriesContentDTO {
 export class SeriesContentDTOForGenre {
   @IsOptional()
   @IsString()
-  title: string;
+  title?: string;
 
   @IsOptional()
   @IsString()

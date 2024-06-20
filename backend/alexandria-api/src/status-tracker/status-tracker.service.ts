@@ -2,12 +2,13 @@ import { Injectable } from '@nestjs/common';
 import { CreateStatusTrackDto } from './dto/create-status-tracker.dto';
 import { PrismaService } from 'prisma/prisma.service';
 import { UpdateStatusTrackDto } from './dto/update-status-tracker.dto';
+import { StatusTrackerDTO } from './entities/status-tracker.entity';
 
 @Injectable()
 export class StatusTrackerService {
   constructor(private readonly prismaService: PrismaService) {}
 
-  async create(data: CreateStatusTrackDto) {
+  async create(data: CreateStatusTrackDto): Promise<StatusTrackerDTO> {
     this.prismaService.statusTrackUser;
     const newData = await this.prismaService.statusTrackUser.create({
       data: data,
@@ -15,15 +16,17 @@ export class StatusTrackerService {
     return newData;
   }
 
-  async findAll() {
+  async findAll(): Promise<StatusTrackerDTO[] | null> {
     return await this.prismaService.statusTrackUser.findMany();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} statusContentype`;
+  async findOne(id: number): Promise<StatusTrackerDTO | null> {
+    return await this.prismaService.statusTrackUser.findFirst({
+      where: { id },
+    });
   }
 
-  async update(id: number, data: UpdateStatusTrackDto) {
+  async update(id: number, data: UpdateStatusTrackDto): Promise<boolean> {
     await this.prismaService.statusTrackUser.update({
       where: { id },
       data: data,
@@ -31,7 +34,7 @@ export class StatusTrackerService {
     return true;
   }
 
-  async remove(id: number) {
+  async remove(id: number): Promise<boolean> {
     await this.prismaService.statusTrackUser.delete({
       where: { id },
     });

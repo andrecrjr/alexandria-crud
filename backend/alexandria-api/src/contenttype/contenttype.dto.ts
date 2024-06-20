@@ -12,8 +12,6 @@ import { ApiProperty, PartialType } from '@nestjs/swagger';
 import { StatusTrackIdDTO } from '../status-tracker/dto/create-status-tracker.dto';
 
 export class ContentTypeDTO {
-  @IsInt()
-  @IsOptional()
   id: number;
 
   @IsString()
@@ -22,12 +20,9 @@ export class ContentTypeDTO {
   @IsString()
   description: string;
 
-  @ValidateNested({ each: true })
-  @Type(() => ContentIdDTO)
-  contents: ContentIdDTO[];
+  contents?: ContentIdDTO[];
 
-  @Type(() => StatusTrackIdDTO)
-  statusTracker: StatusTrackIdDTO;
+  statusTracker?: StatusTrackIdDTO;
 
   statusTrackerId: number;
 }

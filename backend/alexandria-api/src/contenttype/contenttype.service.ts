@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { PrismaService } from 'prisma/prisma.service';
-import { CreateContentTypeDTO } from './contenttype.dto';
+import { ContentTypeDTO, CreateContentTypeDTO } from './contenttype.dto';
 
 @Injectable()
 export class ContenttypeService {
@@ -28,7 +28,7 @@ export class ContenttypeService {
       },
     };
   }
-  async createContentType(data: CreateContentTypeDTO) {
+  async createContentType(data: CreateContentTypeDTO): Promise<ContentTypeDTO> {
     const prismaData = this.createContentTypePrisma(data);
     const created = await this.prismaService.contentType.create({
       data: prismaData,
@@ -36,7 +36,7 @@ export class ContenttypeService {
     return created;
   }
 
-  async getAll() {
+  async getAll(): Promise<ContentTypeDTO[]> {
     // const page = parseInt('0') || 0;
     // const limit = parseInt('10') || 10;
 

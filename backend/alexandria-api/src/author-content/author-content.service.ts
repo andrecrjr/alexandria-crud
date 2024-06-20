@@ -5,6 +5,7 @@ import { PrismaService } from 'prisma/prisma.service';
 import { Prisma } from '@prisma/client';
 import { JwtDTO } from 'src/auth/jwt.dto';
 import { ContentIdDTO } from 'src/content/content.dto';
+import { AuthorContentDTO } from './entities/author-content.dto';
 
 @Injectable()
 export class AuthorContentService {
@@ -46,7 +47,10 @@ export class AuthorContentService {
       createdBy: this.connectUser(createdById),
     };
   }
-  async create(createAuthorContentDto: CreateAuthorContentDto, user: JwtDTO) {
+  async create(
+    createAuthorContentDto: CreateAuthorContentDto,
+    user: JwtDTO,
+  ): Promise<AuthorContentDTO> {
     const prismaData = this.convertAuthorPrisma(createAuthorContentDto, user);
     const data = await this.prismaService.authorContent.create({
       data: prismaData,
@@ -54,7 +58,7 @@ export class AuthorContentService {
     return data;
   }
 
-  async findAll() {
+  async findAll(): Promise<AuthorContentDTO[]> {
     return await this.prismaService.authorContent.findMany({
       include: {
         createdBy: true,
@@ -62,7 +66,7 @@ export class AuthorContentService {
     });
   }
 
-  async findOne(id: number) {
+  async findOne(id: number): Promise<AuthorContentDTO> {
     return await this.prismaService.authorContent.findFirst({
       where: {
         id,
@@ -73,7 +77,10 @@ export class AuthorContentService {
     });
   }
 
-  async update(id: number, updateAuthorContentDto: UpdateAuthorContentDto) {
+  async update(
+    id: number,
+    updateAuthorContentDto: UpdateAuthorContentDto,
+  ): Promise<AuthorContentDTO> {
     return await this.prismaService.authorContent.update({
       where: {
         id,
@@ -82,11 +89,12 @@ export class AuthorContentService {
     });
   }
 
-  async remove(id: number) {
-    return await this.prismaService.authorContent.delete({
+  async remove(id: number): Promise<boolean> {
+    await this.prismaService.authorContent.delete({
       where: {
         id,
       },
     });
+    return true;
   }
 }

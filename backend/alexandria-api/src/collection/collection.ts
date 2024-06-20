@@ -4,33 +4,29 @@ import { IsInt, IsString, IsDate, IsOptional } from 'class-validator';
 
 export class CollectionDTO {
   @IsInt()
-  id: number;
+  id?: number;
 
   @ApiProperty()
   @IsString()
-  name: string;
-
-  @ApiProperty()
-  @IsString()
-  type: string;
+  name?: string;
 
   @ApiProperty()
   @IsInt()
-  page: number;
+  page?: number;
 
   @ApiProperty()
   @IsInt()
-  userId: number;
+  userId?: number;
 
   @ApiProperty()
   @IsInt()
-  contentId: number;
+  contentId?: number;
 
   @IsDate()
-  createdAt: Date;
+  createdAt?: Date;
 
   @IsDate()
-  updatedAt: Date;
+  updatedAt?: Date;
 
   @IsOptional()
   @IsInt()

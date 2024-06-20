@@ -2,8 +2,9 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'prisma/prisma.service';
 import { exclude } from 'src/utils';
 import { Prisma } from '@prisma/client';
-import { UpdateUserProfileDTO } from '../User.dto';
+import { UpdateUserProfileDTO, UserDTO } from '../User.dto';
 import { JwtDTO } from 'src/auth/jwt.dto';
+import { ProfileDTO } from './profile.dto';
 
 @Injectable()
 export class ProfileService {
@@ -26,7 +27,7 @@ export class ProfileService {
     };
   }
 
-  getAllProfiles = async () => {
+  getAllProfiles = async (): Promise<ProfileDTO[] | null> => {
     const data = await this.prismaService.user.findMany({
       include: {
         profile: true,
@@ -37,7 +38,7 @@ export class ProfileService {
     }));
   };
 
-  getProfile = async (user: JwtDTO) => {
+  getProfile = async (user: JwtDTO): Promise<UserDTO | null> => {
     return await this.prismaService.user.findUnique({
       where: {
         id: user.sub,
@@ -49,7 +50,7 @@ export class ProfileService {
     });
   };
 
-  async getUserAndProfile(user: JwtDTO) {
+  async getUserAndProfile(user: JwtDTO): Promise<UserDTO | null> {
     const updateData = await this.prismaService.user.findFirstOrThrow({
       where: {
         id: user.sub,
@@ -62,7 +63,10 @@ export class ProfileService {
     return newData;
   }
 
-  async updateProfile(data: UpdateUserProfileDTO, user: JwtDTO) {
+  async updateProfile(
+    data: UpdateUserProfileDTO,
+    user: JwtDTO,
+  ): Promise<UserDTO | null> {
     const prismaData = this.convertUpdatePrisma(data, user);
     const updateData = await this.prismaService.user.update({
       where: {
@@ -81,7 +85,7 @@ export class ProfileService {
     return { ...newData };
   }
 
-  async deleteProfile(user: JwtDTO) {
+  async deleteProfile(user: JwtDTO): Promise<boolean> {
     await this.prismaService.collection.deleteMany({
       where: {
         profile: { id: user.sub },
