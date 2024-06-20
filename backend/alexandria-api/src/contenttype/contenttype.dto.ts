@@ -61,3 +61,8 @@ export class CreateContentTypeDTO extends ContentTypeDTO {
 }
 
 export class UpdateContentTypeDTO extends PartialType(ContentTypeDTO) {}
+
+export class ContentTypeIDDTO {
+  @IsInt()
+  id: number;
+}

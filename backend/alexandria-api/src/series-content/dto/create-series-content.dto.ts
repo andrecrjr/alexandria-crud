@@ -1,4 +1,3 @@
-import { ContentType } from '@prisma/client';
 import { Type } from 'class-transformer';
 import {
   IsString,
@@ -9,8 +8,9 @@ import {
 } from 'class-validator';
 import { AuthorContentDTO } from 'src/author-content/entities/author-content.dto';
 import { ContentDTO } from 'src/content/content.dto';
-import { ContentTypeDTO } from 'src/contenttype/contenttype.dto';
+import { ContentTypeIDDTO } from 'src/contenttype/contenttype.dto';
 import { GenreContentDTO } from 'src/genre-content/dto/genre-content.dto';
+import { UserIdDTO } from 'src/users/User.dto';
 
 export class CreateSeriesContentDto {
   @IsString()
@@ -21,15 +21,16 @@ export class CreateSeriesContentDto {
   description?: string;
 
   @IsArray()
-  @IsEnum(ContentTypeDTO, { each: true })
-  category: ContentType[];
+  @Type(() => ContentTypeIDDTO)
+  category: ContentTypeIDDTO[];
 
   @IsOptional()
   @IsString()
   imageUrl?: string;
 
   @IsOptional()
-  createdBy?: number;
+  @Type(() => UserIdDTO)
+  createdById?: UserIdDTO;
 
   @ValidateNested()
   @Type(() => AuthorContentDTO) // Specify the nested DTO type
@@ -43,10 +44,12 @@ export class CreateSeriesContentDto {
 
   @ValidateNested()
   @IsArray()
+  @IsOptional()
   @Type(() => ContentDTO) // Specify the nested DTO type
   contents?: ContentDTO[];
 
   @IsArray()
+  @IsOptional()
   @IsEnum(GenreContentDTO, { each: true }) // Validate each item in the array
   genres: GenreContentDTO[];
 

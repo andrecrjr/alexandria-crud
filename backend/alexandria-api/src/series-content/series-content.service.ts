@@ -9,21 +9,55 @@ import { SeriesContentDTOForGenre } from './entities/series-content.entity';
 export class SeriesContentService {
   constructor(private prisma: PrismaService) {}
 
+  convertPrismaData(
+    data: CreateSeriesContentDto,
+  ): Prisma.SeriesContentCreateInput {
+    const { category, seriesCreator, contents, genres, ...rest } = data;
+    return {
+      ...rest,
+      category: category
+        ? {
+            connect: category?.map((item) => ({ id: item.id })),
+          }
+        : undefined,
+      seriesCreator: seriesCreator
+        ? {
+            connect: seriesCreator.map((item) => ({ id: item.id })),
+          }
+        : undefined,
+      contents: contents
+        ? {
+            connect: contents.map((item) => ({ id: item.id })),
+          }
+        : undefined,
+      genres: genres
+        ? {
+            connect: genres.map((item) => ({ id: item.id })),
+          }
+        : undefined,
+    };
+  }
+
   async create(
     data: CreateSeriesContentDto,
   ): Promise<SeriesContentDTOForGenre> {
-    const prismaData = data as Prisma.SeriesContentCreateInput;
-    return this.prisma.seriesContent.create({
+    const prismaData = this.convertPrismaData(data);
+    return await this.prisma.seriesContent.create({
       data: prismaData,
     });
   }
 
   async findAll(): Promise<SeriesContentDTOForGenre[]> {
-    return this.prisma.seriesContent.findMany();
+    const data = await this.prisma.seriesContent.findMany({
+      include: {
+        category: true,
+      },
+    });
+    return data;
   }
 
   async findOne(id: number) {
-    return this.prisma.seriesContent.findUnique({
+    return await this.prisma.seriesContent.findUnique({
       where: { id },
       select: {
         contents: true,
@@ -36,14 +70,14 @@ export class SeriesContentService {
     data: UpdateSeriesContentDto,
   ): Promise<SeriesContent> {
     const prismaData = data as Prisma.SeriesContentUpdateInput;
-    return this.prisma.seriesContent.update({
+    return await this.prisma.seriesContent.update({
       where: { id },
       data: prismaData,
     });
   }
 
   async remove(id: number): Promise<SeriesContent> {
-    return this.prisma.seriesContent.delete({
+    return await this.prisma.seriesContent.delete({
       where: { id },
     });
   }

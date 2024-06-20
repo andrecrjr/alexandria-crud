@@ -17,7 +17,11 @@ export class SeriesContentController {
 
   @Post()
   create(@Body() createSeriesContentDto: CreateSeriesContentDto) {
-    return this.seriesContentService.create(createSeriesContentDto);
+    try {
+      return this.seriesContentService.create(createSeriesContentDto);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   @Get()

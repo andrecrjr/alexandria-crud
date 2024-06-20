@@ -9,11 +9,13 @@ Content-Type: application/json
 }
 
 ### GET unique serie
-GET http://localhost:3000/series-content/
+GET http://localhost:3000/series-content
 
 ### POST unique serie
-POST http://localhost:3000/series-content/
+POST http://localhost:3000/series-content
+Content-Type: application/json
 
 {
-  
+  "title":"One Piece",
+  "category": [{"id":1}, {"id":2}]
 }

@@ -14,7 +14,8 @@ export class PrismaExceptionFilter implements ExceptionFilter {
 
     let status = HttpStatus.INTERNAL_SERVER_ERROR;
     let message = 'Ocorreu um erro inesperado.';
-
+    console.log(exception.code);
+    console.log(exception.message);
     switch (exception.code) {
       case 'P2002':
         status = HttpStatus.CONFLICT;
@@ -51,7 +52,7 @@ export class PrismaExceptionFilter implements ExceptionFilter {
       // Add more cases as needed
       default:
         status = HttpStatus.INTERNAL_SERVER_ERROR;
-        message = 'An unexpected error occurred.';
+        message = exception.message;
     }
 
     response.status(status).send({
