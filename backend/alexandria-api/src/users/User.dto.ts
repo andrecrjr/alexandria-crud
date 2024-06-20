@@ -12,6 +12,8 @@ import { ProfileDTO, UpdateProfileDTO } from './profile/profile.dto';
 import { Type } from 'class-transformer';
 
 export class UserDTO {
+  id?: number;
+
   @IsEmail()
   email?: string;
 
@@ -58,7 +60,6 @@ export class CreateUserDTO {
 export class UpdateUserProfileDTO extends PartialType(CreateUserDTO) {
   @ApiProperty({ required: false })
   @IsEmail()
-  @MinLength(1)
   @IsOptional()
   email: string;
 

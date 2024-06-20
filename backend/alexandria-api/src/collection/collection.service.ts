@@ -1,12 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'prisma/prisma.service';
 import { CreateCollectionDto, UpdateCollectionDto } from './collection.dto';
-import { ApiTags } from '@nestjs/swagger';
 import { JwtDTO } from 'src/auth/jwt.dto';
 import { CollectionDTO } from './collection';
 
 @Injectable()
-@ApiTags('User Collection')
 export class CollectionService {
   constructor(private readonly prismaService: PrismaService) {}
   async createUserWithContent(user: JwtDTO, data: CreateCollectionDto) {

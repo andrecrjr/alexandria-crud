@@ -13,8 +13,8 @@ import { CreateCollectionDto, UpdateCollectionDto } from './collection.dto';
 import { AuthGuard } from 'src/auth/auth.guard';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
-@ApiTags('User Pagination and Content Update')
 @Controller('collection')
+@ApiTags('User Pagination and Content Update')
 export class CollectionController {
   constructor(private readonly collectionService: CollectionService) {}
 

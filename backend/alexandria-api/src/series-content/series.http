@@ -16,6 +16,14 @@ POST http://localhost:3000/series-content
 Content-Type: application/json
 
 {
-  "title":"One Piece",
+  "title":"Naruto",
   "category": [{"id":1}, {"id":2}]
+}
+
+### EDIT unique serie
+PATCH http://localhost:3000/series-content/41
+Content-Type: application/json
+
+{
+  "description":"A fucking crazy ninja way!"
 }

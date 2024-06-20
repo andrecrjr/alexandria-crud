@@ -39,7 +39,7 @@ API created to be the hub web service for entertainment social network.
 
 - [x] Content genre CRUD API
 
-- [] Series Content CRUD API
+- [x] Series Content CRUD API
 
 - [] Search Content Pagination
 
