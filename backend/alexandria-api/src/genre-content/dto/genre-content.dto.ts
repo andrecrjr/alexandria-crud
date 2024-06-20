@@ -1,7 +1,8 @@
+import { OmitType } from '@nestjs/mapped-types';
 import { Type } from 'class-transformer';
 import { IsDate, IsInt, IsString } from 'class-validator';
 import { ContentDTO } from 'src/content/content.dto';
-import { SeriesContentDTO } from 'src/series-content/entities/series-content.entity';
+import { SeriesContentDTOForGenre } from 'src/series-content/entities/series-content.entity';
 
 export class GenreContentDTO {
   @IsInt()
@@ -10,13 +11,21 @@ export class GenreContentDTO {
   name: string;
 
   @IsDate()
-  createdAt: Date; // Optional: Include timestamps if needed
-  @IsDate()
-  updatedAt: Date; // Optional: Include timestamps if needed
+  createdAt: Date;
 
-  @Type(() => SeriesContentDTO)
-  series?: SeriesContentDTO[];
+  @IsDate()
+  updatedAt: Date;
+
+  @Type(() => SeriesContentDTOForGenre)
+  series?: SeriesContentDTOForGenre[];
 
   @Type(() => ContentDTO)
   contents?: ContentDTO[];
+
+  @Type(() => ContentDTO)
+  genres?: GenreContentDTO[];
 }
+
+export class GenreContentForSeriesTrackerDTO extends OmitType(GenreContentDTO, [
+  'series',
+]) {}

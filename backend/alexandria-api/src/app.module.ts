@@ -10,6 +10,7 @@ import { AuthorContentModule } from './author-content/author-content.module';
 import { AmazonServiceModule } from './auth/amazon-service/amazon-service.module';
 // import { SeriesContentModule } from './series-content/series-content.module';
 import { GenreContentModule } from './genre-content/genre-content.module';
+import { SeriesContentModule } from './series-content/series-content.module';
 
 @Module({
   imports: [
@@ -21,7 +22,7 @@ import { GenreContentModule } from './genre-content/genre-content.module';
     AuthorContentModule,
     AmazonServiceModule,
     GenreContentModule,
-    // SeriesContentModule,
+    SeriesContentModule,
   ],
   controllers: [AppController],
   providers: [AppService],

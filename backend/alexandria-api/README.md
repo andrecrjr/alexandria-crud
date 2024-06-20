@@ -41,15 +41,17 @@ API created to be the hub web service for entertainment social network.
 
 - [] Series Content CRUD API
 
-- [] Create a alexa intent to set a new item in my collection database instead update
-
 - [] Search Content Pagination
+
+- [] Genre Content Pagination
 
 - [] List user content pagination
 
 - [] List user pagination
 
 - [] Implement middleware for logging and error handling
+
+- [] Create a alexa intent to set a new item in my collection database instead update
 
 - [] Set up automated testing for all endpoints
 
