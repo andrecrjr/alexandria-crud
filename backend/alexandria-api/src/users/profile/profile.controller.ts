@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   Get,
+  Param,
   Patch,
   Request,
   UseGuards,
@@ -21,6 +22,11 @@ export class ProfileController {
   @Get()
   getProfile(@Request() req) {
     return this.profileService.getUserAndProfile(req.user);
+  }
+
+  @Get(':id')
+  getPublicProfile(@Param() { id }) {
+    return this.profileService.getPublicUser(parseInt(id));
   }
 
   @UseGuards(AuthGuard)

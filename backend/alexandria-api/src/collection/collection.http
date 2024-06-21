@@ -12,7 +12,7 @@ Content-Type: application/json
 # @name login
 POST http://localhost:3000/auth/refresh
 Authorization: Bearer {{login.response.body.accessToken}}
-Cookie: refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFuZHJlLWNhcmxvc0BMaXZlLmNvbSIsInN1YiI6MiwiaWF0IjoxNzE4NzUzOTU2LCJleHAiOjE3MjEzNDU5NTZ9.A6dbSbp7nyg0R7snMFudVdWHTMsRPnbYhBEShPLdANE; Max-Age=86400000; Path=/; HttpOnly
+Cookie: refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFuZHJlLWNhcmxvc0BMaXZlLmNvbSIsInN1YiI6MSwiaWF0IjoxNzE4OTI5NDY1LCJleHAiOjE3MjE1MjE0NjV9.VIDL75FW5F7HgYGOjdLbNQ7RyqcvgsHTtRXRleynEA4; Max-Age=86400000; Path=/; HttpOnly
 
 ### create collection/page between user
 POST http://localhost:3000/collection/page
@@ -20,8 +20,8 @@ Authorization: Bearer {{login.response.body.accessToken}}
 Content-Type: application/json
 
 {
-    "page":8,
-    "contentId":3
+    "page":18,
+    "contentId":5
 }
 
 ### update collection between user
@@ -31,7 +31,7 @@ Content-Type: application/json
 
 {
     "currentStatusTrack":"lendo",
-    "contentId":1
+    "contentId":2
 }
 
 ### get collection between user
@@ -43,5 +43,5 @@ GET http://localhost:3000/collection/search?q=
 Authorization: Bearer {{login.response.body.accessToken}}
 
 ### GET REQUEST ALEXA
-GET http://localhost:3000/collection/alexa/search?q=1%20piece%202&contenttype=manga
+GET http://localhost:3000/collection/alexa/search?q=1%20piece%20volume%201&contenttype=manga
 Authorization: Bearer {{login.response.body.accessToken}}

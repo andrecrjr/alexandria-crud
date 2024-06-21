@@ -63,6 +63,19 @@ export class ProfileService {
     return newData;
   }
 
+  async getPublicUser(id: number): Promise<UserDTO | null> {
+    const updateData = await this.prismaService.user.findFirstOrThrow({
+      where: {
+        id,
+      },
+      include: {
+        profile: true,
+      },
+    });
+    const newData = exclude(updateData, ['password']);
+    return newData;
+  }
+
   async updateProfile(
     data: UpdateUserProfileDTO,
     user: JwtDTO,

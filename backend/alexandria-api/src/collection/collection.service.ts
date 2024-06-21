@@ -35,7 +35,7 @@ export class CollectionService {
   async updateCollectionContentAndUser(
     user: JwtDTO,
     data: UpdateCollectionDto,
-  ): Promise<CollectionDTO> {
+  ) {
     return await this.prismaService.collection.update({
       where: {
         contentId_profileId: {
@@ -76,6 +76,7 @@ export class CollectionService {
     contentType: string,
     user: JwtDTO,
   ): Promise<CollectionDTO[]> {
+    console.log(partialContent);
     const data = await this.prismaService.collection.findMany({
       where: {
         profileId: user.sub,

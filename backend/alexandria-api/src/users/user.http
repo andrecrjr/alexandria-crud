@@ -31,6 +31,9 @@ GET http://localhost:3000/users/profile/all
 GET http://localhost:3000/users/profile
 Authorization: Bearer {{login.response.body.accessToken}}
 
+### GET unique public profile
+GET http://localhost:3000/users/profile/1
+
 ### UPDATE profile
 PATCH  http://localhost:3000/users/profile
 Content-Type: application/json

@@ -25,7 +25,6 @@ export class ContentController {
   }
 
   @Get(':id')
-  @UseGuards(AuthGuard)
   getUnique(@Param('id') id: string) {
     return this.contentService.getUniqueContent(parseInt(id));
   }
