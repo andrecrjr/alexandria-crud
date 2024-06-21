@@ -7,10 +7,10 @@ import {
   ValidateNested,
   IsEnum,
 } from 'class-validator';
-import { AuthorContentDTO } from 'src/author-content/entities/author-content.dto';
+import { AuthorIdDTO } from 'src/author-content/entities/author-content.dto';
 import { ContentIdDTO } from 'src/content/content.dto';
 import { ContentTypeIDDTO } from 'src/contenttype/contenttype.dto';
-import { GenreContentDTO } from 'src/genre-content/dto/genre-content.dto';
+import { GenreIdDTO } from 'src/genre-content/dto/create-genre-content.dto';
 import { UserIdDTO } from 'src/users/User.dto';
 
 export class CreateSeriesContentDto {
@@ -38,11 +38,15 @@ export class CreateSeriesContentDto {
   @Type(() => UserIdDTO)
   createdById?: UserIdDTO;
 
-  @ApiProperty()
   @IsOptional()
   @ValidateNested()
-  @Type(() => AuthorContentDTO) // Specify the nested DTO type
-  seriesCreator?: AuthorContentDTO[];
+  @Type(() => AuthorIdDTO) // Specify the nested DTO type
+  @ApiProperty({
+    description: 'The Authors to which the Series Content is associated.',
+    type: [AuthorIdDTO],
+    required: false,
+  })
+  seriesCreator?: AuthorIdDTO[];
 
   @IsOptional()
   createdAt?: Date; // Prisma handles default for timestamps
@@ -50,18 +54,26 @@ export class CreateSeriesContentDto {
   @IsOptional()
   updatedAt?: Date; // Prisma handles default for timestamps
 
-  @ApiProperty()
+  @ApiProperty({
+    description: 'The Contents to which the Series Content is associated.',
+    type: [ContentIdDTO],
+    required: false,
+  })
   @ValidateNested()
   @IsArray()
   @IsOptional()
   @Type(() => ContentIdDTO) // Specify the nested DTO type
   contents?: ContentIdDTO[];
 
-  @ApiProperty()
+  @ApiProperty({
+    description: 'The genres to which the Series content is associated.',
+    type: [GenreIdDTO],
+    required: false,
+  })
   @IsArray()
   @IsOptional()
-  @IsEnum(GenreContentDTO, { each: true }) // Validate each item in the array
-  genres: GenreContentDTO[];
+  @IsEnum(GenreIdDTO, { each: true }) // Validate each item in the array
+  genres: GenreIdDTO[];
 
   @ApiProperty()
   @IsOptional()

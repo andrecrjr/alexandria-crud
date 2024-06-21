@@ -12,7 +12,7 @@ import { ContentTypeDTO } from 'src/contenttype/contenttype.dto';
 import { ApiProperty } from '@nestjs/swagger';
 import { AuthorIdDTO } from 'src/author-content/entities/author-content.dto';
 import { PartialType, PickType } from '@nestjs/mapped-types';
-import { GenreContentId } from 'src/genre-content/dto/create-genre-content.dto';
+import { GenreIdDTO } from 'src/genre-content/dto/create-genre-content.dto';
 
 export class ContentDTO {
   @IsInt()
@@ -103,10 +103,10 @@ export class ContentDTO {
   @IsOptional()
   @ApiProperty({
     description: "The genre's content",
-    type: [GenreContentId],
+    type: [GenreIdDTO],
     required: false,
   })
-  genres?: GenreContentId[];
+  genres?: GenreIdDTO[];
 }
 
 export class CreateContentDTO extends ContentDTO {
