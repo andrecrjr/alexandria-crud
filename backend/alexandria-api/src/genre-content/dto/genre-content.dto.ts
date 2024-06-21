@@ -7,6 +7,7 @@ import { SeriesContentDTOForGenre } from 'src/series-content/entities/series-con
 export class GenreContentDTO {
   @IsInt()
   id: number;
+
   @IsString()
   name: string;
 
