@@ -11,6 +11,7 @@ import { AmazonServiceModule } from './auth/amazon-service/amazon-service.module
 // import { SeriesContentModule } from './series-content/series-content.module';
 import { GenreContentModule } from './genre-content/genre-content.module';
 import { SeriesContentModule } from './series-content/series-content.module';
+import { PaginationServiceModule } from './pagination-service/pagination-service.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { SeriesContentModule } from './series-content/series-content.module';
     AmazonServiceModule,
     GenreContentModule,
     SeriesContentModule,
+    PaginationServiceModule,
   ],
   controllers: [AppController],
   providers: [AppService],
