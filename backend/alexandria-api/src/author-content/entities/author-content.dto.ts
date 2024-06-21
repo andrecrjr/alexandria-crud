@@ -99,6 +99,6 @@ export class AuthorContentDTO {
 
 export class AuthorIdDTO extends PickType(AuthorContentDTO, ['id'] as const) {
   @IsInt()
-  @ApiProperty({ required: false })
+  @ApiProperty()
   id: number;
 }

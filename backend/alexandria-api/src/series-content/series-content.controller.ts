@@ -10,7 +10,9 @@ import {
 import { SeriesContentService } from './series-content.service';
 import { CreateSeriesContentDto } from './dto/create-series-content.dto';
 import { UpdateSeriesContentDto } from './dto/update-series-content.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Series Content')
 @Controller('series-content')
 export class SeriesContentController {
   constructor(private readonly seriesContentService: SeriesContentService) {}
