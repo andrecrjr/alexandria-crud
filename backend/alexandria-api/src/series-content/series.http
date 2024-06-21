@@ -9,7 +9,7 @@ Content-Type: application/json
 }
 
 ### GET unique serie
-GET http://localhost:3000/series-content
+GET http://localhost:3000/series-content/41
 
 ### POST unique serie
 POST http://localhost:3000/series-content
@@ -25,5 +25,7 @@ PATCH http://localhost:3000/series-content/41
 Content-Type: application/json
 
 {
-  "description":"A fucking crazy ninja way!"
+  "contents":[{
+    "id":2
+  }]
 }

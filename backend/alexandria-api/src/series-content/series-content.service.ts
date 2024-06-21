@@ -38,6 +38,35 @@ export class SeriesContentService {
     };
   }
 
+  convertUpdatePrisma(
+    data: UpdateSeriesContentDto,
+  ): Prisma.SeriesContentUpdateInput {
+    const { category, seriesCreator, contents, genres, ...rest } = data;
+    return {
+      ...rest,
+      category: category
+        ? {
+            connect: category?.map((item) => ({ id: item.id })),
+          }
+        : undefined,
+      seriesCreator: seriesCreator
+        ? {
+            connect: seriesCreator.map((item) => ({ id: item.id })),
+          }
+        : undefined,
+      contents: contents
+        ? {
+            connect: contents.map((item) => ({ id: item.id })),
+          }
+        : undefined,
+      genres: genres
+        ? {
+            connect: genres.map((item) => ({ id: item.id })),
+          }
+        : undefined,
+    };
+  }
+
   async create(
     data: CreateSeriesContentDto,
   ): Promise<SeriesContentDTOForGenre | null> {
@@ -59,7 +88,7 @@ export class SeriesContentService {
   async findOne(id: number): Promise<SeriesContentDTOForGenre | null> {
     return await this.prisma.seriesContent.findUnique({
       where: { id },
-      select: {
+      include: {
         contents: true,
       },
     });
@@ -69,7 +98,7 @@ export class SeriesContentService {
     id: number,
     data: UpdateSeriesContentDto,
   ): Promise<SeriesContentDTOForGenre | null> {
-    const prismaData = data as Prisma.SeriesContentUpdateInput;
+    const prismaData = this.convertUpdatePrisma(data);
     return await this.prisma.seriesContent.update({
       where: { id },
       data: prismaData,

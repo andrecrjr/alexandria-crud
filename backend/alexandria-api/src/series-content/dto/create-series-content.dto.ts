@@ -7,7 +7,7 @@ import {
   IsEnum,
 } from 'class-validator';
 import { AuthorContentDTO } from 'src/author-content/entities/author-content.dto';
-import { ContentDTO } from 'src/content/content.dto';
+import { ContentIdDTO } from 'src/content/content.dto';
 import { ContentTypeIDDTO } from 'src/contenttype/contenttype.dto';
 import { GenreContentDTO } from 'src/genre-content/dto/genre-content.dto';
 import { UserIdDTO } from 'src/users/User.dto';
@@ -45,8 +45,8 @@ export class CreateSeriesContentDto {
   @ValidateNested()
   @IsArray()
   @IsOptional()
-  @Type(() => ContentDTO) // Specify the nested DTO type
-  contents?: ContentDTO[];
+  @Type(() => ContentIdDTO) // Specify the nested DTO type
+  contents?: ContentIdDTO[];
 
   @IsArray()
   @IsOptional()
