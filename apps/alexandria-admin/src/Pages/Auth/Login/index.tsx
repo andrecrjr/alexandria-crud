@@ -8,8 +8,7 @@ import { Input } from "@alexandria/ui/src/components/ui/input";
 import { Checkbox } from "@alexandria/ui/src/components/ui/checkbox";
 import { Label } from "@alexandria/ui/src/components/ui/label";
 import { Link, useNavigate } from "react-router-dom";
-// import { useState } from "react";
-// import request from "@/service/axios";
+import request from "@/service/axios";
 
 import { AuthLoginDTO } from "@/schemas/user/authentication";
 import { useForm } from "react-hook-form";
@@ -18,9 +17,6 @@ import { classValidatorResolver } from "@hookform/resolvers/class-validator";
 const authResolver = classValidatorResolver(AuthLoginDTO);
 
 export default function LoginPage() {
-  // const [email, setEmail] = useState("");
-  // const [pass, setPass] = useState("");
-
   const {
     register,
     handleSubmit,
@@ -28,25 +24,24 @@ export default function LoginPage() {
   } = useForm<AuthLoginDTO>({
     resolver: authResolver,
   });
-  // const nav = useNavigate();
-  const _onSubmit = async (data: object) => {
-    console.log(data);
-    // try {
-    //   const { data } = await request.post<{ accessToken: string }>(
-    //     "/auth/login",
-    //     {
-    //       email,
-    //       password: pass,
-    //     },
-    //     {
-    //       withCredentials: true,
-    //     },
-    //   );
-    //   localStorage.setItem("accessToken", data.accessToken);
-    //   nav("/create");
-    // } catch (error) {
-    //   console.error(error);
-    // }
+  const nav = useNavigate();
+  const _onSubmit = async ({ email, password }: AuthLoginDTO) => {
+    try {
+      const { data } = await request.post<{ accessToken: string }>(
+        "/auth/login",
+        {
+          email,
+          password,
+        },
+        {
+          withCredentials: true,
+        },
+      );
+      localStorage.setItem("accessToken", data.accessToken);
+      nav("/create");
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (

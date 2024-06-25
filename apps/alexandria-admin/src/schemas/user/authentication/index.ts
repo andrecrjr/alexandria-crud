@@ -6,6 +6,6 @@ export class AuthLoginDTO {
 
   @IsString()
   @IsNotEmpty()
-  @MinLength(8)
+  @MinLength(6)
   password: string;
 }
