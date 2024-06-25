@@ -90,7 +90,7 @@ export class UserIdDTO {
   @ApiProperty({ required: false })
   @IsOptional()
   @IsString()
-  id: string;
+  id?: number;
 }
 
 export class AuthLoginDTO {

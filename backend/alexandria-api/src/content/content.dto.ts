@@ -13,6 +13,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import { AuthorIdDTO } from 'src/author-content/entities/author-content.dto';
 import { PartialType, PickType } from '@nestjs/mapped-types';
 import { GenreIdDTO } from 'src/genre-content/dto/create-genre-content.dto';
+import { UpdateUserProfileDTO, UserDTO, UserIdDTO } from 'src/users/User.dto';
 
 export class ContentDTO {
   @IsInt()
@@ -30,7 +31,7 @@ export class ContentDTO {
   })
   description?: string;
 
-  @IsString()
+  @IsInt()
   @IsOptional()
   @ApiProperty({
     description: 'The identifier for the associated content type.',
@@ -56,6 +57,13 @@ export class ContentDTO {
   @ValidateNested({ each: true })
   @Type(() => ContentTypeDTO)
   contentType?: ContentTypeDTO;
+
+  @ApiProperty({
+    description: `User that created this content`,
+  })
+  @ValidateNested({ each: true })
+  @Type(() => UserDTO)
+  createdBy?: UserDTO;
 
   @IsOptional()
   @IsString()
@@ -90,7 +98,7 @@ export class ContentDTO {
     required: false,
   })
   collections?: CollectionDTO[];
-  //typeId, contentType, updatedAt, collections
+
   @IsOptional()
   @ApiProperty({
     description: 'The authors of the content.',
@@ -113,9 +121,9 @@ export class CreateContentDTO extends ContentDTO {
   @IsString()
   @ApiProperty({
     description: 'The International Standard Book Number (ISBN).',
-    required: true,
+    required: false,
   })
-  isbn: string;
+  isbn?: string;
 }
 
 export class UpdateContentDTO extends PartialType(ContentDTO) {
@@ -158,6 +166,13 @@ export class UpdateContentDTO extends PartialType(ContentDTO) {
     required: false,
   })
   createdById?: number;
+
+  @ApiProperty({
+    description: 'The identifier of the user who created the content.',
+    required: false,
+  })
+  @IsOptional()
+  createdBy?: UpdateUserProfileDTO;
 
   createdAt?: Date;
 

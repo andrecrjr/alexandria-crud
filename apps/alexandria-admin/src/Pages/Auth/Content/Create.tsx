@@ -13,14 +13,10 @@ const CreatePage = () => {
             numberPages: 500,
             isbn: "578457542",
             description: "new book",
-            type: {
-              id: 1,
-            },
+            contentTypeId: 2,
           };
 
-          await api.post("/content", data, {
-            withCredentials: true,
-          });
+          await api.post("/content", data);
         }}
       >
         Criar

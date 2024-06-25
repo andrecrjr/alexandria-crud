@@ -9,7 +9,7 @@ import { Checkbox } from "@alexandria/ui/src/components/ui/checkbox";
 import { Label } from "@alexandria/ui/src/components/ui/label";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import axios from "axios";
+import request from "@/service/axios";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -39,18 +39,22 @@ export default function LoginPage() {
           method="POST"
           onSubmit={async (e) => {
             e.preventDefault();
-            const { data } = await axios.post(
-              "http://localhost:3000/auth/login",
-              {
-                email,
-                password: pass,
-              },
-              {
-                withCredentials: true,
-              },
-            );
-            // localStorage.setItem("access_token", data.access_token);
-            nav("/create");
+            try {
+              const { data } = await request.post<{ accessToken: string }>(
+                "/auth/login",
+                {
+                  email,
+                  password: pass,
+                },
+                {
+                  withCredentials: true,
+                },
+              );
+              localStorage.setItem("accessToken", data.accessToken);
+              nav("/create");
+            } catch (error) {
+              console.error(error);
+            }
           }}
         >
           <input type="hidden" name="remember" defaultValue="true" />

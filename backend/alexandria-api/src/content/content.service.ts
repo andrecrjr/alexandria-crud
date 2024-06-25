@@ -13,10 +13,9 @@ export class ContentService {
     user: JwtDTO,
   ): Prisma.ContentCreateInput {
     const { collections, contentType, authors, genres, ...rest } = data;
-
     return {
       ...rest,
-      createdBy: { connect: { id: user.sub } },
+      createdById: user.sub,
       contentType: contentType
         ? {
             connect: {
@@ -41,7 +40,7 @@ export class ContentService {
             })),
           }
         : undefined,
-    };
+    } as Prisma.ContentCreateInput;
   }
 
   convertUpdatePrisma(data: UpdateContentDTO): Prisma.ContentUpdateInput {
@@ -74,7 +73,7 @@ export class ContentService {
             })),
           }
         : undefined,
-    };
+    } as Prisma.ContentUpdateInput;
   }
 
   async getUniqueContent(id: number): Promise<ContentDTO> {
