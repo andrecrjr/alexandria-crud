@@ -1,16 +1,32 @@
-
-import { CardTitle, CardDescription, CardHeader, CardContent, CardFooter, Card } from "@alexandria/ui/src/components/ui/card"
-import { Label } from "@alexandria/ui/src/components/ui/label"
-import { Textarea } from "@alexandria/ui/src/components/ui/textarea"
-import { SelectValue, SelectTrigger, SelectItem, SelectContent, Select } from "@alexandria/ui/src/components/ui/select"
-import { Button } from "@alexandria/ui/src/components/ui/button"
-import { Input } from "@alexandria/ui/src/components/ui/input"
+import {
+  CardTitle,
+  CardDescription,
+  CardHeader,
+  CardContent,
+  CardFooter,
+  Card,
+} from "@alexandria/ui/src/components/ui/card";
+import { Label } from "@alexandria/ui/src/components/ui/label";
+import { Textarea } from "@alexandria/ui/src/components/ui/textarea";
+import {
+  SelectValue,
+  SelectTrigger,
+  SelectItem,
+  SelectContent,
+  Select,
+} from "@alexandria/ui/src/components/ui/select";
+import { Button } from "@alexandria/ui/src/components/ui/button";
+import { Input } from "@alexandria/ui/src/components/ui/input";
+// import { useForm } from "react-hook-form";
 
 const FormInput = () => {
-  return (<Card className="w-full max-w-2xl">
+  return (
+    <form className="w-full max-w-2xl">
       <CardHeader>
-        <CardTitle>Cadastro de Livro</CardTitle>
-        <CardDescription>Preencha os campos abaixo para cadastrar um novo livro.</CardDescription>
+        <CardTitle>Registro de Livros</CardTitle>
+        <CardDescription>
+          Preencha os campos abaixo para cadastrar um novo livro.
+        </CardDescription>
       </CardHeader>
       <CardContent className="grid gap-4">
         <div className="grid grid-cols-2 gap-4">
@@ -25,7 +41,11 @@ const FormInput = () => {
         </div>
         <div className="space-y-2">
           <Label htmlFor="description">Descrição</Label>
-          <Textarea id="description" placeholder="Digite a descrição do livro" rows={4} />
+          <Textarea
+            id="description"
+            placeholder="Digite a descrição do livro"
+            rows={4}
+          />
         </div>
         <div className="grid grid-cols-2 gap-4">
           <div className="space-y-2">
@@ -45,7 +65,11 @@ const FormInput = () => {
           </div>
           <div className="space-y-2">
             <Label htmlFor="price">Preço</Label>
-            <Input id="price" placeholder="Digite o preço do livro" type="number" />
+            <Input
+              id="price"
+              placeholder="Digite o preço do livro"
+              type="number"
+            />
           </div>
         </div>
         <div className="grid grid-cols-2 gap-4">
@@ -64,7 +88,8 @@ const FormInput = () => {
           Salvar
         </Button>
       </CardFooter>
-    </Card>);
+    </form>
+  );
 };
 
-export default FormInput
+export default FormInput;
