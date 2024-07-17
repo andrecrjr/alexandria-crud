@@ -1,6 +1,6 @@
 # Alexandria Monorepo
 
-PNPM Monorepo to develop a Generic Content Tracking API
+Generic PNPM Monorepo with CRUDs
 Stack:
 
 - Nest (back-end)
@@ -9,10 +9,3 @@ Stack:
 - ViteJS (dashboard)
 - Next (front-end)
 
-[x] - Alexandria API
-
-[ ] - Alexandria's Library
-
-[ ] - Nilo Social
-
-[ ] - Nilo Alexa Skill (not in this monorepo)
